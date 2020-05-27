@@ -1,11 +1,9 @@
-
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -19,16 +17,15 @@ public class drawing extends Application {
     public void start(Stage primaryStage){
 
         StackPane pane = new StackPane();
+        GridPane grid = new GridPane();
 
         GraphicsContext gc;
         ColorPicker cp = new ColorPicker();
         Slider slider = new Slider();
         Label label = new Label("1.0");
-        
-        GridPane grid = new GridPane();
 
         Scene scene = new Scene(pane, 800, 500);
-        Canvas canvas = new Canvas(scene.getWidth(), scene.getHeight());
+        Canvas canvas = new Canvas();
         canvas.widthProperty().bind(scene.widthProperty());
         canvas.heightProperty().bind(scene.heightProperty());
 
@@ -52,6 +49,7 @@ public class drawing extends Application {
             slider.setMax(5);
             slider.setShowTickLabels(true);
             slider.setShowTickMarks(true);
+
             slider.valueProperty().addListener(e -> {
                 double value = slider.getValue();
                 String str = String.format("%.1f", value);
@@ -78,17 +76,8 @@ public class drawing extends Application {
             e.printStackTrace();
         }
 
-        // Pane pane = new Pane();
-        
-        // pane.setOnMouseDragged(e -> {
-        //     Circle circle = new Circle(e.getX(), e.getY(), 3);
-        //     pane.getChildren().add(circle);
-        // });
-
         primaryStage.setTitle("Pictionary");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
 }
-
-// Testing
