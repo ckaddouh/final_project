@@ -48,6 +48,7 @@ public class drawing extends Application {
                 gc.beginPath();
                 gc.lineTo(e.getX(), e.getY());
                 gc.stroke();
+                gc.closePath();
             });
 
             slider.setMin(1);
@@ -62,88 +63,44 @@ public class drawing extends Application {
                 gc.setLineWidth(value);
             });
 
-            scene.setOnMouseDragged(e -> {
-                gc.lineTo(e.getSceneX(), e.getSceneY());
-                gc.stroke();
-            });
-
 
             pane.getChildren().addAll(canvas, grid);
 
             Button penBT = new Button("Pen");
             penBT.setOnAction( e -> {
+                gc.beginPath();
                 gc.setStroke(cp.getValue());
                 gc.setLineWidth(slider.getValue());
+                scene.setOnMouseDragged(e1 -> {
+                    gc.lineTo(e1.getSceneX(), e1.getSceneY());
+                    gc.stroke();
+                });
+                gc.closePath();
             });
 
             Button drawRectangleBT = new Button("Rectangle");
-            // drawRectangleBT.setOnAction( e -> {
-            //     pane.setOnMouseDragged( h -> {
-            //         Rectangle rect = new Rectangle(h.getX(), h.getY());
-            //         pane.setOnMouseDragReleased( w -> {
-            //             gc.rect(rect.getX(), rect.getY(), w.getX(), w.getY());
-            //             // rect.setWidth(w.getX() - rect.getX());
-            //             // rect.setHeight(w.getY() - rect.getY());
-            //             // rect.setFill(Color.WHITE);
-            //             // rect.setStroke(Color.BLACK);
-            //             // pane.getChildren().add(rect);
-            //         });
-        
-            //     });
-                
-
-            // });
-
-            Rectangle dragBox = new Rectangle(0, 0, 0, 0);
-            dragBox.setVisible(false);
-            // drawRectangleBT.setOnAction ( e0 -> {
-            //     scene.setOnMouseDragged(e -> {
-            //         dragBox.setVisible(true);
-            //         dragBox.setTranslateX(e.getX());
-            //         dragBox.setTranslateY(e.getY());
-    
-            //         scene.setOnMouseReleased ( e2 -> {
-            //             if (dragBox.isVisible()){
-            //                 dragBox.setWidth(e2.getX() - dragBox.getX());
-            //                 dragBox.setHeight(e2.getY() - dragBox.getY());
-            //                 dragBox.setFill(cp.getValue());
-            //                 dragBox.setStroke(Color.BLACK);
-            //             }
-                        
-            //         });  
-            //             // if(mouseEvent.getEventType() == MouseEvent.MOUSE_RELEASED)
-            //             //     dragBox.setVisible(false);
-                    
-            //     });
-            // });
-
 
             drawRectangleBT.setOnAction ( e0 -> {
                 scene.setOnMousePressed(e -> {
                     double x = e.getX();
                     double y = e.getY();
 
+                    gc.setFill(Color.WHITE);
+
                     scene.setOnMouseReleased( e2 -> {
                         gc.setStroke(cp.getValue());
-                        gc.strokeRect(x, y, Math.abs(e2.getX() - x), Math.abs(e2.getY() - y));
+                        if (e2.getX() > x && e2.getY() > y)
+                            gc.strokeRect(x, y, e2.getX() - x, e2.getY() - y);
+                        if (e2.getX() > x && e2.getY() < y) 
+                            gc.strokeRect(x, e2.getY(), e2.getX() - x, y - e2.getY());
+                        if (e2.getX() < x && e2.getY() > y)
+                            gc.strokeRect(e2.getX(), y, x - e2.getX(), e2.getY() - y);
+                        if (e2.getX() < x && e2.getY() < y)
+                            gc.strokeRect(e2.getX(), e2.getY(), x - e2.getX(), y - e2.getY());                        
                     });
-                    // dragBox.setVisible(true);
-                    // dragBox.setTranslateX(e.getX());
-                    // dragBox.setTranslateY(e.getY());
-    
-                    // scene.setOnMouseReleased ( e2 -> {
-                    //     if (dragBox.isVisible()){
-                    //         dragBox.setWidth(e2.getX() - dragBox.getX());
-                    //         dragBox.setHeight(e2.getY() - dragBox.getY());
-                    //         dragBox.setFill(cp.getValue());
-                    //         dragBox.setStroke(Color.BLACK);
-                    //     }
-                        
-                    //});  
-                        // if(mouseEvent.getEventType() == MouseEvent.MOUSE_RELEASED)
-                        //     dragBox.setVisible(false);
                     
                 });
+
             });
             
 
@@ -154,6 +111,7 @@ public class drawing extends Application {
             Button eraseBT = new Button("Eraser");
             eraseBT.setOnAction(e -> {
                 gc.setStroke(Color.WHITE);
+                gc.setFill(Color.WHITE);
                 gc.setLineWidth(10);
             });
 
@@ -163,21 +121,31 @@ public class drawing extends Application {
             });
 
 
-            // Button selectEraseBT = new Button("Select Erase");
-            // selectEraseBT.setOnAction( e -> {
-            //     pane.setOnMouseDragged( h -> {
-            //         Rectangle rect = new Rectangle(h.getX(), h.getY());
-            //         pane.setOnMouseDragReleased( w -> {
-            //             rect.setWidth(w.getX() - h.getX());
-            //             rect.setHeight(w.getY() - h.getY());
-            //             rect.setFill(Color.WHITE);
-            //             pane.getChildren().add(rect);
-            //         });
-            //     });
-            // });
+            Button selectEraseBT = new Button("Select Erase");
+            selectEraseBT.setOnAction ( e0 -> {
+                scene.setOnMousePressed(e -> {
+                    double x = e.getX();
+                    double y = e.getY();
 
+                    gc.setStroke(Color.WHITE);
+                    gc.setFill(Color.WHITE);
 
-            grid.addRow(0, cp, slider, label, penBT, eraseBT, clearBT, drawRectangleBT);
+                    scene.setOnMouseReleased( e2 -> {
+                        gc.setStroke(cp.getValue());
+                        if (e2.getX() > x && e2.getY() > y)
+                            gc.strokeRect(x, y, e2.getX() - x, e2.getY() - y);
+                        if (e2.getX() > x && e2.getY() < y) 
+                            gc.strokeRect(x, e2.getY(), e2.getX() - x, y - e2.getY());
+                        if (e2.getX() < x && e2.getY() > y)
+                            gc.strokeRect(e2.getX(), y, x - e2.getX(), e2.getY() - y);
+                        if (e2.getX() < x && e2.getY() < y)
+                            gc.strokeRect(e2.getX(), e2.getY(), x - e2.getX(), y - e2.getY());                        
+                    });
+                    
+                });
+            });
+
+            grid.addRow(0, cp, slider, label, penBT, drawRectangleBT, eraseBT, clearBT, selectEraseBT);
             grid.setHgap(20);
             grid.setAlignment(Pos.TOP_CENTER);
             grid.setPadding(new Insets(20, 0, 0, 0));
@@ -194,3 +162,6 @@ public class drawing extends Application {
         primaryStage.show();
     }
 }
+
+// https://examples.javacodegeeks.com/desktop-java/javafx/javafx-canvas-example/
+// Great examples
