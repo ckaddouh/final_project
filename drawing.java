@@ -67,6 +67,7 @@ public class drawing extends Application {
                 gc.stroke();
             });
 
+
             pane.getChildren().addAll(canvas, grid);
 
             Button penBT = new Button("Pen");
@@ -76,24 +77,78 @@ public class drawing extends Application {
             });
 
             Button drawRectangleBT = new Button("Rectangle");
-            drawRectangleBT.setOnAction( e -> {
-                pane.setOnMouseDragged( h -> {
-                    Rectangle rect = new Rectangle(h.getX(), h.getY());
-                    pane.setOnMouseDragReleased( w -> {
-                        rect.setWidth(w.getX() - rect.getX());
-                        rect.setHeight(w.getY() - rect.getY());
-                        rect.setFill(Color.WHITE);
-                        rect.setStroke(Color.BLACK);
-                        pane.getChildren().add(rect);
-                    });
+            // drawRectangleBT.setOnAction( e -> {
+            //     pane.setOnMouseDragged( h -> {
+            //         Rectangle rect = new Rectangle(h.getX(), h.getY());
+            //         pane.setOnMouseDragReleased( w -> {
+            //             gc.rect(rect.getX(), rect.getY(), w.getX(), w.getY());
+            //             // rect.setWidth(w.getX() - rect.getX());
+            //             // rect.setHeight(w.getY() - rect.getY());
+            //             // rect.setFill(Color.WHITE);
+            //             // rect.setStroke(Color.BLACK);
+            //             // pane.getChildren().add(rect);
+            //         });
         
-                });
+            //     });
                 
 
+            // });
+
+            Rectangle dragBox = new Rectangle(0, 0, 0, 0);
+            dragBox.setVisible(false);
+            // drawRectangleBT.setOnAction ( e0 -> {
+            //     scene.setOnMouseDragged(e -> {
+            //         dragBox.setVisible(true);
+            //         dragBox.setTranslateX(e.getX());
+            //         dragBox.setTranslateY(e.getY());
+    
+            //         scene.setOnMouseReleased ( e2 -> {
+            //             if (dragBox.isVisible()){
+            //                 dragBox.setWidth(e2.getX() - dragBox.getX());
+            //                 dragBox.setHeight(e2.getY() - dragBox.getY());
+            //                 dragBox.setFill(cp.getValue());
+            //                 dragBox.setStroke(Color.BLACK);
+            //             }
+                        
+            //         });  
+            //             // if(mouseEvent.getEventType() == MouseEvent.MOUSE_RELEASED)
+            //             //     dragBox.setVisible(false);
+                    
+            //     });
+            // });
+
+
+            drawRectangleBT.setOnAction ( e0 -> {
+                scene.setOnMousePressed(e -> {
+                    double x = e.getX();
+                    double y = e.getY();
+
+                    scene.setOnMouseReleased( e2 -> {
+                        gc.setStroke(cp.getValue());
+                        gc.strokeRect(x, y, Math.abs(e2.getX() - x), Math.abs(e2.getY() - y));
+                    });
+                    // dragBox.setVisible(true);
+                    // dragBox.setTranslateX(e.getX());
+                    // dragBox.setTranslateY(e.getY());
+    
+                    // scene.setOnMouseReleased ( e2 -> {
+                    //     if (dragBox.isVisible()){
+                    //         dragBox.setWidth(e2.getX() - dragBox.getX());
+                    //         dragBox.setHeight(e2.getY() - dragBox.getY());
+                    //         dragBox.setFill(cp.getValue());
+                    //         dragBox.setStroke(Color.BLACK);
+                    //     }
+                        
+                    //});  
+                        // if(mouseEvent.getEventType() == MouseEvent.MOUSE_RELEASED)
+                        //     dragBox.setVisible(false);
+                    
+                });
             });
+            
 
 
-            ObservableList<String> erasers = FXCollections.observableArrayList ("Eraser", "Select Erase");
+            // ObservableList<String> erasers = FXCollections.observableArrayList ("Eraser", "Select Erase");
             
 
             Button eraseBT = new Button("Eraser");
