@@ -1,14 +1,16 @@
-//hello
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
@@ -19,16 +21,16 @@ public class drawing extends Application {
     public void start(Stage primaryStage){
 
         StackPane pane = new StackPane();
+        GridPane grid = new GridPane();
+        pane.setStyle(" -fx-background-color: #FFFFFF");
 
         GraphicsContext gc;
         ColorPicker cp = new ColorPicker();
         Slider slider = new Slider();
         Label label = new Label("1.0");
-        
-        GridPane grid = new GridPane();
 
         Scene scene = new Scene(pane, 800, 500);
-        Canvas canvas = new Canvas(scene.getWidth(), scene.getHeight());
+        Canvas canvas = new Canvas();
         canvas.widthProperty().bind(scene.widthProperty());
         canvas.heightProperty().bind(scene.heightProperty());
 
@@ -52,6 +54,7 @@ public class drawing extends Application {
             slider.setMax(5);
             slider.setShowTickLabels(true);
             slider.setShowTickMarks(true);
+
             slider.valueProperty().addListener(e -> {
                 double value = slider.getValue();
                 String str = String.format("%.1f", value);
@@ -64,9 +67,117 @@ public class drawing extends Application {
                 gc.stroke();
             });
 
+
             pane.getChildren().addAll(canvas, grid);
 
-            grid.addRow(0, cp, slider, label);
+            Button penBT = new Button("Pen");
+            penBT.setOnAction( e -> {
+                gc.setStroke(cp.getValue());
+                gc.setLineWidth(slider.getValue());
+            });
+
+            Button drawRectangleBT = new Button("Rectangle");
+            // drawRectangleBT.setOnAction( e -> {
+            //     pane.setOnMouseDragged( h -> {
+            //         Rectangle rect = new Rectangle(h.getX(), h.getY());
+            //         pane.setOnMouseDragReleased( w -> {
+            //             gc.rect(rect.getX(), rect.getY(), w.getX(), w.getY());
+            //             // rect.setWidth(w.getX() - rect.getX());
+            //             // rect.setHeight(w.getY() - rect.getY());
+            //             // rect.setFill(Color.WHITE);
+            //             // rect.setStroke(Color.BLACK);
+            //             // pane.getChildren().add(rect);
+            //         });
+        
+            //     });
+                
+
+            // });
+
+            Rectangle dragBox = new Rectangle(0, 0, 0, 0);
+            dragBox.setVisible(false);
+            // drawRectangleBT.setOnAction ( e0 -> {
+            //     scene.setOnMouseDragged(e -> {
+            //         dragBox.setVisible(true);
+            //         dragBox.setTranslateX(e.getX());
+            //         dragBox.setTranslateY(e.getY());
+    
+            //         scene.setOnMouseReleased ( e2 -> {
+            //             if (dragBox.isVisible()){
+            //                 dragBox.setWidth(e2.getX() - dragBox.getX());
+            //                 dragBox.setHeight(e2.getY() - dragBox.getY());
+            //                 dragBox.setFill(cp.getValue());
+            //                 dragBox.setStroke(Color.BLACK);
+            //             }
+                        
+            //         });  
+            //             // if(mouseEvent.getEventType() == MouseEvent.MOUSE_RELEASED)
+            //             //     dragBox.setVisible(false);
+                    
+            //     });
+            // });
+
+
+            drawRectangleBT.setOnAction ( e0 -> {
+                scene.setOnMousePressed(e -> {
+                    double x = e.getX();
+                    double y = e.getY();
+
+                    scene.setOnMouseReleased( e2 -> {
+                        gc.setStroke(cp.getValue());
+                        gc.strokeRect(x, y, Math.abs(e2.getX() - x), Math.abs(e2.getY() - y));
+                    });
+                    // dragBox.setVisible(true);
+                    // dragBox.setTranslateX(e.getX());
+                    // dragBox.setTranslateY(e.getY());
+    
+                    // scene.setOnMouseReleased ( e2 -> {
+                    //     if (dragBox.isVisible()){
+                    //         dragBox.setWidth(e2.getX() - dragBox.getX());
+                    //         dragBox.setHeight(e2.getY() - dragBox.getY());
+                    //         dragBox.setFill(cp.getValue());
+                    //         dragBox.setStroke(Color.BLACK);
+                    //     }
+                        
+                    //});  
+                        // if(mouseEvent.getEventType() == MouseEvent.MOUSE_RELEASED)
+                        //     dragBox.setVisible(false);
+                    
+                });
+            });
+            
+
+
+            // ObservableList<String> erasers = FXCollections.observableArrayList ("Eraser", "Select Erase");
+            
+
+            Button eraseBT = new Button("Eraser");
+            eraseBT.setOnAction(e -> {
+                gc.setStroke(Color.WHITE);
+                gc.setLineWidth(10);
+            });
+
+            Button clearBT = new Button("Clear");
+            clearBT.setOnAction(e -> {
+                gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+            });
+
+
+            // Button selectEraseBT = new Button("Select Erase");
+            // selectEraseBT.setOnAction( e -> {
+            //     pane.setOnMouseDragged( h -> {
+            //         Rectangle rect = new Rectangle(h.getX(), h.getY());
+            //         pane.setOnMouseDragReleased( w -> {
+            //             rect.setWidth(w.getX() - h.getX());
+            //             rect.setHeight(w.getY() - h.getY());
+            //             rect.setFill(Color.WHITE);
+            //             pane.getChildren().add(rect);
+            //         });
+            //     });
+            // });
+
+
+            grid.addRow(0, cp, slider, label, penBT, eraseBT, clearBT, drawRectangleBT);
             grid.setHgap(20);
             grid.setAlignment(Pos.TOP_CENTER);
             grid.setPadding(new Insets(20, 0, 0, 0));
@@ -78,21 +189,8 @@ public class drawing extends Application {
             e.printStackTrace();
         }
 
-        // Pane pane = new Pane();
-        
-        // pane.setOnMouseDragged(e -> {
-        //     Circle circle = new Circle(e.getX(), e.getY(), 3);
-        //     pane.getChildren().add(circle);
-        // });
-
         primaryStage.setTitle("Pictionary");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
 }
-
-// Testing
-
-
-
-// hello - annie
