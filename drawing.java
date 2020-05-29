@@ -75,6 +75,24 @@ public class drawing extends Application {
                 gc.setLineWidth(slider.getValue());
             });
 
+            Button drawRectangleBT = new Button("Rectangle");
+            drawRectangleBT.setOnAction( e -> {
+                pane.setOnMouseDragged( h -> {
+                    Rectangle rect = new Rectangle(h.getX(), h.getY());
+                    pane.setOnMouseDragReleased( w -> {
+                        rect.setWidth(w.getX() - rect.getX());
+                        rect.setHeight(w.getY() - rect.getY());
+                        rect.setFill(Color.WHITE);
+                        rect.setStroke(Color.BLACK);
+                        pane.getChildren().add(rect);
+                    });
+        
+                });
+                
+
+            });
+
+
             ObservableList<String> erasers = FXCollections.observableArrayList ("Eraser", "Select Erase");
             
 
@@ -104,7 +122,7 @@ public class drawing extends Application {
             // });
 
 
-            grid.addRow(0, cp, slider, label, penBT, eraseBT, clearBT);
+            grid.addRow(0, cp, slider, label, penBT, eraseBT, clearBT, drawRectangleBT);
             grid.setHgap(20);
             grid.setAlignment(Pos.TOP_CENTER);
             grid.setPadding(new Insets(20, 0, 0, 0));
