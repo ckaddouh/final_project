@@ -89,6 +89,7 @@ public class drawing extends Application {
                 gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
             });
 
+
             // Button selectEraseBT = new Button("Select Erase");
             // selectEraseBT.setOnAction( e -> {
             //     pane.setOnMouseDragged( h -> {
