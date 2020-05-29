@@ -9,7 +9,11 @@
         "c:\\Program Files\\AdoptOpenJDK\\javafx-sdk-11.0.2\\lib\\javafx.swing.jar",
         "c:\\Program Files\\AdoptOpenJDK\\javafx-sdk-11.0.2\\lib\\javafx.web.jar",
         "c:\\Program Files\\AdoptOpenJDK\\javafx-sdk-11.0.2\\lib\\javafx-swt.jar",
+<<<<<<< HEAD
+        "/Library/javafx-sdk-11.0.2_4/lib/**/*.jar"
+=======
         "/Users/kayleenam/School/javafx-sdk-11.0.2/**/*.jar",
         "/Users/annie/Documents/Intro_to_CS_Java/javafx-sdk-11.0.2/lib/**/*.jar"
+>>>>>>> 684a61849d3f6e22d1cad891d64436522194dd19
     ]
 }
