@@ -17,6 +17,11 @@ import javafx.scene.control.Slider;
 import javafx.stage.Stage;
 
 public class drawing extends Application {
+    
+    Boolean pen = false;
+    Boolean rectangle = false;
+    Boolean eraser = false;
+
     @Override
     public void start(Stage primaryStage){
 
@@ -34,6 +39,7 @@ public class drawing extends Application {
         canvas.widthProperty().bind(scene.widthProperty());
         canvas.heightProperty().bind(scene.heightProperty());
 
+
         try {
             gc = canvas.getGraphicsContext2D();
             gc.setStroke(Color.BLACK);
@@ -45,10 +51,19 @@ public class drawing extends Application {
             });
 
             scene.setOnMousePressed(e -> {
-                gc.beginPath();
-                gc.lineTo(e.getX(), e.getY());
-                gc.stroke();
-                gc.closePath();
+                if (pen || eraser){
+                    gc.beginPath();
+                    gc.lineTo(e.getX(), e.getY());
+                    gc.stroke();
+                }
+            });
+
+            scene.setOnMouseDragged(e1 -> {
+                    if (pen || eraser){
+                        gc.lineTo(e1.getSceneX(), e1.getSceneY());
+                        gc.stroke();
+                    }
+                
             });
 
             slider.setMin(1);
@@ -68,36 +83,53 @@ public class drawing extends Application {
 
             Button penBT = new Button("Pen");
             penBT.setOnAction( e -> {
-                gc.beginPath();
-                gc.setStroke(cp.getValue());
-                gc.setLineWidth(slider.getValue());
-                scene.setOnMouseDragged(e1 -> {
-                    gc.lineTo(e1.getSceneX(), e1.getSceneY());
-                    gc.stroke();
-                });
-                gc.closePath();
+                pen = true;
+                    rectangle = false;
+                    eraser = false;
+
+                if (pen){    
+                    gc.beginPath();
+                    gc.setStroke(cp.getValue());
+                    gc.setLineWidth(slider.getValue());
+                    
+                    gc.closePath();
+                }
+                
             });
 
             Button drawRectangleBT = new Button("Rectangle");
 
             drawRectangleBT.setOnAction ( e0 -> {
+                gc.setLineWidth(slider.getValue());
+
+                rectangle = true;
+                pen = false;
+                eraser = false;
+
                 scene.setOnMousePressed(e -> {
-                    double x = e.getX();
-                    double y = e.getY();
-
-                    gc.setFill(Color.WHITE);
-
-                    scene.setOnMouseReleased( e2 -> {
-                        gc.setStroke(cp.getValue());
-                        if (e2.getX() > x && e2.getY() > y)
-                            gc.strokeRect(x, y, e2.getX() - x, e2.getY() - y);
-                        if (e2.getX() > x && e2.getY() < y) 
-                            gc.strokeRect(x, e2.getY(), e2.getX() - x, y - e2.getY());
-                        if (e2.getX() < x && e2.getY() > y)
-                            gc.strokeRect(e2.getX(), y, x - e2.getX(), e2.getY() - y);
-                        if (e2.getX() < x && e2.getY() < y)
-                            gc.strokeRect(e2.getX(), e2.getY(), x - e2.getX(), y - e2.getY());                        
-                    });
+                    if (rectangle){
+                        double x = e.getX();
+                        double y = e.getY();
+    
+                        gc.setFill(Color.WHITE);
+    
+                        scene.setOnMouseReleased( e2 -> {
+                            if (rectangle){
+                                gc.setStroke(cp.getValue());
+                                if (e2.getX() > x && e2.getY() > y)
+                                    gc.strokeRect(x, y, e2.getX() - x, e2.getY() - y);
+                                if (e2.getX() > x && e2.getY() < y) 
+                                    gc.strokeRect(x, e2.getY(), e2.getX() - x, y - e2.getY());
+                                if (e2.getX() < x && e2.getY() > y)
+                                    gc.strokeRect(e2.getX(), y, x - e2.getX(), e2.getY() - y);
+                                if (e2.getX() < x && e2.getY() < y)
+                                    gc.strokeRect(e2.getX(), e2.getY(), x - e2.getX(), y - e2.getY());   
+                            }
+                                   
+                                         
+                        });
+                        
+                    }
                     
                 });
 
@@ -110,9 +142,15 @@ public class drawing extends Application {
 
             Button eraseBT = new Button("Eraser");
             eraseBT.setOnAction(e -> {
-                gc.setStroke(Color.WHITE);
-                gc.setFill(Color.WHITE);
-                gc.setLineWidth(10);
+                eraser = true;
+                rectangle = false;
+                pen = false;
+
+                if (eraser){
+                    gc.setStroke(Color.WHITE);
+                    gc.setLineWidth(10);
+                }
+
             });
 
             Button clearBT = new Button("Clear");
@@ -121,31 +159,40 @@ public class drawing extends Application {
             });
 
 
-            Button selectEraseBT = new Button("Select Erase");
-            selectEraseBT.setOnAction ( e0 -> {
-                scene.setOnMousePressed(e -> {
-                    double x = e.getX();
-                    double y = e.getY();
+            // Button selectEraseBT = new Button("Select Erase");
+            // selectEraseBT.setOnAction ( e0 -> {
+            //     gc.setLineWidth(slider.getValue());
+            //     selectErase = true;
+            //     pen = false;
+            //     eraser = false;
+            //     rectangle = false;
 
-                    gc.setStroke(Color.WHITE);
-                    gc.setFill(Color.WHITE);
-
-                    scene.setOnMouseReleased( e2 -> {
-                        gc.setStroke(cp.getValue());
-                        if (e2.getX() > x && e2.getY() > y)
-                            gc.strokeRect(x, y, e2.getX() - x, e2.getY() - y);
-                        if (e2.getX() > x && e2.getY() < y) 
-                            gc.strokeRect(x, e2.getY(), e2.getX() - x, y - e2.getY());
-                        if (e2.getX() < x && e2.getY() > y)
-                            gc.strokeRect(e2.getX(), y, x - e2.getX(), e2.getY() - y);
-                        if (e2.getX() < x && e2.getY() < y)
-                            gc.strokeRect(e2.getX(), e2.getY(), x - e2.getX(), y - e2.getY());                        
-                    });
+            //     scene.setOnMousePressed(e -> {
+            //         if (selectErase){
+            //             double x = e.getX();
+            //             double y = e.getY();
+    
+            //             gc.setStroke(Color.WHITE);
+            //             gc.setFill(Color.WHITE);
                     
-                });
-            });
 
-            grid.addRow(0, cp, slider, label, penBT, drawRectangleBT, eraseBT, clearBT, selectEraseBT);
+            //         scene.setOnMouseReleased( e2 -> {
+            //             gc.setStroke(cp.getValue());
+            //             if (e2.getX() > x && e2.getY() > y)
+            //                 gc.strokeRect(x, y, e2.getX() - x, e2.getY() - y);
+            //             if (e2.getX() > x && e2.getY() < y) 
+            //                 gc.strokeRect(x, e2.getY(), e2.getX() - x, y - e2.getY());
+            //             if (e2.getX() < x && e2.getY() > y)
+            //                 gc.strokeRect(e2.getX(), y, x - e2.getX(), e2.getY() - y);
+            //             if (e2.getX() < x && e2.getY() < y)
+            //                 gc.strokeRect(e2.getX(), e2.getY(), x - e2.getX(), y - e2.getY());      
+                                    
+            //         });
+            //     }
+            //     });
+            // });
+
+            grid.addRow(0, cp, slider, label, penBT, drawRectangleBT, eraseBT, clearBT);
             grid.setHgap(20);
             grid.setAlignment(Pos.TOP_CENTER);
             grid.setPadding(new Insets(20, 0, 0, 0));
