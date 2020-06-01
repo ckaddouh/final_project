@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
@@ -102,6 +103,8 @@ public class drawing extends Application {
                 
             });
 
+            CheckBox fill = new CheckBox("Fill");
+
             Button drawRectangleBT = new Button("Rectangle");
 
             drawRectangleBT.setOnAction ( e0 -> {
@@ -116,9 +119,7 @@ public class drawing extends Application {
                     if (rectangle){
                         double x = e.getX();
                         double y = e.getY();
-    
-                        gc.setFill(Color.WHITE);
-    
+        
                         scene.setOnMouseReleased( e2 -> {
                             if (pen){
                                 gc.beginPath();
@@ -128,6 +129,7 @@ public class drawing extends Application {
                                 gc.beginPath();
                             }
 
+                            gc.setFill(cp.getValue());
                             if (rectangle){
                                 gc.setStroke(cp.getValue());
                                 if (e2.getX() > x && e2.getY() > y)
@@ -138,9 +140,22 @@ public class drawing extends Application {
                                     gc.strokeRect(e2.getX(), y, x - e2.getX(), e2.getY() - y);
                                 if (e2.getX() < x && e2.getY() < y)
                                     gc.strokeRect(e2.getX(), e2.getY(), x - e2.getX(), y - e2.getY()); 
-                                gc.closePath();                              
+                                gc.closePath();   
                             }    
        
+                            if (rectangle && fill.isSelected()){
+                                gc.setStroke(cp.getValue());
+                                if (e2.getX() > x && e2.getY() > y)
+                                    gc.fillRect(x, y, e2.getX() - x, e2.getY() - y);
+                                if (e2.getX() > x && e2.getY() < y) 
+                                    gc.fillRect(x, e2.getY(), e2.getX() - x, y - e2.getY());
+                                if (e2.getX() < x && e2.getY() > y)
+                                    gc.fillRect(e2.getX(), y, x - e2.getX(), e2.getY() - y);
+                                if (e2.getX() < x && e2.getY() < y)
+                                    gc.fillRect(e2.getX(), e2.getY(), x - e2.getX(), y - e2.getY()); 
+                                gc.closePath();   
+                            }  
+
                         });
                         
                     }
@@ -172,6 +187,16 @@ public class drawing extends Application {
                 gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
             });
 
+            // Button fillBT = new Button("Fill");
+            // fillBT.setOnAction(e -> {
+            //     scene.setOnMouseClicked(e1 -> {
+
+            //     });
+            
+            //     if (Math.pow(e.getX(), .5)){
+                    
+            //     }
+            // });
 
             // Button selectEraseBT = new Button("Select Erase");
             // selectEraseBT.setOnAction ( e0 -> {
@@ -204,9 +229,9 @@ public class drawing extends Application {
             //         });
             //     }
             //     });
-            // });
+            // });             
 
-            grid.addRow(0, cp, slider, label, penBT, drawRectangleBT, eraseBT, clearBT);
+            grid.addRow(0, cp, slider, label, penBT, drawRectangleBT, fill, eraseBT, clearBT);
             grid.setHgap(20);
             grid.setAlignment(Pos.TOP_CENTER);
             grid.setPadding(new Insets(20, 0, 0, 0));
