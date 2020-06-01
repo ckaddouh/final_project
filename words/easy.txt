@@ -23,7 +23,8 @@ coat
 show
 water
 heart
-heartocean
+heart
+ocean
 kite
 dog
 mouth
@@ -36,10 +37,11 @@ boy
 apple
 person
 girl
-ouse
+house
 ball
 mouse
-skateboardnose
+skateboard
+nose
 bed
 whale
 jacket
@@ -62,7 +64,8 @@ pumpkin
 angry
 fireworks
 rainbow
-flowerbaby
+flower
+baby
 beard
 flying saucer
 recycle
@@ -78,17 +81,16 @@ toast
 toothbrush
 mailbox
 church
-catcamera
+cat
+camera
 butterfly
 dolphin
 olympics
 nose
 night
-church
 crayon
 volleyball
 peanut
-eiffel tower
 brain
 kiss
 kitten
@@ -98,7 +100,6 @@ robot
 raindrop
 slipper
 snowball
-statue of liberty
 tadpole
 music
 crib
@@ -108,7 +109,7 @@ brain
 lipstick
 castle
 dumbbell
-eiffelowl
+owl
 ferris wheel
 flag
 piano
@@ -126,7 +127,8 @@ water
 teeth
 thumb
 fingers
-tirewindow
+tire
+window
 umbrella
 triangle
 circle
@@ -170,7 +172,6 @@ fork
 map
 water bottle
 cigarette
-tennis racket
 straw
 candy corn
 moon
@@ -192,7 +193,6 @@ donut
 chocolate
 juice box
 soccer ball
-puzzle piece
 microphone
 diamond
 nails

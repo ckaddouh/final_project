@@ -3,11 +3,11 @@ import javafx.scene.control.Button;
 
 import javafx.scene.paint.Color;
 
-import javafx.scene.text.Font; 
-import javafx.scene.text.FontPosture; 
-import javafx.scene.text.FontWeight; 
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.layout.GridPane;
 
@@ -35,11 +35,12 @@ public class instructionScreen extends GridPane {
         text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
         //ScreenA is a GridPane, so it has the GridPane methods like add(...)
         //ScreenA is a GridPane, so it has the GridPane methods like add(...)
-        add(text, 0, 0);
+        add(text, 1, 1, 2, 2);
+        GridPane.setHalignment(text, HPos.CENTER);
 
         Button changeScreenButton = new Button("Instructions");
         changeScreenButton.setOnAction(e -> handleButton());
-        add(changeScreenButton, 0,1);
+        add(changeScreenButton, 3 ,3, 1, 1);
 
         
         //You would probably add more code to format this GridPane the way you'd like
