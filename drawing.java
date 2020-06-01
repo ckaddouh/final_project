@@ -53,7 +53,7 @@ public class drawing extends Application {
             scene.setOnMousePressed(e -> {
                 if (pen || eraser){
                     gc.beginPath();
-                    gc.lineTo(e.getX(), e.getY());
+                    gc.moveTo(e.getX(), e.getY());
                     gc.stroke();
                 }
             });
@@ -62,8 +62,13 @@ public class drawing extends Application {
                     if (pen || eraser){
                         gc.lineTo(e1.getSceneX(), e1.getSceneY());
                         gc.stroke();
-                    }
-                
+                        scene.setOnMouseDragReleased(e2 -> {
+                            if (pen){
+                                gc.closePath();
+
+                            }
+                        }); 
+                    } 
             });
 
             slider.setMin(1);
@@ -84,15 +89,15 @@ public class drawing extends Application {
             Button penBT = new Button("Pen");
             penBT.setOnAction( e -> {
                 pen = true;
-                    rectangle = false;
-                    eraser = false;
+                rectangle = false;
+                eraser = false;
 
                 if (pen){    
-                    gc.beginPath();
+                    //gc.beginPath();
                     gc.setStroke(cp.getValue());
                     gc.setLineWidth(slider.getValue());
                     
-                    gc.closePath();
+                   gc.closePath();
                 }
                 
             });
@@ -100,6 +105,7 @@ public class drawing extends Application {
             Button drawRectangleBT = new Button("Rectangle");
 
             drawRectangleBT.setOnAction ( e0 -> {
+                gc.beginPath();
                 gc.setLineWidth(slider.getValue());
 
                 rectangle = true;
@@ -114,6 +120,14 @@ public class drawing extends Application {
                         gc.setFill(Color.WHITE);
     
                         scene.setOnMouseReleased( e2 -> {
+                            if (pen){
+                                gc.beginPath();
+                            }   
+                            
+                            if (eraser) {
+                                gc.beginPath();
+                            }
+
                             if (rectangle){
                                 gc.setStroke(cp.getValue());
                                 if (e2.getX() > x && e2.getY() > y)
@@ -123,10 +137,10 @@ public class drawing extends Application {
                                 if (e2.getX() < x && e2.getY() > y)
                                     gc.strokeRect(e2.getX(), y, x - e2.getX(), e2.getY() - y);
                                 if (e2.getX() < x && e2.getY() < y)
-                                    gc.strokeRect(e2.getX(), e2.getY(), x - e2.getX(), y - e2.getY());   
-                            }
-                                   
-                                         
+                                    gc.strokeRect(e2.getX(), e2.getY(), x - e2.getX(), y - e2.getY()); 
+                                gc.closePath();                              
+                            }    
+       
                         });
                         
                     }
@@ -134,8 +148,7 @@ public class drawing extends Application {
                 });
 
             });
-            
-
+        
 
             // ObservableList<String> erasers = FXCollections.observableArrayList ("Eraser", "Select Erase");
             
@@ -150,6 +163,7 @@ public class drawing extends Application {
                     gc.setStroke(Color.WHITE);
                     gc.setLineWidth(10);
                 }
+                gc.beginPath();
 
             });
 
