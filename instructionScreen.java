@@ -31,19 +31,22 @@ public class instructionScreen extends GridPane {
 
         Text text = new Text();
         text.setText("Instructions"); 
-        text.setFill(Color.DODGERBLUE);
-        text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
+        text.setFill(Color.DARKTURQUOISE);
+        text.setFont(Font.font("AvantGarde", FontWeight.BOLD, FontPosture.REGULAR, 20));
         //ScreenA is a GridPane, so it has the GridPane methods like add(...)
         //ScreenA is a GridPane, so it has the GridPane methods like add(...)
         add(text, 1, 1, 2, 2);
         GridPane.setHalignment(text, HPos.CENTER);
 
         Button changeScreenButton = new Button("Instructions");
+        changeScreenButton.setStyle("-fx-font-size:30"); //I looked this up so it may be wrong
         changeScreenButton.setOnAction(e -> handleButton());
         add(changeScreenButton, 3 ,3, 1, 1);
 
         
         //You would probably add more code to format this GridPane the way you'd like
+        //Since screenmanager isn't finished i can't run so idk how it looks but idk 
+        //if we'd need any more formatting?
         setHgap(10);
         setVgap(10);
         setPadding(new Insets(10));
@@ -55,3 +58,4 @@ public class instructionScreen extends GridPane {
     }
     
 }
+//I didn't think there was much to do so enjoy the new fonts and colors <3
