@@ -120,8 +120,11 @@ public class drawing2 extends Application {
                 }
             });
 
+            // Define a set of actions for rectangle and oval when mouse is released
             scene.setOnMouseReleased(e -> {
-                if (rectangle){    
+                // If the rectangle button is selected  
+                if (rectangle){  
+                    // If fill is selected, fill the rectangle with the value of the color picker
                     if (fill.isSelected()){
                         if (e.getX() > x && e.getY() > y)
                             gc.fillRect(x, y, e.getX() - x, e.getY() - y);
@@ -183,6 +186,7 @@ public class drawing2 extends Application {
                 gc.setLineWidth(slider.getValue());
             });
 
+            // Create a rectangle button that adjusts the boolean variables and sets the stroke and line width
             Button rectangleBT = new Button("Rectangle");
             rectangleBT.setOnAction(e -> {
                 rectangle = true;
@@ -194,6 +198,7 @@ public class drawing2 extends Application {
                 gc.setLineWidth(slider.getValue());
             });
 
+            // Create an oval button that adjusts the boolean variables and sets the stroke and line width
             Button ovalBT = new Button("Oval");
             ovalBT.setOnAction(e -> {
                 oval = true;
@@ -223,7 +228,9 @@ public class drawing2 extends Application {
                 gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
             });
 
+            // Add the buttons, color picker, slider, and label to the grid
             grid.addRow(1, cp, slider, sliderLbl, penBT, fill, rectangleBT, ovalBT, eraseBT, clearBT);
+            // Set the grid's alignment
             grid.setHgap(20);
             grid.setAlignment(Pos.TOP_CENTER);
             grid.setPadding(new Insets(20, 0, 0, 0));
@@ -232,6 +239,7 @@ public class drawing2 extends Application {
             e.printStackTrace();
         }
 
+        // Create the stage and show it
         primaryStage.setTitle("Pictionary");
         primaryStage.setScene(scene);
         primaryStage.show();
