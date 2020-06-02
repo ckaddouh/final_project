@@ -22,6 +22,7 @@ public class drawing extends Application {
     Boolean pen = false;
     Boolean rectangle = false;
     Boolean eraser = false;
+    Boolean circle = false;
 
     @Override
     public void start(Stage primaryStage){
@@ -61,14 +62,14 @@ public class drawing extends Application {
 
             scene.setOnMouseDragged(e1 -> {
                     if (pen || eraser){
-                        gc.lineTo(e1.getSceneX(), e1.getSceneY());
+                        gc.lineTo(e1.getX(), e1.getY());
                         gc.stroke();
-                        scene.setOnMouseDragReleased(e2 -> {
-                            if (pen){
-                                gc.closePath();
+                        // scene.setOnMouseDragReleased(e2 -> {
+                        //     if (pen){
+                        //         gc.closePath();
 
-                            }
-                        }); 
+                        //     }
+                        // }); 
                     } 
             });
 
@@ -130,8 +131,22 @@ public class drawing extends Application {
                             }
 
                             gc.setFill(cp.getValue());
-                            if (rectangle){
-                                gc.setStroke(cp.getValue());
+                            gc.setStroke(cp.getValue());
+
+
+                            if (rectangle && fill.isSelected()){
+                                if (e2.getX() > x && e2.getY() > y)
+                                    gc.fillRect(x, y, e2.getX() - x, e2.getY() - y);
+                                if (e2.getX() > x && e2.getY() < y) 
+                                    gc.fillRect(x, e2.getY(), e2.getX() - x, y - e2.getY());
+                                if (e2.getX() < x && e2.getY() > y)
+                                    gc.fillRect(e2.getX(), y, x - e2.getX(), e2.getY() - y);
+                                if (e2.getX() < x && e2.getY() < y)
+                                    gc.fillRect(e2.getX(), e2.getY(), x - e2.getX(), y - e2.getY()); 
+                                gc.closePath();   
+                            }
+
+                            else if (rectangle){
                                 if (e2.getX() > x && e2.getY() > y)
                                     gc.strokeRect(x, y, e2.getX() - x, e2.getY() - y);
                                 if (e2.getX() > x && e2.getY() < y) 
@@ -143,18 +158,17 @@ public class drawing extends Application {
                                 gc.closePath();   
                             }    
        
-                            if (rectangle && fill.isSelected()){
-                                gc.setStroke(cp.getValue());
-                                if (e2.getX() > x && e2.getY() > y)
-                                    gc.fillRect(x, y, e2.getX() - x, e2.getY() - y);
-                                if (e2.getX() > x && e2.getY() < y) 
-                                    gc.fillRect(x, e2.getY(), e2.getX() - x, y - e2.getY());
-                                if (e2.getX() < x && e2.getY() > y)
-                                    gc.fillRect(e2.getX(), y, x - e2.getX(), e2.getY() - y);
-                                if (e2.getX() < x && e2.getY() < y)
-                                    gc.fillRect(e2.getX(), e2.getY(), x - e2.getX(), y - e2.getY()); 
-                                gc.closePath();   
-                            }  
+                            
+                            
+                            if (circle && fill.isSelected()){
+                                gc.fillOval(x, y, (Math.pow(Math.pow(Math.abs(e2.getX() - x), 2) + Math.pow(Math.abs(e2.getY() - y), 2), 2)),(Math.pow(Math.pow(Math.abs(e2.getX() - x), 2) + Math.pow(Math.abs(e2.getY() - y), 2), 2)));
+                                gc.closePath();
+                            }
+
+                            else if (circle){
+                                gc.strokeOval(x, y, (Math.pow(Math.pow(Math.abs(e2.getX() - x), 2) + Math.pow(Math.abs(e2.getY() - y), 2), 2)),(Math.pow(Math.pow(Math.abs(e2.getX() - x), 2) + Math.pow(Math.abs(e2.getY() - y), 2), 2)));
+                                gc.closePath();
+                            }
 
                         });
                         
@@ -231,7 +245,21 @@ public class drawing extends Application {
             //     });
             // });             
 
-            grid.addRow(0, cp, slider, label, penBT, drawRectangleBT, fill, eraseBT, clearBT);
+            Button circleBT = new Button("Circle");
+            circleBT.setOnAction(e -> {
+                circle = true;
+                pen = false;
+                eraser = false;
+                rectangle = false;
+
+                if (circle){
+                    gc.setStroke(cp.getValue());
+                    gc.setLineWidth(slider.getValue());
+                }
+                gc.beginPath();
+            
+            });
+            grid.addRow(0, cp, slider, label, penBT, drawRectangleBT, circleBT, fill, eraseBT, clearBT);
             grid.setHgap(20);
             grid.setAlignment(Pos.TOP_CENTER);
             grid.setPadding(new Insets(20, 0, 0, 0));
