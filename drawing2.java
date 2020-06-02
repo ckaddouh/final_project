@@ -228,8 +228,8 @@ public class drawing2 extends Application {
                 gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
             });
 
-            Label wordlbl = new Label(words.getRandomWord());
-            grid.addRow(0, wordlbl);
+            // Label wordlbl = new Label(list.getRandomWord());
+            // grid.addRow(0, wordlbl);
 
             // Add the buttons, color picker, slider, and label to the grid
             grid.addRow(1, cp, slider, sliderLbl, penBT, fill, rectangleBT, ovalBT, eraseBT, clearBT);
