@@ -143,7 +143,7 @@ public class drawing2 extends Application {
                         if (e.getX() < x && e.getY() < y)
                             gc.strokeRect(e.getX(), e.getY(), x - e.getX(), y - e.getY()); 
                     }
-                   gc.beginPath();
+                   gc.closePath();
                 }
 
                 if (oval) {
@@ -167,7 +167,7 @@ public class drawing2 extends Application {
                         if (e.getX() < x && e.getY() < y)
                             gc.strokeOval(e.getX(), e.getY(), x - e.getX(), y - e.getY());
                     }
-                    gc.beginPath();
+                    gc.closePath();
                 }
             });
             
