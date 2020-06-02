@@ -20,4 +20,8 @@ public class words {
         String random = list.get(randomizer);
         return random;
     }
+
+    public void remove(String word) {
+        list.remove(word);
+    }
 }

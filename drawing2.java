@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 
 public class drawing2 extends Application {
 
-    Boolean pen = false;
+    Boolean pen = true;
     Boolean rectangle = false;
     Boolean oval = false;
     Boolean eraser = false;
@@ -227,6 +227,9 @@ public class drawing2 extends Application {
             clearBT.setOnAction(e -> {
                 gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
             });
+
+            Label wordlbl = new Label(words.getRandomWord());
+            grid.addRow(0, wordlbl);
 
             // Add the buttons, color picker, slider, and label to the grid
             grid.addRow(1, cp, slider, sliderLbl, penBT, fill, rectangleBT, ovalBT, eraseBT, clearBT);

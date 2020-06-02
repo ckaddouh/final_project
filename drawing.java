@@ -19,7 +19,7 @@ import javafx.stage.Stage;
 
 public class drawing extends Application {
     
-    Boolean pen = false;
+    Boolean pen = true;
     Boolean rectangle = false;
     Boolean eraser = false;
     Boolean circle = false;

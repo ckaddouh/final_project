@@ -1,6 +1,6 @@
 
 import javafx.scene.control.Button;
-
+import javafx.scene.control.ChoiceDialog;
 import javafx.scene.paint.Color;
 
 import javafx.scene.text.Font;
@@ -41,6 +41,11 @@ public class instructionScreen extends GridPane {
         Button changeScreenButton = new Button("Instructions");
         changeScreenButton.setOnAction(e -> handleButton());
         add(changeScreenButton, 3 ,3, 1, 1);
+
+        ChoiceDialog<String> text_files = new ChoiceDialog<>("easy.txt", "medium.txt", "hard.txt");
+        text_files.setTitle("Level Choices");
+        text_files.setHeaderText("Choose Your Level");
+        text_files.setContentText("Pick a Level: ");
 
         
         //You would probably add more code to format this GridPane the way you'd like
