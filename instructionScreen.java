@@ -15,15 +15,17 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.layout.GridPane;
 
+
+
 /**
  * ScreenA is a subclass of GridPane. Since GridPane is a subclass of Pane, it
  * can be saved in a Pane variable too.
  */
-public class instructionScreen extends GridPane {
+public class InstructionScreen extends GridPane {
 
-    private screenManager mainApp;
+    private MainApp mainApp;
 
-    public instructionScreen(screenManager app) throws FileNotFoundException {
+    public InstructionScreen(MainApp app) {
         super();
         //the super() calls the constructor of GridPane. 
         //It's not necessary because it's automatically called,
@@ -41,22 +43,12 @@ public class instructionScreen extends GridPane {
         //ScreenA is a GridPane, so it has the GridPane methods like add(...)
         add(text, 1, 1, 2, 2);
         GridPane.setHalignment(text, HPos.CENTER);
-
-        Button changeScreenButton = new Button("Instructions");
+        
+        Button changeScreenButton = new Button("Settings");
         changeScreenButton.setOnAction(e -> handleButton());
-        add(changeScreenButton, 3 ,3, 1, 1);
+        add(changeScreenButton, 3, 3, 1, 1);
 
-        ChoiceDialog<String> text_files = new ChoiceDialog<>("easy.txt", "medium.txt", "hard.txt");
-        text_files.setTitle("Level Choices");
-        text_files.setHeaderText("Choose Your Level");
-        text_files.setContentText("Pick a Level: ");
 
-        Optional<String> file = text_files.showAndWait();
-        
-        if (file.isPresent()) {
-            words list = new words(file.get());
-        }
-        
         //You would probably add more code to format this GridPane the way you'd like
         //Since screenmanager isn't finished i can't run so idk how it looks but idk 
         //if we'd need any more formatting?
@@ -67,7 +59,7 @@ public class instructionScreen extends GridPane {
 
     private void handleButton(){
         //Call the appropriate method from the MainApp
-        mainApp.showScreenA();
+        mainApp.showSettingsScreen();
     }
     
 }
