@@ -39,7 +39,6 @@ public class instructionScreen extends GridPane {
         GridPane.setHalignment(text, HPos.CENTER);
 
         Button changeScreenButton = new Button("Instructions");
-        changeScreenButton.setStyle("-fx-font-size:30"); //I looked this up so it may be wrong
         changeScreenButton.setOnAction(e -> handleButton());
         add(changeScreenButton, 3 ,3, 1, 1);
 
