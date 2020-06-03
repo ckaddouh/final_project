@@ -26,19 +26,7 @@ public class SettingsScreen extends GridPane {
         add(title, 1, 1, 2, 2);
         GridPane.setHalignment(title, HPos.CENTER);
 
-        // ChoiceDialog<String> text_files = new ChoiceDialog<>("easy.txt", "medium.txt", "hard.txt");
-        // text_files.setTitle("Level Choices");
-        // text_files.setHeaderText("Choose Your Level");
-        // text_files.setContentText("Pick a Level: ");
-
-        // add(text_files, 2, 1, 2, 2);
         
-        // Optional<String> file = text_files.showAndWait();
-
-        // if (file.isPresent()) {
-        //     Words list = new Words(file.get());
-
-        // }
 
         Button changeScreenButton = new Button("Start");
         changeScreenButton.setOnAction(e -> handleButton());

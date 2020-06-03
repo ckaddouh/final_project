@@ -1,8 +1,18 @@
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceDialog;
+import javafx.scene.control.ComboBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
+
+import java.util.Optional;
+
+import javax.swing.event.ChangeListener;
+
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -17,8 +27,10 @@ import javafx.scene.layout.GridPane;
 public class WelcomeScreen extends GridPane {
     
     private MainApp mainApp;
+    public static String file_name;
+    public final ComboBox<String> comboBox;
 
-    public WelcomeScreen(MainApp app){
+    public WelcomeScreen(MainApp app) {
         super();
         //the super() calls the constructor of GridPane. 
         //It's not necessary because it's automatically called,
@@ -42,7 +54,34 @@ public class WelcomeScreen extends GridPane {
         add(changeScreenButton, 0, 1);
 
 
+        ObservableList files = FXCollections.observableArrayList("easy.txt", "medium.txt", "hard.txt");
+        comboBox = new ComboBox<String>();
+        comboBox.setItems(files);
+        comboBox.setPromptText("Select a difficulty level");
+        // comboBox.setValue("easy.txt");
+
+        add(comboBox, 2, 1);
+
+        // comboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
+        //     public void changed(ObservableValue ov, String old_val, String new_val){
+        //         file_name = new_val;
+        //     }
+        // });
         
+        // comboBox.valueProperty().addListener(new ChangeListener<String>() {
+        //     @Override public void changed(ObservableValue ov, String t, String t1) {
+        //         file_name = t1;
+        //     }
+        // });
+
+        
+        Button play = new Button("Play");
+        play.setOnAction(e -> {
+           // DrawingScreen.file_name = (String) comboBox.getValue();
+            handleButtonStart();
+        });
+        add(play, 2, 2);
+
         //You would probably add more code to format this GridPane the way you'd like
         setHgap(10);
         setVgap(10);
@@ -58,4 +97,7 @@ public class WelcomeScreen extends GridPane {
         mainApp.showSettingsScreen();
     }
     
+    public void handleButtonStart(){
+        mainApp.showDrawingScreen();
+    }
 }

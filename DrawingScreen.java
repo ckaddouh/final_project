@@ -14,7 +14,8 @@ import javafx.scene.control.Slider;
 public class DrawingScreen extends StackPane {
 
     private MainApp mainApp;
-    
+    public static String file_name;
+
     Boolean pen = true;
     Boolean rectangle = false;
     Boolean oval = false;
@@ -226,6 +227,10 @@ public class DrawingScreen extends StackPane {
             // Label wordlbl = new Label(list.getRandomWord());
             // grid.addRow(0, wordlbl);
 
+            Label lbl = new Label();
+            lbl.setText(file_name);
+            Label lbl2 = new Label("Hello");
+            grid.addRow(0, lbl, lbl2);
             // Add the buttons, color picker, slider, and label to the grid
             grid.addRow(1, cp, slider, sliderLbl, penBT, fill, rectangleBT, ovalBT, eraseBT, clearBT);
             // Set the grid's alignment
