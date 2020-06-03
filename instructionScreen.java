@@ -43,9 +43,14 @@ public class InstructionScreen extends GridPane {
         //ScreenA is a GridPane, so it has the GridPane methods like add(...)
         add(text, 1, 1, 2, 2);
         GridPane.setHalignment(text, HPos.CENTER);
+<<<<<<< HEAD
+
+        Button changeScreenBack = new Button("Back");
+        changeScreenBack.setOnAction(e -> handleButtonBack());
+=======
         
-        Button changeScreenButton = new Button("Settings");
-        changeScreenButton.setOnAction(e -> handleButton());
+        Button changeScreenSettings= new Button("Settings");
+        changeScreenSettings.setOnAction(e -> handleButtonSettings());
         add(changeScreenButton, 3, 3, 1, 1);
 
 
@@ -57,9 +62,12 @@ public class InstructionScreen extends GridPane {
         setPadding(new Insets(10));
     }
 
-    private void handleButton(){
+    private void handleButtonSettings(){
         //Call the appropriate method from the MainApp
         mainApp.showSettingsScreen();
+    }
+    private void handleButtonBack(){
+        mainApp.showScene();
     }
     
 }
