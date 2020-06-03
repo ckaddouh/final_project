@@ -10,9 +10,9 @@ import javafx.scene.layout.GridPane;
  */
 public class ScreenA extends GridPane {
     
-    private MainApp mainApp;
+    private ScreenManager mainApp;
 
-    public ScreenA(MainApp app){
+    public ScreenA(ScreenManager app){
         super();
         //the super() calls the constructor of GridPane. 
         //It's not necessary because it's automatically called,

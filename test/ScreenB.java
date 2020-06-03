@@ -9,9 +9,9 @@ import javafx.scene.layout.FlowPane;
  * Since FlowPane is a subclass of Pane, it can be saved in a Pane variable too.
  */
 public class ScreenB extends FlowPane {
-    private MainApp mainApp;
+    private ScreenManager mainApp;
 
-    public ScreenB(MainApp app){
+    public ScreenB(ScreenManager app){
         super();
         //the super() calls the constructor of GridPane. 
         //It's not necessary because it's automatically called,

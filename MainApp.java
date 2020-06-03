@@ -24,7 +24,7 @@ public class MainApp extends Application {
         drawingScreen = new DrawingScreen(this);
         resultsScreen = new ResultsScreen(this);
         
-        Scene scene = new Scene(welcomeScreen, 500, 800);
+        Scene scene = new Scene(welcomeScreen, 800, 500);
         primaryStage.setTitle("Welcome to Pictionary!");
         primaryStage.setScene(scene);
         primaryStage.show();  

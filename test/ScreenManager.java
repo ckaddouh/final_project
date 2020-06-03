@@ -10,7 +10,7 @@ import javafx.stage.Stage;
  * 
  * Using multiple objects to represent screens helps keep functionality separate. 
  */
-public class MainApp extends Application {
+public class ScreenManager extends Application {
 
 
     Stage primaryStage;
