@@ -3,9 +3,9 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class words {
+public class Words {
     private ArrayList<String> list = new ArrayList<>();
-    public words(String filename) throws java.io.FileNotFoundException {
+    public Words(String filename) throws java.io.FileNotFoundException {
         Scanner input = new Scanner(new FileReader(filename));
         while (input.hasNextLine()) {
             String line = input.nextLine().trim();
@@ -19,5 +19,9 @@ public class words {
         int randomizer = rand.nextInt(list.size());
         String random = list.get(randomizer);
         return random;
+    }
+
+    public void remove(String word) {
+        list.remove(word);
     }
 }

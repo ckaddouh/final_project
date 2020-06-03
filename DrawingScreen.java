@@ -1,10 +1,8 @@
-import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
@@ -12,24 +10,24 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
-import javafx.stage.Stage;
 
-public class drawing2 extends Application {
+public class DrawingScreen extends StackPane {
 
+    private MainApp mainApp;
+    
     Boolean pen = true;
     Boolean rectangle = false;
     Boolean oval = false;
     Boolean eraser = false;
-
     double x;
     double y;
+    
 
-    @Override
-    public void start(Stage primaryStage){
-        
-        // Create a StackPane to hold the canvas and set its background to white
-        StackPane pane = new StackPane();
-        pane.setStyle(" -fx-background-color: #FFFFFF");
+    public DrawingScreen(MainApp app){
+        super();
+        this.mainApp = app;
+
+        setStyle(" -fx-background-color: #FFFFFF");
 
         // Create a GridPane for the words and buttons
         GridPane grid = new GridPane();
@@ -42,13 +40,10 @@ public class drawing2 extends Application {
         Slider slider = new Slider();
         Label sliderLbl = new Label("1.0");
         
-        // Create a new scene
-        Scene scene = new Scene(pane, 800, 500);
-
         // Create a canvas and bind its properties to the scene's properties
         Canvas canvas = new Canvas();
-        canvas.widthProperty().bind(scene.widthProperty());
-        canvas.heightProperty().bind(scene.heightProperty());
+        canvas.widthProperty().bind(this.widthProperty());
+        canvas.heightProperty().bind(this.heightProperty());
 
         // Create a try-catch to carry out specific actions if an error occurs
         try {
@@ -57,7 +52,7 @@ public class drawing2 extends Application {
             gc.setStroke(Color.BLACK);
             gc.setLineWidth(1);
 
-            pane.getChildren().addAll(canvas, grid);
+            getChildren().addAll(canvas, grid);
 
             // Set the starting color picker value
             cp.setValue(Color.BLACK);
@@ -92,7 +87,7 @@ public class drawing2 extends Application {
 
 
             // Define a set of events for when the mouse is pressed
-            scene.setOnMousePressed(e -> {
+            setOnMousePressed(e -> {
                 // If either the pen or eraser is selected, being a new path where the mouse is located
                 if (pen || eraser){
                     gc.beginPath();
@@ -112,7 +107,7 @@ public class drawing2 extends Application {
             });
 
             // Define a set of actions to carry out when the mouse is dragged
-            scene.setOnMouseDragged(e -> {
+            setOnMouseDragged(e -> {
                 // If the pen or eraser is selected, draw a line to the new position of the mouse
                 if (pen || eraser){
                     gc.lineTo(e.getX(), e.getY());
@@ -121,7 +116,7 @@ public class drawing2 extends Application {
             });
 
             // Define a set of actions for rectangle and oval when mouse is released
-            scene.setOnMouseReleased(e -> {
+            setOnMouseReleased(e -> {
                 // If the rectangle button is selected  
                 if (rectangle){  
                     // If fill is selected, fill the rectangle with the value of the color picker
@@ -238,13 +233,21 @@ public class drawing2 extends Application {
             grid.setAlignment(Pos.TOP_CENTER);
             grid.setPadding(new Insets(20, 0, 0, 0));
 
+            Button changeScreenButton = new Button("See Results");
+            changeScreenButton.setOnAction(e -> handleButton());
+            grid.addRow(2);
+            grid.addRow(3);
+            grid.addRow(4);
+            grid.addRow(5, changeScreenButton);
+
         } catch(Exception e) {
             e.printStackTrace();
         }
 
-        // Create the stage and show it
-        primaryStage.setTitle("Pictionary");
-        primaryStage.setScene(scene);
-        primaryStage.show();
     }
+
+        private void handleButton() {
+            mainApp.showResultsScreen();
+        }
+    
 }

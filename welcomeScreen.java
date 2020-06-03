@@ -1,4 +1,3 @@
-
 import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -6,6 +5,7 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
@@ -14,11 +14,11 @@ import javafx.scene.layout.GridPane;
  * ScreenA is a subclass of GridPane.
  * Since GridPane is a subclass of Pane, it can be saved in a Pane variable too.
  */
-public class welcomeScreen extends GridPane {
+public class WelcomeScreen extends GridPane {
     
-    private screenManager mainApp;
+    private MainApp mainApp;
 
-    public welcomeScreen(screenManager app){
+    public WelcomeScreen(MainApp app){
         super();
         //the super() calls the constructor of GridPane. 
         //It's not necessary because it's automatically called,
@@ -34,12 +34,13 @@ public class welcomeScreen extends GridPane {
         label.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
         //ScreenA is a GridPane, so it has the GridPane methods like add(...)
         add(label,0,0);
-        label.setAlignment(HPos.CENTER);
+        label.setAlignment(Pos.CENTER);
         GridPane.setValignment(label, VPos.CENTER);
 
         Button changeScreenButton = new Button("Instructions");
         changeScreenButton.setOnAction(e -> handleButton());
-        add(changeScreenButton, 0,1);
+        add(changeScreenButton, 0, 1);
+
 
         
         //You would probably add more code to format this GridPane the way you'd like
@@ -50,7 +51,11 @@ public class welcomeScreen extends GridPane {
 
     private void handleButton(){
         //Call the appropriate method from the MainApp
-        mainApp.showScreenB();
+        mainApp.showInstructionScreen();
+    }
+
+    public void handleButton2(){
+        mainApp.showSettingsScreen();
     }
     
 }
