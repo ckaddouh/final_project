@@ -38,7 +38,7 @@ public class instructionScreen extends GridPane {
         add(text, 1, 1, 2, 2);
         GridPane.setHalignment(text, HPos.CENTER);
 
-        Button changeScreenButton = new Button("Instructions");
+        Button changeScreenButton = new Button("Back");
         changeScreenButton.setOnAction(e -> handleButton());
         add(changeScreenButton, 3 ,3, 1, 1);
 
