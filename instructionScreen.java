@@ -43,15 +43,13 @@ public class InstructionScreen extends GridPane {
         //ScreenA is a GridPane, so it has the GridPane methods like add(...)
         add(text, 1, 1, 2, 2);
         GridPane.setHalignment(text, HPos.CENTER);
-<<<<<<< HEAD
 
         Button changeScreenBack = new Button("Back");
         changeScreenBack.setOnAction(e -> handleButtonBack());
-=======
         
         Button changeScreenSettings= new Button("Settings");
         changeScreenSettings.setOnAction(e -> handleButtonSettings());
-        add(changeScreenButton, 3, 3, 1, 1);
+        add(changeScreenSettings, 3, 3, 1, 1);
 
 
         //You would probably add more code to format this GridPane the way you'd like
@@ -67,7 +65,7 @@ public class InstructionScreen extends GridPane {
         mainApp.showSettingsScreen();
     }
     private void handleButtonBack(){
-        mainApp.showScene();
+        mainApp.showWelcomeScreen();
     }
     
 }
