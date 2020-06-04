@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -12,7 +14,7 @@ public class ResultsScreen extends GridPane {
 
     private MainApp mainApp;
 
-    public ResultsScreen(MainApp app) {
+    public ResultsScreen(MainApp app) throws FileNotFoundException {
         super();
 
         this.mainApp = app;
@@ -21,10 +23,13 @@ public class ResultsScreen extends GridPane {
         text.setFill(Color.DARKTURQUOISE);
         text.setFont(Font.font("AvantGarde", FontWeight.BOLD, FontPosture.REGULAR, 20));
         add(text, 1, 1, 2, 2);
-        GridPane.setHalignment(text, HPos.CENTER);  
-        
+        GridPane.setHalignment(text, HPos.CENTER);
+
         Button changeScreenButton = new Button("Back");
-        changeScreenButton.setOnAction(e -> handleButton());
+        changeScreenButton.setOnAction(e -> {
+            DrawingScreen.useWords();
+            handleButton();
+        });
         add(changeScreenButton, 3, 3, 1, 1);
         
         setHgap(10);

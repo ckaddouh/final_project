@@ -236,7 +236,7 @@ public class DrawingScreen extends StackPane {
 
             lbl = new Label();
             lbl.setText(file_name);
-            Label lbl2 = new Label();
+            lbl2 = new Label();
             grid.addRow(0, lbl, lbl2);
             // Add the buttons, color picker, slider, and label to the grid
             grid.addRow(1, cp, slider, sliderLbl, penBT, fill, rectangleBT, ovalBT, eraseBT, clearBT);
@@ -263,11 +263,14 @@ public class DrawingScreen extends StackPane {
     }
 
     public static void setFileName(String fileName) throws FileNotFoundException {
-            lbl.setText("words/" + fileName + ".txt");
+            lbl.setText(fileName);
             list = new Words("words/" + fileName + ".txt");
-            System.out.println(Words.list.get(0));
-            // ("words/" + fileName + ".txt");
-            // String word = list.getRandomWord();
-            // list.remove(word);
+            useWords();
         }
+    
+    public static void useWords(){
+        String word = list.getRandomWord();
+        lbl2.setText(word);
+        list.remove(word);
+    }
 }

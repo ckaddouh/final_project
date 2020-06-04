@@ -69,7 +69,6 @@ public class WelcomeScreen extends GridPane {
             try {
                 DrawingScreen.setFileName(comboBox.getValue());
             } catch (FileNotFoundException e1) {
-                // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
         });
