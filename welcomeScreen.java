@@ -74,10 +74,18 @@ public class WelcomeScreen extends GridPane {
         //     }
         // });
 
+        Label tester = new Label("testing");
+        add(tester, 3, 3);
+
+        comboBox.setOnAction(e -> {
+            tester.setText(comboBox.getValue());
+            DrawingScreen.setFileName(comboBox.getValue());
+            // DrawingScreen.file_name = (String) comboBox.getValue();
+
+        });
         
         Button play = new Button("Play");
         play.setOnAction(e -> {
-           // DrawingScreen.file_name = (String) comboBox.getValue();
             handleButtonStart();
         });
         add(play, 2, 2);

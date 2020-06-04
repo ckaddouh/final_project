@@ -15,6 +15,7 @@ public class DrawingScreen extends StackPane {
 
     private MainApp mainApp;
     public static String file_name;
+    public static Label lbl;
 
     Boolean pen = true;
     Boolean rectangle = false;
@@ -227,7 +228,8 @@ public class DrawingScreen extends StackPane {
             // Label wordlbl = new Label(list.getRandomWord());
             // grid.addRow(0, wordlbl);
 
-            Label lbl = new Label();
+            file_name = "Unchanged";
+            lbl = new Label();
             lbl.setText(file_name);
             Label lbl2 = new Label("Hello");
             grid.addRow(0, lbl, lbl2);
@@ -253,6 +255,10 @@ public class DrawingScreen extends StackPane {
 
         private void handleButton() {
             mainApp.showResultsScreen();
+        }
+
+        public static void setFileName(String fileName){
+            lbl.setText(fileName);
         }
     
 }
