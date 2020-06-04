@@ -13,7 +13,7 @@ public class Server {
     
     public static void main(String[] args) throws Exception{
         System.out.println("Starting server...");
-        serverSocket = new ServerSocket(7777); // 127.0.0.1 is another way of saying localhost
+        serverSocket = new ServerSocket(22222); // 127.0.0.1 is another way of saying localhost
         System.out.println("Server Started...");
         
         while(true) {
