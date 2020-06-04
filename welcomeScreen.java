@@ -6,6 +6,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 
+import java.io.FileNotFoundException;
 import java.util.Optional;
 
 import javax.swing.event.ChangeListener;
@@ -21,31 +22,31 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
 /**
- * ScreenA is a subclass of GridPane.
- * Since GridPane is a subclass of Pane, it can be saved in a Pane variable too.
+ * ScreenA is a subclass of GridPane. Since GridPane is a subclass of Pane, it
+ * can be saved in a Pane variable too.
  */
 public class WelcomeScreen extends GridPane {
-    
+
     private MainApp mainApp;
     public static String file_name;
     public final ComboBox<String> comboBox;
 
     public WelcomeScreen(MainApp app) {
         super();
-        //the super() calls the constructor of GridPane. 
-        //It's not necessary because it's automatically called,
-        //but if we wanted certain parameters, we can add them.
+        // the super() calls the constructor of GridPane.
+        // It's not necessary because it's automatically called,
+        // but if we wanted certain parameters, we can add them.
 
-        //Save the  parameter app  so we can access 
-        //methods from the mainApp for changing the screen. 
+        // Save the parameter app so we can access
+        // methods from the mainApp for changing the screen.
         this.mainApp = app;
 
         Label label = new Label();
-        label.setText("Welcome to Pictionary!"); 
+        label.setText("Welcome to Pictionary!");
         label.setTextFill(Color.DODGERBLUE);
         label.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
-        //ScreenA is a GridPane, so it has the GridPane methods like add(...)
-        add(label,0,0);
+        // ScreenA is a GridPane, so it has the GridPane methods like add(...)
+        add(label, 0, 0);
         label.setAlignment(Pos.CENTER);
         GridPane.setValignment(label, VPos.CENTER);
 
@@ -53,41 +54,28 @@ public class WelcomeScreen extends GridPane {
         changeScreenButton.setOnAction(e -> handleButton());
         add(changeScreenButton, 0, 1);
 
-
-        ObservableList files = FXCollections.observableArrayList("easy.txt", "medium.txt", "hard.txt");
+        ObservableList<String> files = FXCollections.observableArrayList("easy", "medium", "hard");
         comboBox = new ComboBox<String>();
         comboBox.setItems(files);
         comboBox.setPromptText("Select a difficulty level");
-        // comboBox.setValue("easy.txt");
 
         add(comboBox, 2, 1);
-
-        // comboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
-        //     public void changed(ObservableValue ov, String old_val, String new_val){
-        //         file_name = new_val;
-        //     }
-        // });
-        
-        // comboBox.valueProperty().addListener(new ChangeListener<String>() {
-        //     @Override public void changed(ObservableValue ov, String t, String t1) {
-        //         file_name = t1;
-        //     }
-        // });
 
         Label tester = new Label("testing");
         add(tester, 3, 3);
 
         comboBox.setOnAction(e -> {
             tester.setText(comboBox.getValue());
-            DrawingScreen.setFileName(comboBox.getValue());
-            // DrawingScreen.file_name = (String) comboBox.getValue();
-
+            try {
+                DrawingScreen.setFileName(comboBox.getValue());
+            } catch (FileNotFoundException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
         });
         
         Button play = new Button("Play");
-        play.setOnAction(e -> {
-            handleButtonStart();
-        });
+        play.setOnAction(e -> handleButtonStart());
         add(play, 2, 2);
 
         //You would probably add more code to format this GridPane the way you'd like

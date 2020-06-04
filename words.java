@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Words {
-    private ArrayList<String> list = new ArrayList<>();
+    public static ArrayList<String> list = new ArrayList<>();
+
     public Words(String filename) throws java.io.FileNotFoundException {
         Scanner input = new Scanner(new FileReader(filename));
         while (input.hasNextLine()) {
@@ -17,8 +18,8 @@ public class Words {
     public String getRandomWord() {
         Random rand = new Random();
         int randomizer = rand.nextInt(list.size());
-        String random = list.get(randomizer);
-        return random;
+        String word = list.get(randomizer);
+        return word;
     }
 
     public void remove(String word) {

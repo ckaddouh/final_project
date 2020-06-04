@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.GridPane;
@@ -16,6 +18,7 @@ public class DrawingScreen extends StackPane {
     private MainApp mainApp;
     public static String file_name;
     public static Label lbl;
+    public static Label lbl2;
 
     Boolean pen = true;
     Boolean rectangle = false;
@@ -23,9 +26,10 @@ public class DrawingScreen extends StackPane {
     Boolean eraser = false;
     double x;
     double y;
-    
 
-    public DrawingScreen(MainApp app){
+    public static Words list;
+
+    public DrawingScreen(MainApp app) {
         super();
         this.mainApp = app;
 
@@ -41,7 +45,7 @@ public class DrawingScreen extends StackPane {
         ColorPicker cp = new ColorPicker();
         Slider slider = new Slider();
         Label sliderLbl = new Label("1.0");
-        
+
         // Create a canvas and bind its properties to the scene's properties
         Canvas canvas = new Canvas();
         canvas.widthProperty().bind(this.widthProperty());
@@ -76,33 +80,33 @@ public class DrawingScreen extends StackPane {
                 double value = slider.getValue();
                 String str = String.format("%.1f", value);
                 sliderLbl.setText(str);
-                
+
                 if (eraser)
                     gc.setLineWidth(value + 5);
                 else
                     gc.setLineWidth(value);
-                
+
             });
 
             // Create a CheckBox to determine if shapes should be filled
             CheckBox fill = new CheckBox("Fill");
 
-
             // Define a set of events for when the mouse is pressed
             setOnMousePressed(e -> {
-                // If either the pen or eraser is selected, being a new path where the mouse is located
-                if (pen || eraser){
+                // If either the pen or eraser is selected, being a new path where the mouse is
+                // located
+                if (pen || eraser) {
                     gc.beginPath();
                     gc.moveTo(e.getX(), e.getY());
                     gc.stroke();
                 }
 
-                if (rectangle){
+                if (rectangle) {
                     x = e.getX();
                     y = e.getY();
                 }
 
-                if (oval){
+                if (oval) {
                     x = e.getX();
                     y = e.getY();
                 }
@@ -110,8 +114,9 @@ public class DrawingScreen extends StackPane {
 
             // Define a set of actions to carry out when the mouse is dragged
             setOnMouseDragged(e -> {
-                // If the pen or eraser is selected, draw a line to the new position of the mouse
-                if (pen || eraser){
+                // If the pen or eraser is selected, draw a line to the new position of the
+                // mouse
+                if (pen || eraser) {
                     gc.lineTo(e.getX(), e.getY());
                     gc.stroke();
                 }
@@ -119,35 +124,35 @@ public class DrawingScreen extends StackPane {
 
             // Define a set of actions for rectangle and oval when mouse is released
             setOnMouseReleased(e -> {
-                // If the rectangle button is selected  
-                if (rectangle){  
+                // If the rectangle button is selected
+                if (rectangle) {
                     // If fill is selected, fill the rectangle with the value of the color picker
-                    if (fill.isSelected()){
+                    if (fill.isSelected()) {
                         if (e.getX() > x && e.getY() > y)
                             gc.fillRect(x, y, e.getX() - x, e.getY() - y);
-                        if (e.getX() > x && e.getY() < y) 
+                        if (e.getX() > x && e.getY() < y)
                             gc.fillRect(x, e.getY(), e.getX() - x, y - e.getY());
                         if (e.getX() < x && e.getY() > y)
                             gc.fillRect(e.getX(), y, x - e.getX(), e.getY() - y);
                         if (e.getX() < x && e.getY() < y)
-                            gc.fillRect(e.getX(), e.getY(), x - e.getX(), y - e.getY()); 
+                            gc.fillRect(e.getX(), e.getY(), x - e.getX(), y - e.getY());
                     }
-                
+
                     else {
                         if (e.getX() > x && e.getY() > y)
                             gc.strokeRect(x, y, e.getX() - x, e.getY() - y);
-                        if (e.getX() > x && e.getY() < y) 
+                        if (e.getX() > x && e.getY() < y)
                             gc.strokeRect(x, e.getY(), e.getX() - x, y - e.getY());
                         if (e.getX() < x && e.getY() > y)
                             gc.strokeRect(e.getX(), y, x - e.getX(), e.getY() - y);
                         if (e.getX() < x && e.getY() < y)
-                            gc.strokeRect(e.getX(), e.getY(), x - e.getX(), y - e.getY()); 
+                            gc.strokeRect(e.getX(), e.getY(), x - e.getX(), y - e.getY());
                     }
-                   gc.closePath();
+                    gc.closePath();
                 }
 
                 if (oval) {
-                    if (fill.isSelected()){
+                    if (fill.isSelected()) {
                         if (e.getX() > x && e.getY() > y)
                             gc.fillOval(x, y, e.getX() - x, e.getY() - y);
                         if (e.getX() > x && e.getY() < y)
@@ -156,8 +161,7 @@ public class DrawingScreen extends StackPane {
                             gc.fillOval(e.getX(), y, x - e.getX(), e.getY() - y);
                         if (e.getX() < x && e.getY() < y)
                             gc.fillOval(e.getX(), e.getY(), x - e.getX(), y - e.getY());
-                    }
-                    else{
+                    } else {
                         if (e.getX() > x && e.getY() > y)
                             gc.strokeOval(x, y, e.getX() - x, e.getY() - y);
                         if (e.getX() > x && e.getY() < y)
@@ -170,7 +174,7 @@ public class DrawingScreen extends StackPane {
                     gc.closePath();
                 }
             });
-            
+
             // Create a pen button which adjusts the boolean variables
             Button penBT = new Button("Pen");
             penBT.setOnAction(e -> {
@@ -183,7 +187,8 @@ public class DrawingScreen extends StackPane {
                 gc.setLineWidth(slider.getValue());
             });
 
-            // Create a rectangle button that adjusts the boolean variables and sets the stroke and line width
+            // Create a rectangle button that adjusts the boolean variables and sets the
+            // stroke and line width
             Button rectangleBT = new Button("Rectangle");
             rectangleBT.setOnAction(e -> {
                 rectangle = true;
@@ -195,7 +200,8 @@ public class DrawingScreen extends StackPane {
                 gc.setLineWidth(slider.getValue());
             });
 
-            // Create an oval button that adjusts the boolean variables and sets the stroke and line width
+            // Create an oval button that adjusts the boolean variables and sets the stroke
+            // and line width
             Button ovalBT = new Button("Oval");
             ovalBT.setOnAction(e -> {
                 oval = true;
@@ -228,10 +234,9 @@ public class DrawingScreen extends StackPane {
             // Label wordlbl = new Label(list.getRandomWord());
             // grid.addRow(0, wordlbl);
 
-            file_name = "Unchanged";
             lbl = new Label();
             lbl.setText(file_name);
-            Label lbl2 = new Label("Hello");
+            Label lbl2 = new Label();
             grid.addRow(0, lbl, lbl2);
             // Add the buttons, color picker, slider, and label to the grid
             grid.addRow(1, cp, slider, sliderLbl, penBT, fill, rectangleBT, ovalBT, eraseBT, clearBT);
@@ -247,18 +252,22 @@ public class DrawingScreen extends StackPane {
             grid.addRow(4);
             grid.addRow(5, changeScreenButton);
 
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
 
-        private void handleButton() {
-            mainApp.showResultsScreen();
-        }
+    private void handleButton() {
+        mainApp.showResultsScreen();
+    }
 
-        public static void setFileName(String fileName){
-            lbl.setText(fileName);
+    public static void setFileName(String fileName) throws FileNotFoundException {
+            lbl.setText("words/" + fileName + ".txt");
+            list = new Words("words/" + fileName + ".txt");
+            System.out.println(Words.list.get(0));
+            // ("words/" + fileName + ".txt");
+            // String word = list.getRandomWord();
+            // list.remove(word);
         }
-    
 }
