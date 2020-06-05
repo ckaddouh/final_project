@@ -77,3 +77,6 @@ public class ChatApp extends Application {
 // Use this instead of 127 blah blah : http://192.168.X.X where X.X is your IP address
 // But computers have to be on the same network
 // Complicated, but this might help: https://serverfault.com/questions/627894/how-should-i-bridge-two-networks-given-each-network-has-its-own-subnet-dhcp-s
+// Explains connecting over the internet: https://www.liquidweb.com/kb/windows-accessing-your-server-with-remote-desktop/ 
+// Connecting server to internet: https://www.quora.com/How-do-I-connect-my-web-server-to-internet
+// Settings stuff: https://smallbusiness.chron.com/connect-computers-server-over-internet-51223.html
