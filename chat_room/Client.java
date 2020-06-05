@@ -29,6 +29,7 @@ public class Client {
         	String sendMessage = sc.nextLine();
         	out.writeUTF(sendMessage);
         }
+
     }
 }
 
