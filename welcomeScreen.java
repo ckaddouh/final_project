@@ -19,13 +19,14 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
 /**
  * ScreenA is a subclass of GridPane. Since GridPane is a subclass of Pane, it
  * can be saved in a Pane variable too.
  */
-public class WelcomeScreen extends GridPane {
+public class WelcomeScreen extends BorderPane {
 
     private MainApp mainApp;
     public static String file_name;
