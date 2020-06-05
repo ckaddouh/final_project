@@ -6,13 +6,13 @@ import javafx.stage.Stage;
 
 public class MainApp extends Application {
 
-    Stage primaryStage;
+    static Stage primaryStage;
 
     Pane welcomeScreen;
     Pane instructionScreen;
     Pane settingsScreen;
-    Pane drawingScreen;
     Pane resultsScreen;
+
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -21,38 +21,50 @@ public class MainApp extends Application {
         welcomeScreen = new WelcomeScreen(this);
         instructionScreen = new InstructionScreen(this);
         settingsScreen = new SettingsScreen(this);
-        drawingScreen = new DrawingScreen(this);
         resultsScreen = new ResultsScreen(this);
         
+
+
         Scene scene = new Scene(welcomeScreen, 800, 500);
         primaryStage.setTitle("Welcome to Pictionary!");
         primaryStage.setScene(scene);
         primaryStage.show();  
+
     }
 
     public void showWelcomeScreen(){
         Scene scene = primaryStage.getScene();
+        setStageSize(800, 500);
         scene.setRoot(welcomeScreen);
     }
 
     public void showInstructionScreen(){
         Scene scene = primaryStage.getScene();
+        setStageSize(415, 250);
         scene.setRoot(instructionScreen);
     }
 
     public void showSettingsScreen(){
         Scene scene = primaryStage.getScene();
+        setStageSize(400, 400);
         scene.setRoot(settingsScreen);
     }
 
     public void showDrawingScreen(){
         Scene scene = primaryStage.getScene();
-        scene.setRoot(drawingScreen);
+        setStageSize(800, 500);
+        scene.setRoot(new DrawingScreen(this));
     }
 
     public void showResultsScreen(){
         Scene scene = primaryStage.getScene();
+        setStageSize(400, 400);
         scene.setRoot(resultsScreen);
+    }
+
+    public static void setStageSize(double width, double height){
+        primaryStage.setWidth(width);
+        primaryStage.setHeight(height);
     }
 
     public static void main(String[] args){

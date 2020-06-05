@@ -80,3 +80,5 @@ public class ChatApp extends Application {
 // Explains connecting over the internet: https://www.liquidweb.com/kb/windows-accessing-your-server-with-remote-desktop/ 
 // Connecting server to internet: https://www.quora.com/How-do-I-connect-my-web-server-to-internet
 // Settings stuff: https://smallbusiness.chron.com/connect-computers-server-over-internet-51223.html
+// SSH Stuff: https://phoenixnap.com/kb/ssh-to-connect-to-remote-server-linux-or-windows
+// THAT LAST ONE LOOKS PROMISING YAY MAYBE WE HAVE TO SSH STUFF?

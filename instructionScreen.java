@@ -1,19 +1,15 @@
 
+import javafx.geometry.HPos;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceDialog;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-
-import java.io.FileNotFoundException;
-import java.util.Optional;
-
-import javafx.geometry.HPos;
-import javafx.geometry.Insets;
-import javafx.scene.layout.GridPane;
 
 
 
@@ -21,7 +17,7 @@ import javafx.scene.layout.GridPane;
  * ScreenA is a subclass of GridPane. Since GridPane is a subclass of Pane, it
  * can be saved in a Pane variable too.
  */
-public class InstructionScreen extends GridPane {
+public class InstructionScreen extends BorderPane {
 
     private MainApp mainApp;
 
@@ -41,24 +37,39 @@ public class InstructionScreen extends GridPane {
         text.setFont(Font.font("AvantGarde", FontWeight.BOLD, FontPosture.REGULAR, 20));
         //ScreenA is a GridPane, so it has the GridPane methods like add(...)
         //ScreenA is a GridPane, so it has the GridPane methods like add(...)
-        add(text, 1, 1, 2, 2);
-        GridPane.setHalignment(text, HPos.CENTER);
+
+        setTop(text);
+        setAlignment(text, Pos.CENTER);
 
         Button changeScreenBack = new Button("Back");
         changeScreenBack.setOnAction(e -> handleButtonBack());
-        add(changeScreenBack, 2, 2);
         
         Button changeScreenSettings= new Button("Settings");
         changeScreenSettings.setOnAction(e -> handleButtonSettings());
-        add(changeScreenSettings, 3, 3, 1, 1);
+
+        Button changeScreenPlay = new Button("Play");
+        changeScreenPlay.setOnAction(e -> handleButtonPlay());
+
+        GridPane bottom = new GridPane();
+        bottom.addRow(0, changeScreenSettings, changeScreenBack, changeScreenPlay);
+
+        bottom.setHgap(10);
+        bottom.setVgap(10);
+        bottom.setPadding(new Insets(10));
+
+        setAlignment(bottom, Pos.BOTTOM_RIGHT);
+        setBottom(bottom);
+
+        Text inst = new Text("                              Welcome to Pictionary!\nThe game is simple: one player draws, and the other guesses.\n                                To begin, press play!");
+        inst.setFont(Font.font("AvantGarde", FontPosture.REGULAR, 14));
+        setAlignment(inst, Pos.CENTER);
+        setCenter(inst);
 
 
         //You would probably add more code to format this GridPane the way you'd like
         //Since screenmanager isn't finished i can't run so idk how it looks but idk 
         //if we'd need any more formatting?
-        setHgap(10);
-        setVgap(10);
-        setPadding(new Insets(10));
+        
     }
 
     private void handleButtonSettings(){
@@ -69,5 +80,8 @@ public class InstructionScreen extends GridPane {
         mainApp.showWelcomeScreen();
     }
     
+    private void handleButtonPlay() {
+        mainApp.showDrawingScreen();
+    }
 }
 //I didn't think there was much to do so enjoy the new fonts and colors <3

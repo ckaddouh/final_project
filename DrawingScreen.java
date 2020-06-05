@@ -26,6 +26,9 @@ public class DrawingScreen extends StackPane {
     Boolean eraser = false;
     double x;
     double y;
+    
+    Canvas canvas;        
+    GraphicsContext gc;
 
     public static Words list;
 
@@ -39,7 +42,7 @@ public class DrawingScreen extends StackPane {
         GridPane grid = new GridPane();
 
         // Create GraphicsContext for the user to draw with
-        GraphicsContext gc;
+
 
         // Implement a color picker and slider for pen color and width
         ColorPicker cp = new ColorPicker();
@@ -47,7 +50,7 @@ public class DrawingScreen extends StackPane {
         Label sliderLbl = new Label("1.0");
 
         // Create a canvas and bind its properties to the scene's properties
-        Canvas canvas = new Canvas();
+        canvas = new Canvas();
         canvas.widthProperty().bind(this.widthProperty());
         canvas.heightProperty().bind(this.heightProperty());
 
@@ -259,6 +262,7 @@ public class DrawingScreen extends StackPane {
     }
 
     private void handleButton() {
+        gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
         mainApp.showResultsScreen();
     }
 
