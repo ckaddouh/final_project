@@ -3,15 +3,15 @@ import java.io.FileNotFoundException;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.GridPane;
+//import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-public class SettingsScreen extends BorderPane {
+public class SettingsScreen extends GridPane {
 
     private MainApp mainApp;
     
@@ -19,11 +19,15 @@ public class SettingsScreen extends BorderPane {
         super();
         this.mainApp = app;
 
+        GridPane pane = new GridPane();
+        pane.setAlignment(Pos.CENTER);
+        pane.setPadding(new Insets(10, 10, 10, 10));
+
         Text title = new Text("Settings");
         title.setFill(Color.DARKTURQUOISE);
         title.setFont(Font.font("AvantGarde", FontWeight.BOLD, FontPosture.REGULAR, 20));
-        setTop(title);
-        setAlignment(title, Pos.CENTER);
+        //setTop(title);
+        //setAlignment(title, Pos.CENTER);
 
         Button changeScreenButton = new Button("Play");
         changeScreenButton.setOnAction(e -> handleButton());
@@ -34,10 +38,14 @@ public class SettingsScreen extends BorderPane {
         Button instructionsBT = new Button("Instructions");
         instructionsBT.setOnAction(e -> handleInstructionsBT());
 
-        HBox bottom = new HBox();
-        bottom.getChildren().addAll(changeScreenButton, backBT, instructionsBT);
+        pane.add(changeScreenButton, 6, 0);
+        pane.add(backBT, 6, 1);
+        pane.add(instructionsBT, 6, 2);
 
-        setPadding(new Insets(10));
+        //HBox bottom = new HBox();
+        //bottom.getChildren().addAll(changeScreenButton, backBT, instructionsBT);
+
+        //setPadding(new Insets(10));
     }
 
         private void handleButton(){
