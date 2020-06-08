@@ -60,14 +60,14 @@ public class SettingsScreen extends GridPane {
         comboBox.setPromptText("Select a difficulty level");
         comboBox.setValue("easy");
         TextField numOfRounds = new TextField();
-        // numOfRounds.setOnAction(e -> {
-        //     DrawingScreen.setNumOfRounds(Integer.parseInt(numOfRounds.getText()));
-        // });
+        numOfRounds.setOnAction(e -> {
+            DrawingScreen.setNumOfRounds(Integer.parseInt(numOfRounds.getText()));
+        });
 
         TextField timerLength = new TextField();
-        // timerLength.setOnAction(e -> {
-        //     DrawingScreen.setTimerLength(Integer.parseInt(timerLength.getText()));
-        // });
+        timerLength.setOnAction(e -> {
+            DrawingScreen.setTimerLength(Integer.parseInt(timerLength.getText()));
+        });
 
         GridPane center = new GridPane();
         center.addRow(0, numOfRounds, timerLength);
