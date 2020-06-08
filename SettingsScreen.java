@@ -25,6 +25,10 @@ public class SettingsScreen extends GridPane {
         super();
         this.mainApp = app;
 
+        GridPane pane = new GridPane();
+        pane.setAlignment(Pos.CENTER);
+        pane.setPadding(new Insets(10, 10, 10, 10));
+
         Text title = new Text("Settings");
         title.setFill(Color.DARKTURQUOISE);
         title.setFont(Font.font("AvantGarde", FontWeight.BOLD, FontPosture.REGULAR, 20));
