@@ -267,10 +267,19 @@ public class DrawingScreen extends StackPane {
     }
 
     public static void setFileName(String fileName) throws FileNotFoundException {
-            lbl.setText(fileName);
-            list = new Words("words/" + fileName + ".txt");
-            useWords();
-        }
+        file_name = fileName;
+        lbl.setText(file_name);
+        list = new Words("words/" + file_name + ".txt");
+        useWords();
+    }
+    
+    public static void setTimerLength(int timerLength) {
+        
+    }
+
+    public static void setNumOfRounds(int numOfRounds) {
+        
+    }
     
     public static void useWords(){
         String word = list.getRandomWord();

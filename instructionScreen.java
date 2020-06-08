@@ -44,14 +44,14 @@ public class InstructionScreen extends BorderPane {
         Button changeScreenBack = new Button("Back");
         changeScreenBack.setOnAction(e -> handleButtonBack());
         
-        Button changeScreenSettings= new Button("Settings");
-        changeScreenSettings.setOnAction(e -> handleButtonSettings());
+        // Button changeScreenSettings= new Button("Settings");
+        // changeScreenSettings.setOnAction(e -> handleButtonSettings());
 
         Button changeScreenPlay = new Button("Play");
         changeScreenPlay.setOnAction(e -> handleButtonPlay());
 
         GridPane bottom = new GridPane();
-        bottom.addRow(0, changeScreenSettings, changeScreenBack, changeScreenPlay);
+        bottom.addRow(0, changeScreenBack, changeScreenPlay);
 
         bottom.setHgap(10);
         bottom.setVgap(10);
@@ -72,10 +72,11 @@ public class InstructionScreen extends BorderPane {
         
     }
 
-    private void handleButtonSettings(){
-        //Call the appropriate method from the MainApp
-        mainApp.showSettingsScreen();
-    }
+    // private void handleButtonSettings(){
+    //     //Call the appropriate method from the MainApp
+    //     mainApp.showSettingsScreen();
+    // }
+    
     private void handleButtonBack(){
         mainApp.showWelcomeScreen();
     }
