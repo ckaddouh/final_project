@@ -16,7 +16,7 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-public class SettingsScreen extends BorderPane {
+public class SettingsScreen extends GridPane {
 
     private MainApp mainApp;
     public final ComboBox<String> comboBox;
@@ -28,8 +28,7 @@ public class SettingsScreen extends BorderPane {
         Text title = new Text("Settings");
         title.setFill(Color.DARKTURQUOISE);
         title.setFont(Font.font("AvantGarde", FontWeight.BOLD, FontPosture.REGULAR, 20));
-        setTop(title);
-        setAlignment(title, Pos.CENTER);
+        add(title, 0 , 2);
 
         Button changeScreenButton = new Button("Play");
         changeScreenButton.setOnAction(e -> handleButton());
@@ -40,15 +39,16 @@ public class SettingsScreen extends BorderPane {
         Button instructionsBT = new Button("Instructions");
         instructionsBT.setOnAction(e -> handleInstructionsBT());
 
-        GridPane bottom = new GridPane();
-        bottom.addRow(0, changeScreenButton, backBT, instructionsBT);
+        addRow(2, changeScreenButton, backBT, instructionsBT);
+        // GridPane bottom = new GridPane();
+        // bottom.addRow(0, changeScreenButton, backBT, instructionsBT);
 
-        bottom.setHgap(10);
-        bottom.setVgap(10);
-        bottom.setPadding(new Insets(10));
+        setHgap(10);
+        setVgap(10);
+        setPadding(new Insets(10));
 
-        setAlignment(bottom, Pos.BOTTOM_RIGHT);
-        setBottom(bottom);
+        // setAlignment(bottom, Pos.BOTTOM_RIGHT);
+        // setBottom(bottom);
 
         ObservableList<String> files = FXCollections.observableArrayList("easy", "medium", "hard");
         comboBox = new ComboBox<String>();
@@ -68,14 +68,12 @@ public class SettingsScreen extends BorderPane {
         GridPane center = new GridPane();
         center.addRow(0, numOfRounds, timerLength);
 
-        setCenter(center);
-        setAlignment(center, Pos.CENTER);
-
-
         Label tester = new Label("Showing");
-        setLeft(tester);
 
-        comboBox.setOnMouseClicked(e -> {
+        addRow(1, tester, center, comboBox);
+
+
+        comboBox.setOnAction(e -> {
             tester.setText(comboBox.getValue());
             try {
                 DrawingScreen.setFileName(comboBox.getValue());
@@ -84,7 +82,6 @@ public class SettingsScreen extends BorderPane {
             }
         });
 
-        setRight(comboBox);
 
     }
 
