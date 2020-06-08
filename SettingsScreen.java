@@ -19,7 +19,7 @@ import javafx.scene.text.Text;
 public class SettingsScreen extends GridPane {
 
     private MainApp mainApp;
-    public final ComboBox<String> comboBox;
+    public static ComboBox<String> comboBox = new ComboBox<>();
     
     public SettingsScreen(MainApp app) throws FileNotFoundException {
         super();
@@ -55,19 +55,19 @@ public class SettingsScreen extends GridPane {
         // setBottom(bottom);
 
         ObservableList<String> files = FXCollections.observableArrayList("easy", "medium", "hard");
-        comboBox = new ComboBox<String>();
+        // comboBox = new ComboBox<String>();
         comboBox.setItems(files);
         comboBox.setPromptText("Select a difficulty level");
-
+        comboBox.setValue("easy");
         TextField numOfRounds = new TextField();
-        numOfRounds.setOnAction(e -> {
-            DrawingScreen.setNumOfRounds(Integer.parseInt(numOfRounds.getText()));
-        });
+        // numOfRounds.setOnAction(e -> {
+        //     DrawingScreen.setNumOfRounds(Integer.parseInt(numOfRounds.getText()));
+        // });
 
         TextField timerLength = new TextField();
-        timerLength.setOnAction(e -> {
-            DrawingScreen.setTimerLength(Integer.parseInt(timerLength.getText()));
-        });
+        // timerLength.setOnAction(e -> {
+        //     DrawingScreen.setTimerLength(Integer.parseInt(timerLength.getText()));
+        // });
 
         GridPane center = new GridPane();
         center.addRow(0, numOfRounds, timerLength);
@@ -78,9 +78,9 @@ public class SettingsScreen extends GridPane {
 
 
         comboBox.setOnAction(e -> {
-            tester.setText(comboBox.getValue());
+            tester.setText(String.format("words/%s.txt", comboBox.getValue()));
             try {
-                DrawingScreen.setFileName(comboBox.getValue());
+                DrawingScreen.setFileName(String.format("%s.txt", comboBox.getValue()));
             } catch (FileNotFoundException e1) {
                 e1.printStackTrace();
             }
@@ -89,8 +89,9 @@ public class SettingsScreen extends GridPane {
 
     }
 
-        private void handleButton(){
+        private void handleButton() {
             //Call the appropriate method from the MainApp
+
             mainApp.showDrawingScreen();
         }
 
