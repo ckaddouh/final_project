@@ -272,6 +272,14 @@ public class DrawingScreen extends StackPane {
             useWords();
         }
     
+    public static void setTimerLength(int timerLength) {
+        
+    }
+
+    public static void setNumOfRounds(int numOfRounds) {
+        
+    }
+    
     public static void useWords(){
         String word = list.getRandomWord();
         lbl2.setText(word);
