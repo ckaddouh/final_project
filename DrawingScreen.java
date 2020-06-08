@@ -30,7 +30,7 @@ public class DrawingScreen extends StackPane {
     Canvas canvas;        
     GraphicsContext gc;
 
-    public static Words list;
+    public static words list;
 
     public DrawingScreen(MainApp app) {
         super();
@@ -269,7 +269,7 @@ public class DrawingScreen extends StackPane {
     public static void setFileName(String fileName) throws FileNotFoundException {
         file_name = fileName;
         lbl.setText(file_name);
-        list = new Words("words/" + file_name + ".txt");
+        list = new words("words/" + file_name + ".txt");
         useWords();
     }
     

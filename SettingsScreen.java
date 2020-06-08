@@ -88,7 +88,9 @@ public class SettingsScreen extends BorderPane {
     }
 
         private void handleButton() {
-            mainApp.showDrawingScreen();
+            //Call the appropriate method from the MainApp
+
+            mainApp.showWordScreen();
         }
 
         private void handleBackBT(){

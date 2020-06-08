@@ -10,6 +10,7 @@ public class MainApp extends Application {
 
     Pane welcomeScreen;
     Pane instructionScreen;
+    Pane wordScreen;
     Pane drawingScreen;
     Pane settingsScreen;
     Pane resultsScreen;
@@ -19,11 +20,12 @@ public class MainApp extends Application {
     public void start(Stage stage) throws Exception {
         primaryStage = stage;
 
-        welcomeScreen = new WelcomeScreen(this);
-        instructionScreen = new InstructionScreen(this);
+        welcomeScreen = new welcomeScreen(this);
+        instructionScreen = new instructionScreen(this);
         drawingScreen = new DrawingScreen(this);
         settingsScreen = new SettingsScreen(this);
         resultsScreen = new ResultsScreen(this);
+        wordScreen = new WordScreen(this);
         
 
 
@@ -47,8 +49,14 @@ public class MainApp extends Application {
 
     public void showSettingsScreen(){
         Scene scene = primaryStage.getScene();
-        setStageSize(400, 400);
+        setStageSize(400, 500);
         scene.setRoot(settingsScreen);
+    }
+
+    public void showWordScreen(){
+        Scene scene = primaryStage.getScene();
+        setStageSize(415, 250);
+        scene.setRoot(wordScreen);
     }
 
     public void showDrawingScreen(){
