@@ -16,7 +16,7 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-public class SettingsScreen extends GridPane {
+public class SettingsScreen extends BorderPane {
 
     private MainApp mainApp;
     public static ComboBox<String> comboBox = new ComboBox<>();
@@ -25,14 +25,14 @@ public class SettingsScreen extends GridPane {
         super();
         this.mainApp = app;
 
-        GridPane pane = new GridPane();
-        pane.setAlignment(Pos.CENTER);
-        pane.setPadding(new Insets(10, 10, 10, 10));
+        // GridPane pane = new GridPane();
+        // pane.setAlignment(Pos.CENTER);
 
-        Text title = new Text("Settings");
+        Text title = new Text("Settingsc");
         title.setFill(Color.DARKTURQUOISE);
         title.setFont(Font.font("AvantGarde", FontWeight.BOLD, FontPosture.REGULAR, 20));
-        add(title, 0 , 2);
+        setTop(title);
+        setAlignment(title, Pos.CENTER);
 
         Button changeScreenButton = new Button("Play");
         changeScreenButton.setOnAction(e -> handleButton());
@@ -42,23 +42,21 @@ public class SettingsScreen extends GridPane {
 
         Button instructionsBT = new Button("Instructions");
         instructionsBT.setOnAction(e -> handleInstructionsBT());
+        
+        GridPane bottom = new GridPane();
+        bottom.addRow(0, changeScreenButton, backBT, instructionsBT);
+        bottom.setHgap(10);
+        bottom.setVgap(10);
+        bottom.setPadding(new Insets(10));
 
-        addRow(2, changeScreenButton, backBT, instructionsBT);
-        // GridPane bottom = new GridPane();
-        // bottom.addRow(0, changeScreenButton, backBT, instructionsBT);
-
-        setHgap(10);
-        setVgap(10);
-        setPadding(new Insets(10));
-
-        // setAlignment(bottom, Pos.BOTTOM_RIGHT);
-        // setBottom(bottom);
+        setBottom(bottom);
+        setAlignment(bottom, Pos.BOTTOM_RIGHT);
 
         ObservableList<String> files = FXCollections.observableArrayList("easy", "medium", "hard");
-        // comboBox = new ComboBox<String>();
         comboBox.setItems(files);
         comboBox.setPromptText("Select a difficulty level");
         comboBox.setValue("easy");
+
         TextField numOfRounds = new TextField();
         numOfRounds.setOnAction(e -> {
             DrawingScreen.setNumOfRounds(Integer.parseInt(numOfRounds.getText()));
@@ -69,13 +67,13 @@ public class SettingsScreen extends GridPane {
             DrawingScreen.setTimerLength(Integer.parseInt(timerLength.getText()));
         });
 
-        GridPane center = new GridPane();
-        center.addRow(0, numOfRounds, timerLength);
-
         Label tester = new Label("Showing");
 
-        addRow(1, tester, center, comboBox);
+        GridPane center = new GridPane();
+        center.addRow(0, tester, numOfRounds, timerLength, comboBox);
 
+        setCenter(center);
+        setAlignment(center, Pos.CENTER);
 
         comboBox.setOnAction(e -> {
             tester.setText(comboBox.getValue());
