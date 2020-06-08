@@ -92,7 +92,7 @@ public class SettingsScreen extends GridPane {
         private void handleButton() {
             //Call the appropriate method from the MainApp
 
-            mainApp.showDrawingScreen();
+            mainApp.showWordScreen();
         }
 
         private void handleBackBT(){
