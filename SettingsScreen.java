@@ -78,9 +78,9 @@ public class SettingsScreen extends GridPane {
 
 
         comboBox.setOnAction(e -> {
-            tester.setText(String.format("words/%s.txt", comboBox.getValue()));
+            tester.setText(comboBox.getValue());
             try {
-                DrawingScreen.setFileName(String.format("%s.txt", comboBox.getValue()));
+                DrawingScreen.setFileName(tester.getText());
             } catch (FileNotFoundException e1) {
                 e1.printStackTrace();
             }

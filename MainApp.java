@@ -10,6 +10,7 @@ public class MainApp extends Application {
 
     Pane welcomeScreen;
     Pane instructionScreen;
+    Pane drawingScreen;
     Pane settingsScreen;
     Pane resultsScreen;
 
@@ -20,6 +21,7 @@ public class MainApp extends Application {
 
         welcomeScreen = new WelcomeScreen(this);
         instructionScreen = new InstructionScreen(this);
+        drawingScreen = new DrawingScreen(this);
         settingsScreen = new SettingsScreen(this);
         resultsScreen = new ResultsScreen(this);
         
@@ -53,7 +55,7 @@ public class MainApp extends Application {
     public void showDrawingScreen(){
         Scene scene = primaryStage.getScene();
         setStageSize(800, 500);
-        scene.setRoot(new DrawingScreen(this));
+        scene.setRoot(drawingScreen);
     }
 
     public void showResultsScreen(){
