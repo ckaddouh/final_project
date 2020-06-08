@@ -60,8 +60,7 @@ public class InstructionScreen extends BorderPane {
         setAlignment(bottom, Pos.BOTTOM_RIGHT);
         setBottom(bottom);
 
-        Text inst = new Text(
-                "                              Welcome to Pictionary!\nThe game is simple: one player draws, and the other guesses.\n                                To begin, press play!");
+        Text inst = new Text("                              Welcome to Pictionary!\nThe game is simple: one player draws, and the other guesses.\n                                To begin, press play!");
         inst.setFont(Font.font("AvantGarde", FontPosture.REGULAR, 14));
         setAlignment(inst, Pos.CENTER);
         setCenter(inst);
@@ -86,7 +85,6 @@ public class InstructionScreen extends BorderPane {
         try {
             DrawingScreen.setFileName("easy");
         } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
