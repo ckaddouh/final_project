@@ -31,7 +31,6 @@ public class MainApp extends Application {
         primaryStage.setTitle("Welcome to Pictionary!");
         primaryStage.setScene(scene);
         primaryStage.show();  
-
     }
 
     public void showWelcomeScreen(){
