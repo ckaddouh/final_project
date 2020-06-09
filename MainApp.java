@@ -20,12 +20,12 @@ public class MainApp extends Application {
     public void start(Stage stage) throws Exception {
         primaryStage = stage;
 
-        welcomeScreen = new welcomeScreen(this);
-        instructionScreen = new instructionScreen(this);
+        welcomeScreen = new WelcomeScreen(this);
+        instructionScreen = new InstructionScreen(this);
         drawingScreen = new DrawingScreen(this);
         settingsScreen = new SettingsScreen(this);
         resultsScreen = new ResultsScreen(this);
-        wordScreen = new WordScreen(this);
+        // wordScreen = new WordScreen(this);
         
 
 

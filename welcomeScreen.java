@@ -20,12 +20,12 @@ import javafx.scene.text.FontWeight;
  * ScreenA is a subclass of GridPane. Since GridPane is a subclass of Pane, it
  * can be saved in a Pane variable too.
  */
-public class welcomeScreen extends BorderPane {
+public class WelcomeScreen extends BorderPane {
 
     private MainApp mainApp;
     public static String file_name;
 
-    public welcomeScreen(MainApp app) {
+    public WelcomeScreen(MainApp app) {
         super();
         // the super() calls the constructor of GridPane.
         // It's not necessary because it's automatically called,

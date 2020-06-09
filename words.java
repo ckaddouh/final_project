@@ -1,12 +1,13 @@
+
 import java.io.FileReader;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class words {
+public class Words {
     public static ArrayList<String> list = new ArrayList<>();
 
-    public words(String filename) throws java.io.FileNotFoundException {
+    public Words(String filename) throws java.io.FileNotFoundException {
         Scanner input = new Scanner(new FileReader(filename));
         while (input.hasNextLine()) {
             String line = input.nextLine().trim();
