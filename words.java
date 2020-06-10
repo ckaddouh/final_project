@@ -3,10 +3,10 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Words {
+public class words {
     public static ArrayList<String> list = new ArrayList<>();
 
-    public Words(String filename) throws java.io.FileNotFoundException {
+    public words(String filename) throws java.io.FileNotFoundException {
         Scanner input = new Scanner(new FileReader(filename));
         while (input.hasNextLine()) {
             String line = input.nextLine().trim();

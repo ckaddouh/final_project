@@ -15,7 +15,7 @@ public class WordScreen extends BorderPane {
     public static Label roundsLbl = new Label();
     public static Label time = new Label();
 
-    public static Words list;
+    public static words list;
     public static String word;
     public static Label wordLbl;
 
@@ -55,7 +55,7 @@ public class WordScreen extends BorderPane {
         
         public static void setFileName(String fileName) throws FileNotFoundException {
             file_name = fileName;
-            list = new Words("words/" + file_name + ".txt");
+            list = new words("words/" + file_name + ".txt");
             useWords();
         }
         
