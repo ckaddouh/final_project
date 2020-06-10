@@ -59,7 +59,7 @@ public class InstructionScreen extends BorderPane {
         setAlignment(bottom, Pos.BOTTOM_RIGHT);
         setBottom(bottom);
 
-        Text inst = new Text("                              Welcome to Pictionary!\nThe game is simple: one player draws, and the other guesses.\n                                To begin, press play!");
+        Text inst = new Text("                              Welcome to Pictionary!\nThe game is simple: one player draws, and the other guesses.\n                       You are given a certain amount of\n                        time to get as many as you can \n                               To begin, press play!");
         inst.setFont(Font.font("AvantGarde", FontPosture.REGULAR, 14));
         setAlignment(inst, Pos.CENTER);
         setCenter(inst);
