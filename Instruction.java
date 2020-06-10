@@ -16,11 +16,11 @@ import javafx.scene.text.Text;
  * ScreenA is a subclass of GridPane. Since GridPane is a subclass of Pane, it
  * can be saved in a Pane variable too.
  */
-public class InstructionScreen extends BorderPane {
+public class Instruction extends BorderPane {
 
     private MainApp mainApp;
 
-    public InstructionScreen(MainApp app) {
+    public Instruction(MainApp app) {
         super();
         //the super() calls the constructor of GridPane. 
         //It's not necessary because it's automatically called,
@@ -59,7 +59,7 @@ public class InstructionScreen extends BorderPane {
         setAlignment(bottom, Pos.BOTTOM_RIGHT);
         setBottom(bottom);
 
-        Text inst = new Text("                              Welcome to Pictionary!\nThe game is simple: one player draws, and the other guesses.\n                                To begin, press play!");
+        Text inst = new Text("                              Welcome to Pictionary!\nThe game is simple: one player draws, and the other guesses.\n                       You are given a certain amount of\n                        time to get as many as you can \n                               To begin, press play!");
         inst.setFont(Font.font("AvantGarde", FontPosture.REGULAR, 14));
         setAlignment(inst, Pos.CENTER);
         setCenter(inst);
