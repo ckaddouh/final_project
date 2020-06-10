@@ -69,8 +69,6 @@ public class WelcomeScreen extends BorderPane {
         setBottom(bottom);
 
         //You would probably add more code to format this GridPane the way you'd like
-      
-    
     }
 
     private void handleButton(){

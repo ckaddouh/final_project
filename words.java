@@ -1,4 +1,3 @@
-
 import java.io.FileReader;
 import java.util.Scanner;
 import java.util.ArrayList;
