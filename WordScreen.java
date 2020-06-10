@@ -54,9 +54,6 @@ public class WordScreen extends BorderPane {
             // TODO Auto-generated catch block
             e1.printStackTrace();
         }
-
-        setTimerLength(10);
-        setNumOfRounds(3);
         
     }
 
