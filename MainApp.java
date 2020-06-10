@@ -23,7 +23,7 @@ public class MainApp extends Application {
         primaryStage = stage;
 
         welcomeScreen = new welcomeScreen(this);
-        instructionScreen = new instructionScreen(this);
+        instructionScreen = new Instruction(this);
         drawingScreen = new DrawingScreen(this);
         settingsScreen = new SettingsScreen(this);
         resultsScreen = new ResultsScreen(this);

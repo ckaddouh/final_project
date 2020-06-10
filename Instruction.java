@@ -16,11 +16,11 @@ import javafx.scene.text.Text;
  * ScreenA is a subclass of GridPane. Since GridPane is a subclass of Pane, it
  * can be saved in a Pane variable too.
  */
-public class instructionScreen extends BorderPane {
+public class Instruction extends BorderPane {
 
     private MainApp mainApp;
 
-    public instructionScreen(MainApp app) {
+    public Instruction(MainApp app) {
         super();
         //the super() calls the constructor of GridPane. 
         //It's not necessary because it's automatically called,
