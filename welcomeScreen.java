@@ -69,21 +69,15 @@ public class WelcomeScreen extends BorderPane {
         setBottom(bottom);
 
         //You would probably add more code to format this GridPane the way you'd like
-      
-    
     }
 
     private void handleButton(){
         //Call the appropriate method from the MainApp
         mainApp.showInstructionScreen();
     }
-
-    public void handleButton2(){
-        mainApp.showSettingsScreen();
-    }
     
     public void handleButtonStart(){
-        mainApp.showDrawingScreen();
+        mainApp.showWordScreen();
     }
 
     public void handleButtonSettings() {

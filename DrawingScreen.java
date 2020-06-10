@@ -30,7 +30,13 @@ public class DrawingScreen extends StackPane {
     Canvas canvas;        
     GraphicsContext gc;
 
-    public static Words list;
+    public static int sec;
+    public static int rounds;
+
+    public static Label info;
+    public static Label info2;
+
+    public static String word;
 
     public DrawingScreen(MainApp app) {
         super();
@@ -248,10 +254,13 @@ public class DrawingScreen extends StackPane {
             grid.setAlignment(Pos.TOP_CENTER);
             grid.setPadding(new Insets(20, 0, 0, 0));
 
+            info = new Label("Nothing");
+            info2 = new Label("Info 2");
+
             Button changeScreenButton = new Button("See Results");
             changeScreenButton.setOnAction(e -> handleButton());
-            grid.addRow(2);
-            grid.addRow(3);
+            grid.addRow(2, info);
+            grid.addRow(3, info2);
             grid.addRow(4);
             grid.addRow(5, changeScreenButton);
 
@@ -266,24 +275,26 @@ public class DrawingScreen extends StackPane {
         mainApp.showResultsScreen();
     }
 
-    public static void setFileName(String fileName) throws FileNotFoundException {
-        file_name = fileName;
-        lbl.setText(file_name);
-        list = new Words("words/" + file_name + ".txt");
-        useWords();
-    }
+    // public static void setFileName(String fileName) throws FileNotFoundException {
+    //     file_name = fileName;
+    //     lbl.setText(file_name);
+    //     list = new Words("words/" + file_name + ".txt");
+    //     useWords();
+    // }
     
     public static void setTimerLength(int timerLength) {
-        
+        sec = timerLength;
+        info.setText(String.format("%d", sec));
     }
 
     public static void setNumOfRounds(int numOfRounds) {
-        
+        rounds = numOfRounds;
+        info2.setText(String.format("%d", rounds));
     }
     
-    public static void useWords(){
-        String word = list.getRandomWord();
-        lbl2.setText(word);
-        list.remove(word);
-    }
+    // public static void useWords(){
+    //     word = list.getRandomWord();
+    //     lbl2.setText(word);
+    //     list.remove(word);
+    // }
 }

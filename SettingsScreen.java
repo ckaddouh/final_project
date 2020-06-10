@@ -20,18 +20,22 @@ public class SettingsScreen extends BorderPane {
 
     private MainApp mainApp;
     public static ComboBox<String> comboBox = new ComboBox<>();
+    public static TextField timerLength;
+    public static TextField numOfRounds;
     
     public SettingsScreen(MainApp app) throws FileNotFoundException {
         super();
         this.mainApp = app;
 
-        // GridPane pane = new GridPane();
-        // pane.setAlignment(Pos.CENTER);
+        GridPane pane = new GridPane();
+        pane.setAlignment(Pos.CENTER);
+        pane.setPadding(new Insets(10, 10, 10, 10));
 
-        Text title = new Text("Settingsc");
+        Text title = new Text("Settings");
         title.setFill(Color.DARKTURQUOISE);
         title.setFont(Font.font("AvantGarde", FontWeight.BOLD, FontPosture.REGULAR, 20));
         setTop(title);
+
         setAlignment(title, Pos.CENTER);
 
         Button changeScreenButton = new Button("Play");
@@ -42,53 +46,62 @@ public class SettingsScreen extends BorderPane {
 
         Button instructionsBT = new Button("Instructions");
         instructionsBT.setOnAction(e -> handleInstructionsBT());
-        
+
         GridPane bottom = new GridPane();
         bottom.addRow(0, changeScreenButton, backBT, instructionsBT);
+        
         bottom.setHgap(10);
         bottom.setVgap(10);
         bottom.setPadding(new Insets(10));
 
-        setBottom(bottom);
         setAlignment(bottom, Pos.BOTTOM_RIGHT);
+        setBottom(bottom);
 
         ObservableList<String> files = FXCollections.observableArrayList("easy", "medium", "hard");
+        // comboBox = new ComboBox<String>();
         comboBox.setItems(files);
         comboBox.setPromptText("Select a difficulty level");
         comboBox.setValue("easy");
 
-        TextField numOfRounds = new TextField();
-        numOfRounds.setOnAction(e -> {
-            DrawingScreen.setNumOfRounds(Integer.parseInt(numOfRounds.getText()));
-        });
+        numOfRounds.setText("10");
+        timerLength.setText("30");
+        
+        numOfRounds = new TextField();
 
-        TextField timerLength = new TextField();
-        timerLength.setOnAction(e -> {
-            DrawingScreen.setTimerLength(Integer.parseInt(timerLength.getText()));
-        });
+        // numOfRounds.setOnAction(e -> {
+        //     WordScreen.setNumOfRounds(Integer.parseInt(numOfRounds.getText()));
+        // });
 
-        Label tester = new Label("Showing");
+        timerLength = new TextField();
+        // timerLength.setOnAction(e -> {
+        //     WordScreen.setTimerLength(Integer.parseInt(timerLength.getText()));
+        // });
+
+        Label rounds = new Label("Number of Rounds");
+        Label length = new Label("Length of Rounds (seconds)");
+        Label difficulty = new Label("Difficulty Level");
 
         GridPane center = new GridPane();
-        center.addRow(0, tester, numOfRounds, timerLength, comboBox);
-
+        center.addRow(0, rounds, numOfRounds);
+        center.addRow(1, length, timerLength);
+        center.addRow(2, difficulty, comboBox);
+        center.setHgap(10);
+        center.setVgap(10);
+        center.setPadding(new Insets(10));
         setCenter(center);
-        setAlignment(center, Pos.CENTER);
 
-        comboBox.setOnAction(e -> {
-            tester.setText(comboBox.getValue());
-            try {
-                DrawingScreen.setFileName(tester.getText());
-            } catch (FileNotFoundException e1) {
-                e1.printStackTrace();
-            }
-        });
-
-
+        // comboBox.setOnAction(e -> {
+        //     try {
+        //         WordScreen.setFileName(comboBox.getValue());
+        //     } catch (FileNotFoundException e1) {
+        //         e1.printStackTrace();
+        //     }
+        // });
     }
 
         private void handleButton() {
-            mainApp.showDrawingScreen();
+            //Call the appropriate method from the MainApp
+            mainApp.showWordScreen();
         }
 
         private void handleBackBT(){

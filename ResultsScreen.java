@@ -1,4 +1,5 @@
 import java.io.FileNotFoundException;
+import java.util.concurrent.TimeUnit;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -14,11 +15,23 @@ public class ResultsScreen extends GridPane {
 
     private MainApp mainApp;
 
-    public ResultsScreen(MainApp app) throws FileNotFoundException {
+    public ResultsScreen(MainApp app) {
         super();
 
         this.mainApp = app;
 
+        DrawingScreen.rounds--;
+
+        Button next = new Button("Next");
+
+        if (WordScreen.rounds <= 0) 
+            add(next, 2, 3);
+
+        next.setOnAction(e -> {
+            if (WordScreen.rounds <= 0) 
+                handleFinalScreen();
+        });
+        
         Text text = new Text("Results!");
         text.setFill(Color.DARKTURQUOISE);
         text.setFont(Font.font("AvantGarde", FontWeight.BOLD, FontPosture.REGULAR, 20));
@@ -27,7 +40,7 @@ public class ResultsScreen extends GridPane {
 
         Button changeScreenButton = new Button("Back");
         changeScreenButton.setOnAction(e -> {
-            DrawingScreen.useWords();
+            WordScreen.useWords();
             handleButton();
         });
         add(changeScreenButton, 3, 3, 1, 1);
@@ -39,6 +52,11 @@ public class ResultsScreen extends GridPane {
         
     }
     private void handleButton(){
-        mainApp.showDrawingScreen();
+        mainApp.showWordScreen();
     }
+
+    private void handleFinalScreen() {
+        mainApp.showFinalScreen();
+    }
+
 }
