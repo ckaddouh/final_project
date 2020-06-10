@@ -101,7 +101,6 @@ public class MainApp extends Application {
         primaryStage.setHeight(height);
     }
 
-
     public static void main(String[] args){
         launch(args);
     }
