@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+
 import javafx.application.Application;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -10,11 +12,11 @@ public class MainApp extends Application {
 
     Pane welcomeScreen;
     Pane instructionScreen;
-    Pane wordScreen;
     Pane drawingScreen;
     Pane settingsScreen;
     Pane resultsScreen;
-
+    Pane finalScreen;
+    Pane wordScreen;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -25,14 +27,14 @@ public class MainApp extends Application {
         drawingScreen = new DrawingScreen(this);
         settingsScreen = new SettingsScreen(this);
         resultsScreen = new ResultsScreen(this);
-        // wordScreen = new WordScreen(this);
-        
-
+        finalScreen = new FinalScreen(this);
+        wordScreen = new WordScreen(this);
 
         Scene scene = new Scene(welcomeScreen, 800, 500);
         primaryStage.setTitle("Welcome to Pictionary!");
         primaryStage.setScene(scene);
         primaryStage.show();  
+
     }
 
     public void showWelcomeScreen(){
@@ -49,18 +51,21 @@ public class MainApp extends Application {
 
     public void showSettingsScreen(){
         Scene scene = primaryStage.getScene();
-        setStageSize(400, 500);
+        setStageSize(800, 400);
         scene.setRoot(settingsScreen);
-    }
-
-    public void showWordScreen(){
-        Scene scene = primaryStage.getScene();
-        setStageSize(415, 250);
-        scene.setRoot(wordScreen);
     }
 
     public void showDrawingScreen(){
         Scene scene = primaryStage.getScene();
+        
+        DrawingScreen.setNumOfRounds(Integer.parseInt(SettingsScreen.numOfRounds.getText()));
+        DrawingScreen.setTimerLength(Integer.parseInt(SettingsScreen.timerLength.getText()));
+        // try {
+        //     DrawingScreen.setFileName(SettingsScreen.comboBox.getValue());
+        // } catch (FileNotFoundException e) {
+        //     e.printStackTrace();
+        // }
+
         setStageSize(800, 500);
         scene.setRoot(drawingScreen);
     }
@@ -71,10 +76,31 @@ public class MainApp extends Application {
         scene.setRoot(resultsScreen);
     }
 
+    public void showFinalScreen(){
+        Scene scene = primaryStage.getScene();
+        setStageSize(400, 400);
+        scene.setRoot(finalScreen);
+    }
+
+    public void showWordScreen(){
+        Scene scene = primaryStage.getScene();
+
+        WordScreen.setNumOfRounds(Integer.parseInt(SettingsScreen.numOfRounds.getText()));
+        WordScreen.setTimerLength(Integer.parseInt(SettingsScreen.timerLength.getText()));
+        try {
+            WordScreen.setFileName(SettingsScreen.comboBox.getValue());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        setStageSize(400, 400);
+        scene.setRoot(wordScreen);
+    }
+
     public static void setStageSize(double width, double height){
         primaryStage.setWidth(width);
         primaryStage.setHeight(height);
     }
+
 
     public static void main(String[] args){
         launch(args);
