@@ -60,6 +60,7 @@ public class MainApp extends Application {
         
         DrawingScreen.setNumOfRounds(Integer.parseInt(SettingsScreen.numOfRounds.getText()));
         DrawingScreen.setTimerLength(Integer.parseInt(SettingsScreen.timerLength.getText()));
+        
         // try {
         //     DrawingScreen.setFileName(SettingsScreen.comboBox.getValue());
         // } catch (FileNotFoundException e) {

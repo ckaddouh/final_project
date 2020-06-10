@@ -11,13 +11,13 @@ public class WordScreen extends BorderPane {
     private MainApp mainApp;
 
     public static String file_name;
-    public static Label difficulty;
-    public static Label roundsLbl = new Label();
-    public static Label time = new Label();
+    public static Label difficulty = new Label("difficulty");
+    public static Label roundsLbl = new Label("rounds");
+    public static Label time = new Label("time");
 
     public static Words list;
     public static String word;
-    public static Label wordLbl;
+    public static Label wordLbl = new Label();
 
     public static int rounds;
     public static int sec;
@@ -26,7 +26,7 @@ public class WordScreen extends BorderPane {
         super(); 
         this.mainApp = app;
         
-        Label wordLbl = new Label();
+        Label wordLbl = new Label("Showing");
         setTop(wordLbl);
         setAlignment(wordLbl, Pos.CENTER);
 
@@ -35,8 +35,8 @@ public class WordScreen extends BorderPane {
         // roundsLbl = new Label();
         // time = new Label();
         
-        pane.addRow(0, roundsLbl);
-        pane.addRow(1, time);
+        pane.add(roundsLbl, 0, 1);
+        pane.add(time, 1, 0);
 
         Label ready = new Label("Ready?");
         Button play = new Button("Let's Go!");
@@ -47,6 +47,17 @@ public class WordScreen extends BorderPane {
         
         setCenter(pane);
         setAlignment(pane, Pos.CENTER);
+
+        try {
+            setFileName("easy");
+        } catch (FileNotFoundException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+
+        setTimerLength(10);
+        setNumOfRounds(3);
+        
     }
 
         private void handleButton() {
