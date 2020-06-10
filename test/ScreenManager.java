@@ -12,7 +12,6 @@ import javafx.stage.Stage;
  */
 public class ScreenManager extends Application {
 
-
     Stage primaryStage;
     //Save screenA so you don't have to build it every time
     Pane screenA;

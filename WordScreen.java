@@ -12,12 +12,15 @@ public class WordScreen extends BorderPane {
 
     public static String file_name;
     public static Label difficulty;
-    public static Label rounds;
-    public static Label time;
+    public static Label roundsLbl = new Label();
+    public static Label time = new Label();
 
     public static Words list;
     public static String word;
     public static Label wordLbl;
+
+    public static int rounds;
+    public static int sec;
 
     public WordScreen(MainApp app) {
         super(); 
@@ -29,9 +32,10 @@ public class WordScreen extends BorderPane {
 
         GridPane pane = new GridPane();
         
-        time = new Label("You have " + time + " seconds");
+        // roundsLbl = new Label();
+        // time = new Label();
         
-        pane.addRow(0, rounds);
+        pane.addRow(0, roundsLbl);
         pane.addRow(1, time);
 
         Label ready = new Label("Ready?");
@@ -56,14 +60,15 @@ public class WordScreen extends BorderPane {
         }
         
         public static void setTimerLength(int timerLength) {
-            time.setText("" + timerLength);
+            sec = timerLength;
+            time.setText(String.format("You have %d seconds", sec));
         }
     
         public static void setNumOfRounds(int numOfRounds) {
-            rounds.setText("" + numOfRounds);
+            rounds = numOfRounds;
+            roundsLbl.setText(String.format("There are %d rounds remaining", rounds));
         }
         
-       
         public static void useWords(){
             word = list.getRandomWord();
             wordLbl.setText("Your word is... " + word + "!");

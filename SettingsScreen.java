@@ -68,14 +68,14 @@ public class SettingsScreen extends BorderPane {
         
         numOfRounds = new TextField();
 
-        numOfRounds.setOnAction(e -> {
-            WordScreen.setNumOfRounds(Integer.parseInt(numOfRounds.getText()));
-        });
+        // numOfRounds.setOnAction(e -> {
+        //     WordScreen.setNumOfRounds(Integer.parseInt(numOfRounds.getText()));
+        // });
 
         timerLength = new TextField();
-        timerLength.setOnAction(e -> {
-            WordScreen.setTimerLength(Integer.parseInt(timerLength.getText()));
-        });
+        // timerLength.setOnAction(e -> {
+        //     WordScreen.setTimerLength(Integer.parseInt(timerLength.getText()));
+        // });
 
         Label rounds = new Label("Number of Rounds");
         Label length = new Label("Length of Rounds (seconds)");
@@ -90,18 +90,17 @@ public class SettingsScreen extends BorderPane {
         center.setPadding(new Insets(10));
         setCenter(center);
 
-        comboBox.setOnAction(e -> {
-            try {
-                WordScreen.setFileName(comboBox.getValue());
-            } catch (FileNotFoundException e1) {
-                e1.printStackTrace();
-            }
-        });
+        // comboBox.setOnAction(e -> {
+        //     try {
+        //         WordScreen.setFileName(comboBox.getValue());
+        //     } catch (FileNotFoundException e1) {
+        //         e1.printStackTrace();
+        //     }
+        // });
     }
 
         private void handleButton() {
             //Call the appropriate method from the MainApp
-            
             mainApp.showWordScreen();
         }
 

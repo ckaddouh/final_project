@@ -24,11 +24,11 @@ public class ResultsScreen extends GridPane {
 
         Button next = new Button("Next");
 
-        if (DrawingScreen.rounds <= 0) 
+        if (WordScreen.rounds <= 0) 
             add(next, 2, 3);
 
         next.setOnAction(e -> {
-            if (DrawingScreen.rounds <= 0) 
+            if (WordScreen.rounds <= 0) 
                 handleFinalScreen();
         });
         
@@ -52,7 +52,7 @@ public class ResultsScreen extends GridPane {
         
     }
     private void handleButton(){
-        mainApp.showDrawingScreen();
+        mainApp.showWordScreen();
     }
 
     private void handleFinalScreen() {
