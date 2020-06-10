@@ -75,10 +75,6 @@ public class WelcomeScreen extends BorderPane {
         //Call the appropriate method from the MainApp
         mainApp.showInstructionScreen();
     }
-
-    public void handleButton2(){
-        mainApp.showSettingsScreen();
-    }
     
     public void handleButtonStart(){
         mainApp.showWordScreen();
