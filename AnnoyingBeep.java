@@ -22,16 +22,20 @@ public class AnnoyingBeep {
 	int numWarningBeeps = 30;
 
         public void run() {
+            int x = 0;
 	    if (numWarningBeeps > 0) {
 	        toolkit.beep();
-            System.out.println("Beep!");
-            numWarningBeeps--;
-	    } else {
+        System.out.printf("%d\n", x);
+        numWarningBeeps--;
+        x++;
+        } 
+        else {
 	        toolkit.beep(); 
                 System.out.println("Time's up!");
 	        //timer.cancel(); //Not necessary because we call System.exit
 	        System.exit(0);   //Stops the AWT thread (and everything else)
-	    }
+        }
+        x++;
         }
     }
 
