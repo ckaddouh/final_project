@@ -14,44 +14,52 @@ import javafx.scene.text.Text;
 public class ResultsScreen extends GridPane {
 
     private MainApp mainApp;
+    public static Text text;
 
     public ResultsScreen(MainApp app) {
         super();
 
         this.mainApp = app;
 
-        DrawingScreen.rounds--;
-
         Button next = new Button("Next");
+        Button changeScreenButton = new Button("Back");
 
-        if (WordScreen.rounds <= 0) 
             add(next, 2, 3);
 
-        next.setOnAction(e -> {
-            if (WordScreen.rounds <= 0) 
-                handleFinalScreen();
-        });
+            next.setOnAction(e -> {
+                if (WordScreen.getNumOfRounds() <= 0) 
+                    handleFinalScreen();
+            });
+
+            // changeScreenButton.disarm();
+    
         
-        Text text = new Text("Results!");
+        text = new Text();
+
+
+
         text.setFill(Color.DARKTURQUOISE);
         text.setFont(Font.font("AvantGarde", FontWeight.BOLD, FontPosture.REGULAR, 20));
         add(text, 1, 1, 2, 2);
         GridPane.setHalignment(text, HPos.CENTER);
 
-        Button changeScreenButton = new Button("Back");
         changeScreenButton.setOnAction(e -> {
-            WordScreen.useWords();
-            handleButton();
+            if ((WordScreen.rounds - 1) >= 0){
+                WordScreen.useWords();
+                handleButton();
+            }
         });
+
         add(changeScreenButton, 3, 3, 1, 1);
         
         setHgap(10);
         setVgap(10);
         setPadding(new Insets(10));
-
         
     }
+
     private void handleButton(){
+        WordScreen.setNumOfRounds(WordScreen.rounds - 1);
         mainApp.showWordScreen();
     }
 

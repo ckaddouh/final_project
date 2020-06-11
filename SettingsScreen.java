@@ -70,14 +70,6 @@ public class SettingsScreen extends BorderPane {
         timerLength.setText("30");
         
 
-        // numOfRounds.setOnAction(e -> {
-        //     WordScreen.setNumOfRounds(Integer.parseInt(numOfRounds.getText()));
-        // });
-
-        // timerLength.setOnAction(e -> {
-        //     WordScreen.setTimerLength(Integer.parseInt(timerLength.getText()));
-        // });
-
         Label rounds = new Label("Number of Rounds");
         Label length = new Label("Length of Rounds (seconds)");
         Label difficulty = new Label("Difficulty Level");
@@ -102,6 +94,7 @@ public class SettingsScreen extends BorderPane {
 
         private void handleButton() {
             //Call the appropriate method from the MainApp
+            WordScreen.setNumOfRounds(Integer.parseInt(SettingsScreen.numOfRounds.getText()));
             mainApp.showWordScreen();
         }
 

@@ -30,7 +30,6 @@ public class WordScreen extends BorderPane {
         super(); 
         this.mainApp = app;
         
-        Label wordLbl = new Label("Showing");
         wordLbl.setTextFill(Color.DODGERBLUE);
         wordLbl.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 36));
         setTop(wordLbl);
@@ -67,18 +66,13 @@ public class WordScreen extends BorderPane {
         
         setCenter(pane);
         setAlignment(pane, Pos.CENTER);
-
-        try {
-            setFileName("easy");
-        } catch (FileNotFoundException e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
-        }
         
     }
 
         private void handleButton() {
             mainApp.showDrawingScreen();
+            new Reminder(sec);
+            System.out.println("Task scheduled.");
         }
         
         public static void setFileName(String fileName) throws FileNotFoundException {
@@ -95,15 +89,20 @@ public class WordScreen extends BorderPane {
     
         public static void setNumOfRounds(int numOfRounds) {
             rounds = numOfRounds;
+            
             roundsLbl.setText(String.format("There are %d rounds remaining", rounds));
             roundsLbl.setFont(Font.font("verdana", 20));
 
         }
-        
+
         public static void useWords(){
             word = list.getRandomWord();
-            wordLbl.setText("Your word is... " + word + "!");
+            wordLbl.setText("" + word);
             list.remove(word);
+        }
+
+        public static int getNumOfRounds(){
+            return rounds;
         }
 }
 
