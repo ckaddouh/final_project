@@ -19,23 +19,26 @@ public class AnnoyingBeep {
     }
 
     class RemindTask extends TimerTask {
-	int numWarningBeeps = 30;
+	int numWarningBeeps = 5;
 
         public void run() {
-            int x = 0;
-	    if (numWarningBeeps > 0) {
-	        toolkit.beep();
-        System.out.printf("%d\n", x);
-        numWarningBeeps--;
-        x++;
+	    if (numWarningBeeps > 3) {
+            System.out.printf("%d\n", numWarningBeeps);
+            numWarningBeeps--;
         } 
-        else {
+        if (numWarningBeeps == 0) {
 	        toolkit.beep(); 
                 System.out.println("Time's up!");
 	        //timer.cancel(); //Not necessary because we call System.exit
 	        System.exit(0);   //Stops the AWT thread (and everything else)
         }
-        x++;
+        if (numWarningBeeps <= 3) {
+            toolkit.beep();
+            System.out.printf("%d\n", numWarningBeeps);
+            numWarningBeeps--;
+
+        }
+            
         }
     }
 
