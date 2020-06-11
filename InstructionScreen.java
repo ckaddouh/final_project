@@ -81,6 +81,7 @@ public class InstructionScreen extends BorderPane {
     }
     
     private void handleButtonPlay() {
+        WordScreen.setNumOfRounds(Integer.parseInt(SettingsScreen.numOfRounds.getText()));
         mainApp.showWordScreen();
     }
 }
