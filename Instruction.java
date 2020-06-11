@@ -43,8 +43,8 @@ public class Instruction extends BorderPane {
         Button changeScreenBack = new Button("Back");
         changeScreenBack.setOnAction(e -> handleButtonBack());
         
-        // Button changeScreenSettings= new Button("Settings");
-        // changeScreenSettings.setOnAction(e -> handleButtonSettings());
+        Button changeScreenSettings= new Button("Settings");
+        changeScreenSettings.setOnAction(e -> handleButtonSettings());
 
         Button changeScreenPlay = new Button("Play");
         changeScreenPlay.setOnAction(e -> handleButtonPlay());
@@ -71,16 +71,17 @@ public class Instruction extends BorderPane {
         
     }
 
-    // private void handleButtonSettings(){
-    //     //Call the appropriate method from the MainApp
-    //     mainApp.showSettingsScreen();
-    // }
+    private void handleButtonSettings(){
+        //Call the appropriate method from the MainApp
+        mainApp.showSettingsScreen();
+    }
     
     private void handleButtonBack(){
         mainApp.showWelcomeScreen();
     }
-    
+
     private void handleButtonPlay() {
+        WordScreen.setNumOfRounds(Integer.parseInt(SettingsScreen.numOfRounds.getText()));
         mainApp.showWordScreen();
     }
 }

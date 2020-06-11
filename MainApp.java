@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 public class MainApp extends Application {
 
     static Stage primaryStage;
+    // static Stage secondaryStage;
 
     Pane welcomeScreen;
     Pane instructionScreen;
@@ -17,10 +18,19 @@ public class MainApp extends Application {
     Pane resultsScreen;
     Pane finalScreen;
     Pane wordScreen;
+    // Pane timeScreen;
+
+
 
     @Override
     public void start(Stage stage) throws Exception {
         primaryStage = stage;
+        // secondaryStage = new Stage();
+
+        // Scene scene2 = new Scene(timeScreen, 400, 400);
+        // secondaryStage.setTitle("Pictionary");
+        // secondaryStage.setScene(scene2);
+    
 
         welcomeScreen = new WelcomeScreen(this);
         instructionScreen = new InstructionScreen(this);
@@ -29,6 +39,7 @@ public class MainApp extends Application {
         resultsScreen = new ResultsScreen(this);
         finalScreen = new FinalScreen(this);
         wordScreen = new WordScreen(this);
+        // timeScreen = new TimeScreen(this);
 
         Scene scene = new Scene(welcomeScreen, 800, 500);
         primaryStage.setTitle("Welcome to Pictionary!");
@@ -57,7 +68,7 @@ public class MainApp extends Application {
 
     public void showDrawingScreen(){
         Scene scene = primaryStage.getScene();
-        
+
         DrawingScreen.setNumOfRounds(Integer.parseInt(SettingsScreen.numOfRounds.getText()));
         DrawingScreen.setTimerLength(Integer.parseInt(SettingsScreen.timerLength.getText()));
         
@@ -66,13 +77,24 @@ public class MainApp extends Application {
         // } catch (FileNotFoundException e) {
         //     e.printStackTrace();
         // }
+        
+        // secondaryStage.show();
 
+        new Reminder(WordScreen.sec);
+        System.out.println("Task scheduled.");
+    
         setStageSize(800, 500);
         scene.setRoot(drawingScreen);
     }
 
     public void showResultsScreen(){
         Scene scene = primaryStage.getScene();
+
+        if (DrawingScreen.isCorrect)
+            ResultsScreen.text.setText("CORRECT! \n The word was " + WordScreen.word);
+        else
+            ResultsScreen.text.setText("Out of time... \n The word was " + WordScreen.word);
+
         setStageSize(400, 400);
         scene.setRoot(resultsScreen);
     }
@@ -83,16 +105,22 @@ public class MainApp extends Application {
         scene.setRoot(finalScreen);
     }
 
+    // public void showTimeScreen(){
+    //     Scene scene = primaryStage.getScene();
+    //     setStageSize(400, 400);
+    //     scene.setRoot(timeScreen);
+    // }
+
     public void showWordScreen(){
         Scene scene = primaryStage.getScene();
 
-        WordScreen.setNumOfRounds(Integer.parseInt(SettingsScreen.numOfRounds.getText()));
-        WordScreen.setTimerLength(Integer.parseInt(SettingsScreen.timerLength.getText()));
         try {
             WordScreen.setFileName(SettingsScreen.comboBox.getValue());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        WordScreen.setTimerLength(Integer.parseInt(SettingsScreen.timerLength.getText()));
+
         setStageSize(400, 400);
         scene.setRoot(wordScreen);
     }

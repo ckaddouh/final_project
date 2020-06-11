@@ -77,6 +77,7 @@ public class WelcomeScreen extends BorderPane {
     }
     
     public void handleButtonStart(){
+        WordScreen.setNumOfRounds(Integer.parseInt(SettingsScreen.numOfRounds.getText()));
         mainApp.showWordScreen();
     }
 

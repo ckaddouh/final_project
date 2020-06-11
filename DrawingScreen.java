@@ -12,6 +12,8 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class DrawingScreen extends StackPane {
 
@@ -37,6 +39,11 @@ public class DrawingScreen extends StackPane {
     public static Label info2;
 
     public static String word;
+
+    public static boolean isCorrect;
+
+    public static Timer timer;
+    public static Label timerLbl;
 
     public DrawingScreen(MainApp app) {
         super();
@@ -243,12 +250,18 @@ public class DrawingScreen extends StackPane {
             // Label wordlbl = new Label(list.getRandomWord());
             // grid.addRow(0, wordlbl);
 
+            Button yesBT = new Button("GOT IT");
+            yesBT.setOnAction(e -> {
+                isCorrect = true;
+                handleButtonCorrect();
+            });
+
             lbl = new Label();
             lbl.setText(file_name);
             lbl2 = new Label();
             grid.addRow(0, lbl, lbl2);
             // Add the buttons, color picker, slider, and label to the grid
-            grid.addRow(1, cp, slider, sliderLbl, penBT, fill, rectangleBT, ovalBT, eraseBT, clearBT);
+            grid.addRow(1, cp, slider, sliderLbl, penBT, fill, rectangleBT, ovalBT, eraseBT, clearBT, yesBT);
             // Set the grid's alignment
             grid.setHgap(20);
             grid.setAlignment(Pos.TOP_CENTER);
@@ -256,6 +269,9 @@ public class DrawingScreen extends StackPane {
 
             info = new Label("Nothing");
             info2 = new Label("Info 2");
+
+            Button seeWord = new Button("See Word");
+            seeWord.setOnAction(e -> handleSeeWord());
 
             Button changeScreenButton = new Button("See Results");
             changeScreenButton.setOnAction(e -> handleButton());
@@ -268,10 +284,31 @@ public class DrawingScreen extends StackPane {
             e.printStackTrace();
         }
 
+
     }
+
+    // public static void Remainder(int seconds){
+    //     timer = new Timer();
+    //     timer.schedule(new RemindTask(), seconds*1000);
+    // }
+
+    // class RemindTask extends TimerTask {
+    //     public void run() {
+    //         timerLbl.setText("Time is up!");
+    //         mainApp.showResults();
+    //     }
+    // }
 
     private void handleButton() {
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        mainApp.showResultsScreen();
+    }
+
+    public void handleSeeWord() {
+        mainApp.showWordScreen();
+    }
+
+    public void handleButtonCorrect() {
         mainApp.showResultsScreen();
     }
 
@@ -291,6 +328,7 @@ public class DrawingScreen extends StackPane {
         rounds = numOfRounds;
         info2.setText(String.format("%d", rounds));
     }
+
     
     // public static void useWords(){
     //     word = list.getRandomWord();
