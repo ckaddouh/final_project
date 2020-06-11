@@ -64,7 +64,6 @@ public class WelcomeScreen extends BorderPane {
         play.setOnAction(e -> handleButtonStart());
         play.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.7), 5, 0.0, 0, 1)");
         play.setStyle("-fx-font: 22 fantasy; -fx-background-color: #0072ab, linear-gradient(#2a5880 0%, #1f2429 20%, #191d22 100%), linear-gradient(#007be0, #3275c7), radial-gradient(center 50% 0%, radius 100%, #64a5f5, #9ddbfa)");
-        setCenter(play);
 
 
         Button settingsBT = new Button("Settings");
