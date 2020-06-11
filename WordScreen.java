@@ -71,8 +71,8 @@ public class WordScreen extends BorderPane {
 
         private void handleButton() {
             mainApp.showDrawingScreen();
-            new Reminder(sec);
-            System.out.println("Task scheduled.");
+            // new Reminder(sec);
+            // System.out.println("Task scheduled.");
         }
         
         public static void setFileName(String fileName) throws FileNotFoundException {
@@ -97,7 +97,7 @@ public class WordScreen extends BorderPane {
 
         public static void useWords(){
             word = list.getRandomWord();
-            wordLbl.setText("" + word);
+            wordLbl.setText("Your word is.... " + word);
             list.remove(word);
         }
 

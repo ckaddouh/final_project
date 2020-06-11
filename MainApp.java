@@ -18,8 +18,7 @@ public class MainApp extends Application {
     Pane resultsScreen;
     Pane finalScreen;
     Pane wordScreen;
-    // Pane timeScreen;
-
+    Pane reminder;
 
 
     @Override
@@ -39,6 +38,7 @@ public class MainApp extends Application {
         resultsScreen = new ResultsScreen(this);
         finalScreen = new FinalScreen(this);
         wordScreen = new WordScreen(this);
+        // reminder = new Reminder(this);
         // timeScreen = new TimeScreen(this);
 
         Scene scene = new Scene(welcomeScreen, 800, 500);
@@ -80,8 +80,8 @@ public class MainApp extends Application {
         
         // secondaryStage.show();
 
-        new Reminder(WordScreen.sec);
-        System.out.println("Task scheduled.");
+        new Reminder(this);
+        // System.out.println(WordScreen.sec);
     
         setStageSize(800, 500);
         scene.setRoot(drawingScreen);
@@ -121,7 +121,7 @@ public class MainApp extends Application {
         }
         WordScreen.setTimerLength(Integer.parseInt(SettingsScreen.timerLength.getText()));
 
-        setStageSize(400, 400);
+        setStageSize(600, 400);
         scene.setRoot(wordScreen);
     }
 

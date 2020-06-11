@@ -24,14 +24,17 @@ public class ResultsScreen extends GridPane {
         Button next = new Button("Next");
         Button changeScreenButton = new Button("Back");
 
-            add(next, 2, 3);
+        add(next, 2, 3);
 
-            next.setOnAction(e -> {
-                if (WordScreen.getNumOfRounds() <= 0) 
-                    handleFinalScreen();
-            });
+        next.setOnAction(e -> {
+            if (WordScreen.getNumOfRounds() <= 0) {
+                handleFinalScreen();
+                DrawingScreen.isCorrect = false;
+            }
+        
+        });
 
-            // changeScreenButton.disarm();
+        // changeScreenButton.disarm();
     
         
         text = new Text();

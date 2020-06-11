@@ -40,7 +40,7 @@ public class DrawingScreen extends StackPane {
 
     public static String word;
 
-    public static boolean isCorrect;
+    public static boolean isCorrect = false;
 
     public static Timer timer;
     public static Label timerLbl;
@@ -48,6 +48,7 @@ public class DrawingScreen extends StackPane {
     public DrawingScreen(MainApp app) {
         super();
         this.mainApp = app;
+
 
         setStyle(" -fx-background-color: #FFFFFF");
 
@@ -67,14 +68,18 @@ public class DrawingScreen extends StackPane {
         canvas.widthProperty().bind(this.widthProperty());
         canvas.heightProperty().bind(this.heightProperty());
 
+
         // Create a try-catch to carry out specific actions if an error occurs
         try {
             // Define the graphics context to that of the pane and set the pen's properties
             gc = canvas.getGraphicsContext2D();
             gc.setStroke(Color.BLACK);
             gc.setLineWidth(1);
-
+            
             getChildren().addAll(canvas, grid);
+
+            gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+
 
             // Set the starting color picker value
             cp.setValue(Color.BLACK);
@@ -252,7 +257,13 @@ public class DrawingScreen extends StackPane {
 
             Button yesBT = new Button("GOT IT");
             yesBT.setOnAction(e -> {
-                isCorrect = true;
+                if (Reminder.seconds > 0){
+                    isCorrect = true;
+                    Reminder.timer.cancel();
+                }
+                else  {
+                    isCorrect = false;
+                }
                 handleButtonCorrect();
             });
 
