@@ -1,23 +1,27 @@
 import java.io.FileNotFoundException;
 
+import javafx.geometry.HPos;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.*;
 
 public class WordScreen extends BorderPane {
 
     private MainApp mainApp;
 
     public static String file_name;
-    public static Label difficulty;
-    public static Label roundsLbl = new Label();
-    public static Label time = new Label();
+    public static Label difficulty = new Label("difficulty");
+    public static Label roundsLbl = new Label("rounds");
+    public static Label time = new Label("time");
 
     public static Words list;
     public static String word;
-    public static Label wordLbl;
+    public static Label wordLbl = new Label();
 
     public static int rounds;
     public static int sec;
@@ -26,7 +30,8 @@ public class WordScreen extends BorderPane {
         super(); 
         this.mainApp = app;
         
-        Label wordLbl = new Label();
+        wordLbl.setTextFill(Color.DODGERBLUE);
+        wordLbl.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 36));
         setTop(wordLbl);
         setAlignment(wordLbl, Pos.CENTER);
 
@@ -35,22 +40,39 @@ public class WordScreen extends BorderPane {
         // roundsLbl = new Label();
         // time = new Label();
         
-        pane.addRow(0, roundsLbl);
-        pane.addRow(1, time);
+        
+        Label filler = new Label();
+        pane.addRow(1, filler, roundsLbl);
+        Label filler2 = new Label();
+        pane.addRow(2, filler2);
+        Label filler3 = new Label();
+        pane.addRow(3, filler3, time);
+        setAlignment(time, Pos.CENTER);
 
+        Label filler4 = new Label();
+        pane.addRow(4, filler4);
         Label ready = new Label("Ready?");
+        ready.setFont(Font.font("verdana", 20));
         Button play = new Button("Let's Go!");
 
-        pane.addRow(2, ready, play);
+        Label filler5 = new Label();
+        pane.addRow(5, filler5, ready);
+        setAlignment(ready, Pos.CENTER);
+        Label filler6 = new Label();
+        pane.addRow(6, filler6, play);
+        setAlignment(play, Pos.CENTER);
 
         play.setOnAction(e -> handleButton());
         
         setCenter(pane);
         setAlignment(pane, Pos.CENTER);
+        
     }
 
         private void handleButton() {
             mainApp.showDrawingScreen();
+            new Reminder(sec);
+            System.out.println("Task scheduled.");
         }
         
         public static void setFileName(String fileName) throws FileNotFoundException {
@@ -62,17 +84,25 @@ public class WordScreen extends BorderPane {
         public static void setTimerLength(int timerLength) {
             sec = timerLength;
             time.setText(String.format("You have %d seconds", sec));
+            time.setFont(Font.font("verdana", 20));
         }
     
         public static void setNumOfRounds(int numOfRounds) {
             rounds = numOfRounds;
+            
             roundsLbl.setText(String.format("There are %d rounds remaining", rounds));
+            roundsLbl.setFont(Font.font("verdana", 20));
+
         }
-        
+
         public static void useWords(){
             word = list.getRandomWord();
-            wordLbl.setText("Your word is... " + word + "!");
+            wordLbl.setText("" + word);
             list.remove(word);
+        }
+
+        public static int getNumOfRounds(){
+            return rounds;
         }
 }
 

@@ -63,19 +63,12 @@ public class SettingsScreen extends BorderPane {
         comboBox.setPromptText("Select a difficulty level");
         comboBox.setValue("easy");
 
+        numOfRounds = new TextField();
+        timerLength = new TextField();
+
         numOfRounds.setText("10");
         timerLength.setText("30");
         
-        numOfRounds = new TextField();
-
-        // numOfRounds.setOnAction(e -> {
-        //     WordScreen.setNumOfRounds(Integer.parseInt(numOfRounds.getText()));
-        // });
-
-        timerLength = new TextField();
-        // timerLength.setOnAction(e -> {
-        //     WordScreen.setTimerLength(Integer.parseInt(timerLength.getText()));
-        // });
 
         Label rounds = new Label("Number of Rounds");
         Label length = new Label("Length of Rounds (seconds)");
@@ -101,6 +94,7 @@ public class SettingsScreen extends BorderPane {
 
         private void handleButton() {
             //Call the appropriate method from the MainApp
+            WordScreen.setNumOfRounds(Integer.parseInt(SettingsScreen.numOfRounds.getText()));
             mainApp.showWordScreen();
         }
 
