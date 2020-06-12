@@ -38,9 +38,13 @@ public class SettingsScreen extends BorderPane {
 
 
         Text title = new Text("Settings");
-        title.setFill(Color.DARKTURQUOISE);
+        title.setFill(Color.DODGERBLUE);
         title.setFont(Font.font("AvantGarde", FontWeight.BOLD, FontPosture.REGULAR, 20));
         setTop(title);
+
+        title.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 35));
+        title.setStyle("text-decoration: underline overline; -fx-background-color: dodgerblue");
+
 
         setAlignment(title, Pos.CENTER);
 
@@ -89,6 +93,16 @@ public class SettingsScreen extends BorderPane {
         Label rounds = new Label("Number of Rounds");
         Label length = new Label("Length of Rounds (seconds)");
         Label difficulty = new Label("Difficulty Level");
+
+        rounds.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
+        rounds.setStyle("color: dodgerblue");
+
+        length.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
+        length.setStyle("color: dodgerblue");
+
+        difficulty.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
+        difficulty.setStyle("color: dodgerblue");
+
 
         GridPane center = new GridPane();
         center.addRow(0, rounds, numOfRounds);
