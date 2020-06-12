@@ -1,5 +1,10 @@
+import java.beans.EventHandler;
 import java.io.FileNotFoundException;
+import java.time.Duration;
 
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.GridPane;
@@ -35,7 +40,7 @@ public class DrawingScreen extends StackPane {
     public static int sec;
     public static int rounds;
 
-    public static Label info;
+    public static Label timerLabel = new Label();
     public static Label info2;
 
     public static String word;
@@ -71,6 +76,7 @@ public class DrawingScreen extends StackPane {
 
         // Create a try-catch to carry out specific actions if an error occurs
         try {
+            doTime();
             // Define the graphics context to that of the pane and set the pen's properties
             gc = canvas.getGraphicsContext2D();
             gc.setStroke(Color.BLACK);
@@ -278,7 +284,7 @@ public class DrawingScreen extends StackPane {
             grid.setAlignment(Pos.TOP_CENTER);
             grid.setPadding(new Insets(20, 0, 0, 0));
 
-            info = new Label("Nothing");
+            // info = new Label("Nothing");
             info2 = new Label("Info 2");
 
             Button seeWord = new Button("See Word");
@@ -286,7 +292,7 @@ public class DrawingScreen extends StackPane {
 
             Button changeScreenButton = new Button("See Results");
             changeScreenButton.setOnAction(e -> handleButton());
-            grid.addRow(2, info);
+            grid.addRow(2, timerLabel);
             grid.addRow(3, info2);
             grid.addRow(4);
             grid.addRow(5, changeScreenButton);
@@ -294,6 +300,13 @@ public class DrawingScreen extends StackPane {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        timerLabel.setText(seconds.toString());
+        timerLabel.setTextFill(Color.RED);
+        timerLabel.setStyle("-fx-font-size: 4em;");
+
+
+ 
 
 
     }
@@ -332,7 +345,7 @@ public class DrawingScreen extends StackPane {
     
     public static void setTimerLength(int timerLength) {
         sec = timerLength;
-        info.setText(String.format("%d", sec));
+        timerLabel.setText(String.format("%d", sec));
     }
 
     public static void setNumOfRounds(int numOfRounds) {
@@ -346,4 +359,6 @@ public class DrawingScreen extends StackPane {
     //     lbl2.setText(word);
     //     list.remove(word);
     // }
+
+
 }

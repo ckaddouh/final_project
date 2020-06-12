@@ -35,13 +35,13 @@ public class Reminder extends BorderPane {
         
         show = new Button();
         show.setOnAction(e -> {
-            DrawingScreen.setTimerLength(seconds);
+            // DrawingScreen.setTimerLength(seconds);
+            DrawingScreen.info.setText(String.format("%d", seconds));
         });
 
         changeScreen = new Button();
         changeScreen.setOnAction(e -> {
             DrawingScreen.isCorrect = false;
-
             mainApp.showResultsScreen();
         });
 
@@ -50,11 +50,11 @@ public class Reminder extends BorderPane {
     class RemindTask extends TimerTask {
         public void run() {
             if (seconds > 0) {
-                // show.fire();
+                show.fire();
                 System.out.println("" + seconds);
                 seconds--;
-
             }
+            
             else {
                 toolkit.beep();
                 changeScreen.fire();
