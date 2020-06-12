@@ -4,6 +4,8 @@ import java.util.concurrent.TimeUnit;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -24,6 +26,8 @@ public class ResultsScreen extends GridPane {
         Button next = new Button("Next");
         Button changeScreenButton = new Button("Back");
 
+        setBackground( new BackgroundFill(Color.LIGHTCYAN, CornerRadii.EMPTY, Insets.EMPTY));
+
         add(next, 2, 3);
 
         next.setOnAction(e -> {
@@ -33,6 +37,7 @@ public class ResultsScreen extends GridPane {
             }
         
         });
+        
 
         // changeScreenButton.disarm();
     
@@ -61,7 +66,10 @@ public class ResultsScreen extends GridPane {
         
     }
 
-    private void handleButton(){
+    private void setBackground(BackgroundFill backgroundFill) {
+    }
+
+    private void handleButton() {
         WordScreen.setNumOfRounds(WordScreen.rounds - 1);
         mainApp.showWordScreen();
     }
@@ -69,5 +77,6 @@ public class ResultsScreen extends GridPane {
     private void handleFinalScreen() {
         mainApp.showFinalScreen();
     }
+    
 
 }

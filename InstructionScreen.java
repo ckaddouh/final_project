@@ -2,7 +2,10 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -63,6 +66,8 @@ public class InstructionScreen extends BorderPane {
         inst.setFont(Font.font("AvantGarde", FontPosture.REGULAR, 14));
         setAlignment(inst, Pos.CENTER);
         setCenter(inst);
+
+        setBackground( new Background( new BackgroundFill(Color.LIGHTCYAN, CornerRadii.EMPTY, Insets.EMPTY)));
 
 
         //You would probably add more code to format this GridPane the way you'd like
