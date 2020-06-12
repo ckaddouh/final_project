@@ -1,11 +1,15 @@
 import java.io.FileNotFoundException;
 
 import javafx.geometry.HPos;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.*;
@@ -29,6 +33,8 @@ public class WordScreen extends BorderPane {
     public WordScreen(MainApp app) {
         super(); 
         this.mainApp = app;
+
+        setBackground( new Background( new BackgroundFill(Color.LIGHTCYAN, CornerRadii.EMPTY, Insets.EMPTY)));
         
         wordLbl.setTextFill(Color.DODGERBLUE);
         wordLbl.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 36));
@@ -54,6 +60,10 @@ public class WordScreen extends BorderPane {
         Label ready = new Label("Ready?");
         ready.setFont(Font.font("verdana", 20));
         Button play = new Button("Let's Go!");
+
+        play.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.7), 5, 0.0, 0, 1)");
+        play.setStyle("-fx-font: 22 fantasy; -fx-background-color: #0072ab, linear-gradient(#2a5880 0%, #1f2429 20%, #191d22 100%), linear-gradient(#007be0, #3275c7), radial-gradient(center 50% 0%, radius 100%, #64a5f5, #9ddbfa)");
+
 
         Label filler5 = new Label();
         pane.addRow(5, filler5, ready);
