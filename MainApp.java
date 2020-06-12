@@ -41,6 +41,7 @@ public class MainApp extends Application {
         // reminder = new Reminder(this);
         // timeScreen = new TimeScreen(this);
 
+        primaryStage.setResizable(false);
         Scene scene = new Scene(welcomeScreen, 800, 500);
         primaryStage.setTitle("Welcome to Pictionary!");
         primaryStage.setScene(scene);
@@ -83,7 +84,7 @@ public class MainApp extends Application {
         new Reminder(this);
         // System.out.println(WordScreen.sec);
     
-        setStageSize(800, 500);
+        setStageSize(900, 500);
         scene.setRoot(drawingScreen);
     }
 
