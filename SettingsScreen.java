@@ -8,7 +8,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -31,10 +34,17 @@ public class SettingsScreen extends BorderPane {
         pane.setAlignment(Pos.CENTER);
         pane.setPadding(new Insets(10, 10, 10, 10));
 
+        setBackground( new Background( new BackgroundFill(Color.LIGHTCYAN, CornerRadii.EMPTY, Insets.EMPTY)));
+
+
         Text title = new Text("Settings");
-        title.setFill(Color.DARKTURQUOISE);
+        title.setFill(Color.DODGERBLUE);
         title.setFont(Font.font("AvantGarde", FontWeight.BOLD, FontPosture.REGULAR, 20));
         setTop(title);
+
+        title.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 35));
+        title.setStyle("text-decoration: underline overline; -fx-background-color: dodgerblue");
+
 
         setAlignment(title, Pos.CENTER);
 
@@ -46,6 +56,16 @@ public class SettingsScreen extends BorderPane {
 
         Button instructionsBT = new Button("Instructions");
         instructionsBT.setOnAction(e -> handleInstructionsBT());
+
+        changeScreenButton.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.7), 5, 0.0, 0, 1)");
+        changeScreenButton.setStyle("-fx-font: 22 fantasy; -fx-background-color: #0072ab, linear-gradient(#2a5880 0%, #1f2429 20%, #191d22 100%), linear-gradient(#007be0, #3275c7), radial-gradient(center 50% 0%, radius 100%, #64a5f5, #9ddbfa)");
+
+        backBT.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.7), 5, 0.0, 0, 1)");
+        backBT.setStyle("-fx-font: 22 fantasy; -fx-background-color: #0072ab, linear-gradient(#2a5880 0%, #1f2429 20%, #191d22 100%), linear-gradient(#007be0, #3275c7), radial-gradient(center 50% 0%, radius 100%, #64a5f5, #9ddbfa)");
+
+        instructionsBT.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.7), 5, 0.0, 0, 1)");
+        instructionsBT.setStyle("-fx-font: 22 fantasy; -fx-background-color: #0072ab, linear-gradient(#2a5880 0%, #1f2429 20%, #191d22 100%), linear-gradient(#007be0, #3275c7), radial-gradient(center 50% 0%, radius 100%, #64a5f5, #9ddbfa)");
+
 
         GridPane bottom = new GridPane();
         bottom.addRow(0, changeScreenButton, backBT, instructionsBT);
@@ -73,6 +93,16 @@ public class SettingsScreen extends BorderPane {
         Label rounds = new Label("Number of Rounds");
         Label length = new Label("Length of Rounds (seconds)");
         Label difficulty = new Label("Difficulty Level");
+
+        rounds.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
+        rounds.setStyle("color: dodgerblue");
+
+        length.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
+        length.setStyle("color: dodgerblue");
+
+        difficulty.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
+        difficulty.setStyle("color: dodgerblue");
+
 
         GridPane center = new GridPane();
         center.addRow(0, rounds, numOfRounds);
