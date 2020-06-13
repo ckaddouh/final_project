@@ -92,7 +92,6 @@ public class WordScreen extends BorderPane {
             
             roundsLbl.setText(String.format("There are %d rounds remaining", rounds));
             roundsLbl.setFont(Font.font("verdana", 20));
-
         }
 
         public static void useWords(){

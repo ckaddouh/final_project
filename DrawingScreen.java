@@ -76,7 +76,6 @@ public class DrawingScreen extends StackPane {
 
         // Create a try-catch to carry out specific actions if an error occurs
         try {
-            doTime();
             // Define the graphics context to that of the pane and set the pen's properties
             gc = canvas.getGraphicsContext2D();
             gc.setStroke(Color.BLACK);
@@ -301,12 +300,8 @@ public class DrawingScreen extends StackPane {
             e.printStackTrace();
         }
 
-        timerLabel.setText(seconds.toString());
-        timerLabel.setTextFill(Color.RED);
-        timerLabel.setStyle("-fx-font-size: 4em;");
 
-
- 
+        
 
 
     }

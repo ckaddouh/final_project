@@ -27,7 +27,7 @@ public class ResultsScreen extends GridPane {
         add(next, 2, 3);
 
         next.setOnAction(e -> {
-            if (WordScreen.getNumOfRounds() <= 0) {
+            if (WordScreen.getNumOfRounds() <= 1) {
                 handleFinalScreen();
                 DrawingScreen.isCorrect = false;
             }

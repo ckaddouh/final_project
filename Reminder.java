@@ -36,7 +36,7 @@ public class Reminder extends BorderPane {
         show = new Button();
         show.setOnAction(e -> {
             // DrawingScreen.setTimerLength(seconds);
-            DrawingScreen.info.setText(String.format("%d", seconds));
+            DrawingScreen.timerLabel.setText(String.format("%d", seconds));
         });
 
         changeScreen = new Button();
