@@ -33,14 +33,13 @@ public class DrawingScreen extends StackPane {
     Boolean eraser = false;
     double x;
     double y;
-    
-    Canvas canvas;        
+
+    Canvas canvas;
     GraphicsContext gc;
 
     public static int sec;
     public static int rounds;
 
-    public static Label timerLabel = new Label();
     public static Label info2;
 
     public static String word;
@@ -48,12 +47,16 @@ public class DrawingScreen extends StackPane {
     public static boolean isCorrect = false;
 
     public static Timer timer;
-    public static Label timerLbl;
+    public static Label timerLbl = new Label();
+
+    private static final Integer STARTTIME = WordScreen.sec;
+    protected static final Object timerSeconds = null;
+    private Timeline timeline;
+    private Integer timeSeconds = STARTTIME;
 
     public DrawingScreen(MainApp app) {
         super();
         this.mainApp = app;
-
 
         setStyle(" -fx-background-color: #FFFFFF");
 
@@ -61,7 +64,6 @@ public class DrawingScreen extends StackPane {
         GridPane grid = new GridPane();
 
         // Create GraphicsContext for the user to draw with
-
 
         // Implement a color picker and slider for pen color and width
         ColorPicker cp = new ColorPicker();
@@ -73,18 +75,16 @@ public class DrawingScreen extends StackPane {
         canvas.widthProperty().bind(this.widthProperty());
         canvas.heightProperty().bind(this.heightProperty());
 
-
         // Create a try-catch to carry out specific actions if an error occurs
         try {
             // Define the graphics context to that of the pane and set the pen's properties
             gc = canvas.getGraphicsContext2D();
             gc.setStroke(Color.BLACK);
             gc.setLineWidth(1);
-            
+
             getChildren().addAll(canvas, grid);
 
             gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-
 
             // Set the starting color picker value
             cp.setValue(Color.BLACK);
@@ -262,11 +262,10 @@ public class DrawingScreen extends StackPane {
 
             Button yesBT = new Button("GOT IT");
             yesBT.setOnAction(e -> {
-                if (Reminder.seconds > 0){
+                if (Reminder.seconds > 0) {
                     isCorrect = true;
                     Reminder.timer.cancel();
-                }
-                else  {
+                } else {
                     isCorrect = false;
                 }
                 handleButtonCorrect();
@@ -289,9 +288,10 @@ public class DrawingScreen extends StackPane {
             Button seeWord = new Button("See Word");
             seeWord.setOnAction(e -> handleSeeWord());
 
+            timerLbl = new Label("Showing");
             Button changeScreenButton = new Button("See Results");
             changeScreenButton.setOnAction(e -> handleButton());
-            grid.addRow(2, timerLabel);
+            grid.addRow(2, timerLbl);
             grid.addRow(3, info2);
             grid.addRow(4);
             grid.addRow(5, changeScreenButton);
@@ -300,8 +300,51 @@ public class DrawingScreen extends StackPane {
             e.printStackTrace();
         }
 
+        Button button = new Button();
+        button.fire();
 
-        
+        // button.setOnAction(e -> {
+        // if (timeline != null) {
+        // timeline.stop();
+        // }
+        // timeSeconds = STARTTIME;
+
+        // timerLbl.setText(timeSeconds.toString());
+        // timeline = new Timeline();
+        // timeline.setCycleCount(Timeline.INDEFINITE);
+        // timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(1), new
+        // EventHandler(){
+        // public void handle(ActionEvent event){
+        // timeSeconds--;
+        // timerLbl.setText(timerSeconds.toString());
+        // if(timeSeconds <= 0){
+        // timeline.stop();
+        // }
+        // }
+        // }));
+        // timeline.playFromStart();
+
+        // });
+        // }
+
+    //     int i = 0;
+    //     Timer timer2 = new Timer();
+
+    //     timer.setDelay(1000);
+
+    //     for (int i = WordScreen.sec; i >= 0; i--) {
+    //         timerLbl.setText(i + "");
+    //         try {
+    //             Thread.sleep(1000);
+    //         } catch (InterruptedException e) {
+    //             // TODO Auto-generated catch block
+    //             e.printStackTrace();
+    //         }
+    // }
+
+
+
+
 
 
     }
@@ -338,9 +381,8 @@ public class DrawingScreen extends StackPane {
     //     useWords();
     // }
     
-    public static void setTimerLength(int timerLength) {
-        sec = timerLength;
-        timerLabel.setText(String.format("%d", sec));
+    public static void setTimerLength(Integer timerLength) {
+        timerLbl.setText(Integer.toString(timerLength));
     }
 
     public static void setNumOfRounds(int numOfRounds) {

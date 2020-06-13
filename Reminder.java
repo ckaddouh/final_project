@@ -2,6 +2,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 
@@ -17,6 +18,8 @@ public class Reminder extends BorderPane {
 
     Toolkit toolkit;    
     public static Timer timer;
+
+    public static Label secs = new Label();
 
     static int seconds;
     public static boolean printStuff;
@@ -34,10 +37,14 @@ public class Reminder extends BorderPane {
         seconds = WordScreen.sec;
         
         show = new Button();
-        show.setOnAction(e -> {
-            // DrawingScreen.setTimerLength(seconds);
-            DrawingScreen.timerLabel.setText(String.format("%d", seconds));
-        });
+
+        DrawingScreen.timerLbl.textProperty().bind(secs.textProperty());
+        // show.setOnAction(e -> {
+        //     // DrawingScreen.setTimerLength(seconds);
+        //     DrawingScreen.setTimerLength(seconds);
+        //     // ResultsScreen.text.setText("Hmmm");
+
+        // });
 
         changeScreen = new Button();
         changeScreen.setOnAction(e -> {
@@ -45,21 +52,27 @@ public class Reminder extends BorderPane {
             mainApp.showResultsScreen();
         });
 
+        secs.setText(String.valueOf(seconds));
+
+
 	}
+
 
     class RemindTask extends TimerTask {
         public void run() {
             if (seconds > 0) {
-                show.fire();
+                // show.fire();
                 System.out.println("" + seconds);
                 seconds--;
+                secs.setText(String.valueOf(seconds));
             }
             
             else {
                 toolkit.beep();
                 changeScreen.fire();
-                System.out.println("Time's up!");
+                DrawingScreen.timerLbl.setText("Time's up!");
                 // DrawingScreen.info.setText("Time's up!");
+
                 timer.cancel(); //Terminate the timer thread
                 // System.exit();
             }
