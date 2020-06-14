@@ -27,9 +27,12 @@ public class MainApp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         primaryStage = stage;
-        stage2 = new Stage();
 
-        Scene scene2 = new Scene(new TimerScreen(this), 400, 400);
+        stage2 = new Stage();
+        stage2.setX(1100);
+        stage2.setY(150);
+
+        Scene scene2 = new Scene(new TimerScreen(this), 200, 200);
         stage2.setTitle("Pictionary");
         stage2.setScene(scene2);
     
@@ -80,6 +83,8 @@ public class MainApp extends Application {
 
     public void showDrawingScreen(){
         Scene scene = primaryStage.getScene();
+        primaryStage.setX(100);
+        primaryStage.setY(100);
 
         DrawingScreen.setNumOfRounds(Integer.parseInt(SettingsScreen.numOfRounds.getText()));
         DrawingScreen.setTimerLength(Integer.parseInt(SettingsScreen.timerLength.getText()));
@@ -107,6 +112,9 @@ public class MainApp extends Application {
 
         Scene scene = primaryStage.getScene();
 
+        primaryStage.setX(350);
+        primaryStage.setY(100);
+
         if (DrawingScreen.isCorrect)
             ResultsScreen.text.setText("CORRECT! \n The word was " + WordScreen.word);
         else
@@ -132,7 +140,9 @@ public class MainApp extends Application {
     // }
 
     public void showWordScreen(){
-        Scene scene = primaryStage.getScene();
+        Scene scene = primaryStage.getScene();        
+        primaryStage.setX(350);
+        primaryStage.setY(100);
 
         try {
             WordScreen.setFileName(SettingsScreen.comboBox.getValue());
