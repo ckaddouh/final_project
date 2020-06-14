@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 public class MainApp extends Application {
 
     static Stage primaryStage;
+    public static Stage stage2;
     // static Stage secondaryStage;
 
     Pane welcomeScreen;
@@ -19,16 +20,18 @@ public class MainApp extends Application {
     Pane finalScreen;
     Pane wordScreen;
     Pane reminder;
+    // Pane timerScreen;
 
+    public static Scene scene2;
 
     @Override
     public void start(Stage stage) throws Exception {
         primaryStage = stage;
-        // secondaryStage = new Stage();
+        stage2 = new Stage();
 
-        // Scene scene2 = new Scene(timeScreen, 400, 400);
-        // secondaryStage.setTitle("Pictionary");
-        // secondaryStage.setScene(scene2);
+        Scene scene2 = new Scene(new TimerScreen(this), 400, 400);
+        stage2.setTitle("Pictionary");
+        stage2.setScene(scene2);
     
 
         welcomeScreen = new WelcomeScreen(this);
@@ -38,11 +41,20 @@ public class MainApp extends Application {
         resultsScreen = new ResultsScreen(this);
         finalScreen = new FinalScreen(this);
         wordScreen = new WordScreen(this);
-        // reminder = new Reminder(this);
+        // timerScreen = new TimerScreen(this);
+        reminder = new Reminder(this);
         // timeScreen = new TimeScreen(this);
 
+        primaryStage.setResizable(false);
+        stage2.setResizable(false);
+
+        // scene2 = new Scene(new TimerScreen(this), 400, 400);
+        // scene2 = new Scene(reminder, 400, 400);
+        // stage2.setScene(scene2);
+        // stage2.setTitle("Pictionary!");
+        
         Scene scene = new Scene(welcomeScreen, 800, 500);
-        primaryStage.setTitle("Welcome to Pictionary!");
+        primaryStage.setTitle("Pictionary!");
         primaryStage.setScene(scene);
         primaryStage.show();  
 
@@ -72,6 +84,10 @@ public class MainApp extends Application {
         DrawingScreen.setNumOfRounds(Integer.parseInt(SettingsScreen.numOfRounds.getText()));
         DrawingScreen.setTimerLength(Integer.parseInt(SettingsScreen.timerLength.getText()));
         
+        scene2 = new Scene(new TimerScreen(this), 400, 400);
+        stage2.setScene(scene2);
+        stage2.show();
+
         // try {
         //     DrawingScreen.setFileName(SettingsScreen.comboBox.getValue());
         // } catch (FileNotFoundException e) {
@@ -83,7 +99,7 @@ public class MainApp extends Application {
         new Reminder(this);
         // System.out.println(WordScreen.sec);
     
-        setStageSize(800, 500);
+        setStageSize(900, 500);
         scene.setRoot(drawingScreen);
     }
 
@@ -97,6 +113,8 @@ public class MainApp extends Application {
 
         setStageSize(400, 400);
         scene.setRoot(resultsScreen);
+        stage2.close();
+        Reminder.timer.cancel();
     }
 
     public void showFinalScreen(){
