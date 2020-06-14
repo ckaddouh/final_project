@@ -23,6 +23,9 @@ public class ResultsScreen extends GridPane {
 
         this.mainApp = app;
 
+        // mainApp.stage2.close();
+        // Reminder.timer.cancel();
+
         Button next = new Button("Next");
         Button changeScreenButton = new Button("Back");
 
@@ -38,7 +41,7 @@ public class ResultsScreen extends GridPane {
         add(next, 2, 3);
 
         next.setOnAction(e -> {
-            if (WordScreen.getNumOfRounds() <= 0) {
+            if (WordScreen.getNumOfRounds() <= 1) {
                 handleFinalScreen();
                 DrawingScreen.isCorrect = false;
             }
@@ -51,15 +54,13 @@ public class ResultsScreen extends GridPane {
         
         text = new Text();
 
-
-
         text.setFill(Color.DARKTURQUOISE);
         text.setFont(Font.font("AvantGarde", FontWeight.BOLD, FontPosture.REGULAR, 20));
         add(text, 1, 1, 2, 2);
         GridPane.setHalignment(text, HPos.CENTER);
 
         changeScreenButton.setOnAction(e -> {
-            if ((WordScreen.rounds - 1) >= 0){
+            if ((WordScreen.rounds - 1) > 0){
                 WordScreen.useWords();
                 handleButton();
             }

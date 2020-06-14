@@ -2,6 +2,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 
@@ -19,12 +20,11 @@ public class Reminder extends BorderPane {
     public static Timer timer;
 
     static int seconds;
-    public static boolean printStuff;
-    public static Button show;
     public static Button changeScreen;
 
-    public Reminder(MainApp mainApp) {
+    public Reminder(MainApp app) {
         super();
+        this.mainApp = app;
 
         toolkit = Toolkit.getDefaultToolkit();
 
@@ -33,14 +33,20 @@ public class Reminder extends BorderPane {
         
         seconds = WordScreen.sec;
         
-        show = new Button();
-        show.setOnAction(e -> {
-            DrawingScreen.setTimerLength(seconds);
-        });
+        
+        // label.textProperty().bind(secs.textProperty());
+        // DrawingScreen.timerLbl.textProperty().bind(secs.textProperty());
+        // show.setOnAction(e -> {
+        //     // DrawingScreen.setTimerLength(seconds);
+        //     DrawingScreen.setTimerLength(seconds);
+        //     // ResultsScreen.text.setText("Hmmm");
+
+        // });
 
         changeScreen = new Button();
         changeScreen.setOnAction(e -> {
             DrawingScreen.isCorrect = false;
+            // MainApp.stage2.close();
 
             mainApp.showResultsScreen();
         });
@@ -52,13 +58,15 @@ public class Reminder extends BorderPane {
             if (seconds > 0) {
                 // show.fire();
                 System.out.println("" + seconds);
+                // label.setText(String.valueOf(seconds));
                 seconds--;
-
             }
+            
             else {
                 toolkit.beep();
                 changeScreen.fire();
-                System.out.println("Time's up!");
+
+                // DrawingScreen.timerLbl.setText("Time's up!");
                 // DrawingScreen.info.setText("Time's up!");
                 timer.cancel(); //Terminate the timer thread
                 // System.exit();
