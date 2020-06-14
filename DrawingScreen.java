@@ -265,6 +265,8 @@ public class DrawingScreen extends StackPane {
                 if (Reminder.seconds > 0) {
                     isCorrect = true;
                     Reminder.timer.cancel();
+                    MainApp.stage2.close();
+                    
                 } else {
                     isCorrect = false;
                 }
