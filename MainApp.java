@@ -53,7 +53,7 @@ public class MainApp extends Application {
         // stage2.setScene(scene2);
         // stage2.setTitle("Pictionary!");
         
-        Scene scene = new Scene(welcomeScreen, 800, 500);
+        Scene scene = new Scene(welcomeScreen, 900, 500);
         primaryStage.setTitle("Pictionary!");
         primaryStage.setScene(scene);
         primaryStage.show();  
@@ -62,19 +62,19 @@ public class MainApp extends Application {
 
     public void showWelcomeScreen(){
         Scene scene = primaryStage.getScene();
-        setStageSize(800, 500);
+        // setStageSize(800, 500);
         scene.setRoot(welcomeScreen);
     }
 
     public void showInstructionScreen(){
         Scene scene = primaryStage.getScene();
-        setStageSize(415, 250);
+        // setStageSize(415, 250);
         scene.setRoot(instructionScreen);
     }
 
     public void showSettingsScreen(){
         Scene scene = primaryStage.getScene();
-        setStageSize(800, 400);
+        // setStageSize(800, 400);
         scene.setRoot(settingsScreen);
     }
 
@@ -99,11 +99,12 @@ public class MainApp extends Application {
         new Reminder(this);
         // System.out.println(WordScreen.sec);
     
-        setStageSize(900, 500);
+        // setStageSize(900, 500);
         scene.setRoot(drawingScreen);
     }
 
     public void showResultsScreen(){
+
         Scene scene = primaryStage.getScene();
 
         if (DrawingScreen.isCorrect)
@@ -111,15 +112,16 @@ public class MainApp extends Application {
         else
             ResultsScreen.text.setText("Out of time... \n The word was " + WordScreen.word);
 
-        setStageSize(400, 400);
+        // stage2.close();
+
+        // setStageSize(400, 400);
         scene.setRoot(resultsScreen);
-        stage2.close();
         Reminder.timer.cancel();
     }
 
     public void showFinalScreen(){
         Scene scene = primaryStage.getScene();
-        setStageSize(400, 400);
+        // setStageSize(400, 400);
         scene.setRoot(finalScreen);
     }
 
@@ -139,7 +141,7 @@ public class MainApp extends Application {
         }
         WordScreen.setTimerLength(Integer.parseInt(SettingsScreen.timerLength.getText()));
 
-        setStageSize(600, 400);
+        // setStageSize(600, 400);
         scene.setRoot(wordScreen);
     }
 

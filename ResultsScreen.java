@@ -23,7 +23,7 @@ public class ResultsScreen extends GridPane {
 
         this.mainApp = app;
 
-        // MainApp.stage2.close();
+        // mainApp.stage2.close();
         // Reminder.timer.cancel();
 
         Button next = new Button("Next");
