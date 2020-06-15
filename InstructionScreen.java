@@ -2,7 +2,10 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -31,9 +34,9 @@ public class InstructionScreen extends BorderPane {
         this.mainApp = app;
 
         Text text = new Text();
-        text.setText("Instructions"); 
-        text.setFill(Color.DARKTURQUOISE);
-        text.setFont(Font.font("AvantGarde", FontWeight.BOLD, FontPosture.REGULAR, 20));
+        text.setText("\nInstructions"); 
+        text.setFill(Color.DODGERBLUE);
+        text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 35));
         //ScreenA is a GridPane, so it has the GridPane methods like add(...)
         //ScreenA is a GridPane, so it has the GridPane methods like add(...)
 
@@ -49,6 +52,14 @@ public class InstructionScreen extends BorderPane {
         Button changeScreenPlay = new Button("Play");
         changeScreenPlay.setOnAction(e -> handleButtonPlay());
 
+        changeScreenBack.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.7), 5, 0.0, 0, 1)");
+        changeScreenBack.setStyle("-fx-font: 22 fantasy; -fx-background-color: #0072ab, linear-gradient(#2a5880 0%, #1f2429 20%, #191d22 100%), linear-gradient(#007be0, #3275c7), radial-gradient(center 50% 0%, radius 100%, #64a5f5, #9ddbfa)");
+
+
+        changeScreenPlay.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.7), 5, 0.0, 0, 1)");
+        changeScreenPlay.setStyle("-fx-font: 22 fantasy; -fx-background-color: #0072ab, linear-gradient(#2a5880 0%, #1f2429 20%, #191d22 100%), linear-gradient(#007be0, #3275c7), radial-gradient(center 50% 0%, radius 100%, #64a5f5, #9ddbfa)");
+
+
         GridPane bottom = new GridPane();
         bottom.addRow(0, changeScreenBack, changeScreenPlay);
 
@@ -59,10 +70,12 @@ public class InstructionScreen extends BorderPane {
         setAlignment(bottom, Pos.BOTTOM_RIGHT);
         setBottom(bottom);
 
-        Text inst = new Text("                              Welcome to Pictionary!\nThe game is simple: one player draws, and the other guesses.\n                       You are given a certain amount of\n                        time to get as many as you can \n                               To begin, press play!");
-        inst.setFont(Font.font("AvantGarde", FontPosture.REGULAR, 14));
+        Text inst = new Text("                Welcome to Pictionary!\n     The game is simple: one player draws, \n               and the other guesses.\n        You are given a certain amount of\n        time to get as many as you can \n             Go to settings to change\n         the number of rounds and length.\n                To begin, press play!");
+        inst.setFont(Font.font("verdana", FontPosture.REGULAR, 25));
         setAlignment(inst, Pos.CENTER);
         setCenter(inst);
+
+        setBackground( new Background( new BackgroundFill(Color.LIGHTCYAN, CornerRadii.EMPTY, Insets.EMPTY)));
 
 
         //You would probably add more code to format this GridPane the way you'd like
