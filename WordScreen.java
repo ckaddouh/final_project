@@ -57,12 +57,12 @@ public class WordScreen extends BorderPane {
 
         Label filler4 = new Label();
         pane.addRow(4, filler4);
-        Label ready = new Label("Ready?");
+        Label ready = new Label("\tReady?\n");
         ready.setFont(Font.font("verdana", 20));
         Button play = new Button("Let's Go!");
 
         play.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.7), 5, 0.0, 0, 1)");
-        play.setStyle("-fx-font: 22 fantasy; -fx-background-color: #0072ab, linear-gradient(#2a5880 0%, #1f2429 20%, #191d22 100%), linear-gradient(#007be0, #3275c7), radial-gradient(center 50% 0%, radius 100%, #64a5f5, #9ddbfa)");
+        play.setStyle("-fx-font: 32 fantasy; -fx-background-color: #0072ab, linear-gradient(#2a5880 0%, #1f2429 20%, #191d22 100%), linear-gradient(#007be0, #3275c7), radial-gradient(center 50% 0%, radius 100%, #64a5f5, #9ddbfa)");
 
 
         Label filler5 = new Label();
@@ -76,6 +76,17 @@ public class WordScreen extends BorderPane {
         
         setCenter(pane);
         setAlignment(pane, Pos.CENTER);
+
+        GridPane bottom = new GridPane();
+        bottom.addRow(0, play);
+
+        bottom.setHgap(10);
+        bottom.setVgap(10);
+        bottom.setPadding(new Insets(10));
+
+        setAlignment(bottom, Pos.BOTTOM_RIGHT);
+        setBottom(bottom);
+
         
     }
 
@@ -93,20 +104,20 @@ public class WordScreen extends BorderPane {
         
         public static void setTimerLength(int timerLength) {
             sec = timerLength;
-            time.setText(String.format("You have %d seconds", sec));
+            time.setText(String.format("\tYou have %d seconds", sec));
             time.setFont(Font.font("verdana", 20));
         }
     
         public static void setNumOfRounds(int numOfRounds) {
             rounds = numOfRounds;
             
-            roundsLbl.setText(String.format("There are %d rounds remaining", rounds));
+            roundsLbl.setText(String.format("\n\tThere are %d rounds remaining", rounds));
             roundsLbl.setFont(Font.font("verdana", 20));
         }
 
         public static void useWords(){
             word = list.getRandomWord();
-            wordLbl.setText("Your word is.... " + word);
+            wordLbl.setText("\nYour word is.... " + word + "!");
             list.remove(word);
         }
 
