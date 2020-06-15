@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
@@ -22,6 +23,9 @@ public class ResultsScreen extends GridPane {
         super();
 
         this.mainApp = app;
+
+        setBackground( new Background( new BackgroundFill(Color.LIGHTCYAN, CornerRadii.EMPTY, Insets.EMPTY)));
+
 
         // mainApp.stage2.close();
         // Reminder.timer.cancel();
@@ -54,8 +58,7 @@ public class ResultsScreen extends GridPane {
         
         text = new Text();
 
-        text.setFill(Color.DARKTURQUOISE);
-        text.setFont(Font.font("AvantGarde", FontWeight.BOLD, FontPosture.REGULAR, 20));
+        text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
         add(text, 1, 1, 2, 2);
         GridPane.setHalignment(text, HPos.CENTER);
 

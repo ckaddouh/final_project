@@ -384,12 +384,12 @@ public class DrawingScreen extends StackPane {
     // }
     
     public static void setTimerLength(Integer timerLength) {
-        timerLbl.setText(Integer.toString(timerLength));
+        timerLbl.setText(Integer.toString(timerLength) + " seconds each");
     }
 
     public static void setNumOfRounds(int numOfRounds) {
         rounds = numOfRounds;
-        info2.setText(String.format("%d", rounds));
+        info2.setText(String.format("There are %d rounds", rounds));
     }
 
     

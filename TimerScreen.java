@@ -33,7 +33,7 @@ public class TimerScreen extends BorderPane {
         setBackground( new Background( new BackgroundFill(Color.LIGHTCYAN, CornerRadii.EMPTY, Insets.EMPTY)));
 
         label = new Label();
-        label.setTextFill(Color.ORANGE);
+        label.setTextFill(Color.DODGERBLUE);
         label.setFont(Font.font(20));
         HBox layout= new HBox(5);
         layout.getChildren().add(label);

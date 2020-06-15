@@ -37,9 +37,9 @@ public class SettingsScreen extends BorderPane {
         setBackground( new Background( new BackgroundFill(Color.LIGHTCYAN, CornerRadii.EMPTY, Insets.EMPTY)));
 
 
-        Text title = new Text("Settings");
+        Text title = new Text("\nSettings\n");
         title.setFill(Color.DODGERBLUE);
-        title.setFont(Font.font("AvantGarde", FontWeight.BOLD, FontPosture.REGULAR, 20));
+        title.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 35));
         setTop(title);
 
         title.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 35));

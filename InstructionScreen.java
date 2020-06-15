@@ -34,9 +34,9 @@ public class InstructionScreen extends BorderPane {
         this.mainApp = app;
 
         Text text = new Text();
-        text.setText("Instructions"); 
-        text.setFill(Color.DARKTURQUOISE);
-        text.setFont(Font.font("AvantGarde", FontWeight.BOLD, FontPosture.REGULAR, 20));
+        text.setText("\nInstructions"); 
+        text.setFill(Color.DODGERBLUE);
+        text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 35));
         //ScreenA is a GridPane, so it has the GridPane methods like add(...)
         //ScreenA is a GridPane, so it has the GridPane methods like add(...)
 
@@ -70,8 +70,8 @@ public class InstructionScreen extends BorderPane {
         setAlignment(bottom, Pos.BOTTOM_RIGHT);
         setBottom(bottom);
 
-        Text inst = new Text("                              Welcome to Pictionary!\nThe game is simple: one player draws, and the other guesses.\n                       You are given a certain amount of\n                        time to get as many as you can \n                               To begin, press play!");
-        inst.setFont(Font.font("AvantGarde", FontPosture.REGULAR, 14));
+        Text inst = new Text("                Welcome to Pictionary!\n     The game is simple: one player draws, \n               and the other guesses.\n        You are given a certain amount of\n        time to get as many as you can \n             Go to settings to change\n         the number of rounds and length.\n                To begin, press play!");
+        inst.setFont(Font.font("verdana", FontPosture.REGULAR, 25));
         setAlignment(inst, Pos.CENTER);
         setCenter(inst);
 
