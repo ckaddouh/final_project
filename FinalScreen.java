@@ -7,6 +7,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -18,8 +20,9 @@ public class FinalScreen extends BorderPane {
         super(); 
         this.mainApp = app;
         
-        Label complete = new Label("Great job!");
-        complete.setFont(new Font("verdana", 24));
+        Label complete = new Label("\nGreat job!");
+        complete.setTextFill(Color.DODGERBLUE);
+        complete.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 40));
         setTop(complete);
         setAlignment(complete, Pos.CENTER);
 
@@ -27,8 +30,9 @@ public class FinalScreen extends BorderPane {
         imageView.setImage(new Image("image/confetti.gif"));
         setCenter(imageView);
 
-        Label thanks = new Label("          Thanks for playing! \nWe hope you enjoyed the game! :)");
-        thanks.setFont(new Font("verdana", 18));
+        Label thanks = new Label("          Thanks for playing! \nWe hope you enjoyed the game! \n                       :)");
+        thanks.setFont(new Font("verdana", 20));
+        thanks.setTextFill(Color.DODGERBLUE);
         setBottom(thanks);
         setAlignment(thanks, Pos.CENTER);
 
