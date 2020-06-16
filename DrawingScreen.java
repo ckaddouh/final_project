@@ -27,20 +27,22 @@ public class DrawingScreen extends StackPane {
     public static Label lbl;
     public static Label lbl2;
 
-    Boolean pen = true;
-    Boolean rectangle = false;
-    Boolean oval = false;
-    Boolean eraser = false;
+    public static Boolean pen = true;
+    public static Boolean rectangle = false;
+    public static Boolean oval = false;
+    public static Boolean eraser = false;
+
+    public static CheckBox fill;
+
     double x;
     double y;
 
-    Canvas canvas;
-    GraphicsContext gc;
+    public static Canvas canvas;
+    public static GraphicsContext gc;
 
     public static int sec;
     public static int rounds;
 
-    public static Label info2;
 
     public static String word;
 
@@ -84,8 +86,6 @@ public class DrawingScreen extends StackPane {
 
             getChildren().addAll(canvas, grid);
 
-            gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-
             // Set the starting color picker value
             cp.setValue(Color.BLACK);
             // If the user selects another color, set that color for the pen
@@ -94,6 +94,13 @@ public class DrawingScreen extends StackPane {
                     gc.setStroke(cp.getValue());
                 gc.setFill(cp.getValue());
             });
+
+            // Create a clear button that places a white rectangle over the canvas
+            Button clearBT = new Button("Clear");
+            clearBT.setOnAction(e -> {
+                gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+            });
+
 
             // Define the properties of the slider for the width of the pen
             slider.setMin(1);
@@ -115,7 +122,7 @@ public class DrawingScreen extends StackPane {
             });
 
             // Create a CheckBox to determine if shapes should be filled
-            CheckBox fill = new CheckBox("Fill");
+            fill = new CheckBox("Fill");
 
             // Define a set of events for when the mouse is pressed
             setOnMousePressed(e -> {
@@ -251,19 +258,17 @@ public class DrawingScreen extends StackPane {
                 gc.setLineWidth(10);
             });
 
-            // Create a clear button that places a white rectangle over the canvas
-            Button clearBT = new Button("Clear");
-            clearBT.setOnAction(e -> {
-                gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-            });
-
-            // Label wordlbl = new Label(list.getRandomWord());
-            // grid.addRow(0, wordlbl);
 
             Button yesBT = new Button("GOT IT");
             yesBT.setOnAction(e -> {
-                if (Reminder.seconds > 0) {
+                if (Reminder.seconds >= 0) {
                     isCorrect = true;
+                    pen = true;
+                    rectangle = false;
+                    oval = false;
+                    eraser = false;
+                    gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+                    fill.setSelected(false);
                     Reminder.timer.cancel();
                     MainApp.stage2.close();
                     
@@ -284,19 +289,13 @@ public class DrawingScreen extends StackPane {
             grid.setAlignment(Pos.TOP_CENTER);
             grid.setPadding(new Insets(20, 0, 0, 0));
 
-            // info = new Label("Nothing");
-            info2 = new Label("Info 2");
-
             Button seeWord = new Button("See Word");
             seeWord.setOnAction(e -> handleSeeWord());
 
-            timerLbl = new Label("Showing");
-            Button changeScreenButton = new Button("See Results");
-            changeScreenButton.setOnAction(e -> handleButton());
-            grid.addRow(2, timerLbl);
-            grid.addRow(3, info2);
-            grid.addRow(4);
-            grid.addRow(5, changeScreenButton);
+
+            clearBT.fire();  
+          
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -304,64 +303,8 @@ public class DrawingScreen extends StackPane {
 
         Button button = new Button();
         button.fire();
-
-        // button.setOnAction(e -> {
-        // if (timeline != null) {
-        // timeline.stop();
-        // }
-        // timeSeconds = STARTTIME;
-
-        // timerLbl.setText(timeSeconds.toString());
-        // timeline = new Timeline();
-        // timeline.setCycleCount(Timeline.INDEFINITE);
-        // timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(1), new
-        // EventHandler(){
-        // public void handle(ActionEvent event){
-        // timeSeconds--;
-        // timerLbl.setText(timerSeconds.toString());
-        // if(timeSeconds <= 0){
-        // timeline.stop();
-        // }
-        // }
-        // }));
-        // timeline.playFromStart();
-
-        // });
-        // }
-
-    //     int i = 0;
-    //     Timer timer2 = new Timer();
-
-    //     timer.setDelay(1000);
-
-    //     for (int i = WordScreen.sec; i >= 0; i--) {
-    //         timerLbl.setText(i + "");
-    //         try {
-    //             Thread.sleep(1000);
-    //         } catch (InterruptedException e) {
-    //             // TODO Auto-generated catch block
-    //             e.printStackTrace();
-    //         }
-    // }
-
-
-
-
-
-
     }
 
-    // public static void Remainder(int seconds){
-    //     timer = new Timer();
-    //     timer.schedule(new RemindTask(), seconds*1000);
-    // }
-
-    // class RemindTask extends TimerTask {
-    //     public void run() {
-    //         timerLbl.setText("Time is up!");
-    //         mainApp.showResults();
-    //     }
-    // }
 
     private void handleButton() {
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
@@ -376,28 +319,9 @@ public class DrawingScreen extends StackPane {
         mainApp.showResultsScreen();
     }
 
-    // public static void setFileName(String fileName) throws FileNotFoundException {
-    //     file_name = fileName;
-    //     lbl.setText(file_name);
-    //     list = new Words("words/" + file_name + ".txt");
-    //     useWords();
-    // }
-    
-    public static void setTimerLength(Integer timerLength) {
-        timerLbl.setText(Integer.toString(timerLength) + " seconds each");
+    public static void clearScreen() {
+        gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
     }
-
-    public static void setNumOfRounds(int numOfRounds) {
-        rounds = numOfRounds;
-        info2.setText(String.format("There are %d rounds", rounds));
-    }
-
-    
-    // public static void useWords(){
-    //     word = list.getRandomWord();
-    //     lbl2.setText(word);
-    //     list.remove(word);
-    // }
 
 
 }

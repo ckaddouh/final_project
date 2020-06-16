@@ -35,8 +35,8 @@ public class MainApp extends Application {
         Scene scene2 = new Scene(new TimerScreen(this), 200, 200);
         stage2.setTitle("Pictionary");
         stage2.setScene(scene2);
-    
 
+ 
         welcomeScreen = new WelcomeScreen(this);
         instructionScreen = new InstructionScreen(this);
         drawingScreen = new DrawingScreen(this);
@@ -85,9 +85,6 @@ public class MainApp extends Application {
         Scene scene = primaryStage.getScene();
         primaryStage.setX(100);
         primaryStage.setY(100);
-
-        DrawingScreen.setNumOfRounds(Integer.parseInt(SettingsScreen.numOfRounds.getText()));
-        DrawingScreen.setTimerLength(Integer.parseInt(SettingsScreen.timerLength.getText()));
         
         scene2 = new Scene(new TimerScreen(this), 400, 400);
         stage2.setScene(scene2);

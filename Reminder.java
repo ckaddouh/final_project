@@ -57,19 +57,28 @@ public class Reminder extends BorderPane {
         public void run() {
             if (seconds > 0) {
                 // show.fire();
-                System.out.println("" + seconds);
                 // label.setText(String.valueOf(seconds));
                 seconds--;
             }
             
             else {
+
                 toolkit.beep();
                 changeScreen.fire();
-
+                DrawingScreen.clearScreen();
+                DrawingScreen.pen = true;
+                DrawingScreen.rectangle = false;
+                DrawingScreen.oval = false;
+                DrawingScreen.eraser = false;
+                DrawingScreen.fill.setSelected(false);
+                
                 // DrawingScreen.timerLbl.setText("Time's up!");
                 // DrawingScreen.info.setText("Time's up!");
                 timer.cancel(); //Terminate the timer thread
-                // System.exit();
+                // System.exit();                
+                MainApp.stage2.close();
+
+
             }
         }
     }
