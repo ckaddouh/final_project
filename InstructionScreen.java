@@ -15,30 +15,20 @@ import javafx.scene.text.Text;
 
 
 
-/**
- * ScreenA is a subclass of GridPane. Since GridPane is a subclass of Pane, it
- * can be saved in a Pane variable too.
- */
+
 public class InstructionScreen extends BorderPane {
 
     private MainApp mainApp;
 
     public InstructionScreen(MainApp app) {
         super();
-        //the super() calls the constructor of GridPane. 
-        //It's not necessary because it's automatically called,
-        //but if we wanted certain parameters, we can add them.
 
-        //Save the  parameter app  so we can access 
-        //methods from the mainApp for changing the screen. 
         this.mainApp = app;
 
         Text text = new Text();
         text.setText("\nInstructions"); 
         text.setFill(Color.DODGERBLUE);
         text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 35));
-        //ScreenA is a GridPane, so it has the GridPane methods like add(...)
-        //ScreenA is a GridPane, so it has the GridPane methods like add(...)
 
         setTop(text);
         setAlignment(text, Pos.CENTER);
@@ -46,8 +36,6 @@ public class InstructionScreen extends BorderPane {
         Button changeScreenBack = new Button("Back");
         changeScreenBack.setOnAction(e -> handleButtonBack());
         
-        // Button changeScreenSettings= new Button("Settings");
-        // changeScreenSettings.setOnAction(e -> handleButtonSettings());
 
         Button changeScreenPlay = new Button("Play");
         changeScreenPlay.setOnAction(e -> handleButtonPlay());
@@ -77,18 +65,8 @@ public class InstructionScreen extends BorderPane {
 
         setBackground( new Background( new BackgroundFill(Color.LIGHTCYAN, CornerRadii.EMPTY, Insets.EMPTY)));
 
-
-        //You would probably add more code to format this GridPane the way you'd like
-        //Since screenmanager isn't finished i can't run so idk how it looks but idk 
-        //if we'd need any more formatting?
-        
     }
 
-    // private void handleButtonSettings(){
-    //     //Call the appropriate method from the MainApp
-    //     mainApp.showSettingsScreen();
-    // }
-    
     private void handleButtonBack(){
         mainApp.showWelcomeScreen();
     }
@@ -98,4 +76,3 @@ public class InstructionScreen extends BorderPane {
         mainApp.showWordScreen();
     }
 }
-//I didn't think there was much to do so enjoy the new fonts and colors <3

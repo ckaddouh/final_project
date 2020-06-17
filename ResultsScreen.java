@@ -27,8 +27,7 @@ public class ResultsScreen extends GridPane {
         setBackground( new Background( new BackgroundFill(Color.LIGHTCYAN, CornerRadii.EMPTY, Insets.EMPTY)));
 
 
-        // mainApp.stage2.close();
-        // Reminder.timer.cancel();
+
 
         Button next = new Button("Next");
         Button changeScreenButton = new Button("Back");

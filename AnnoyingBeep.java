@@ -29,7 +29,6 @@ public class AnnoyingBeep {
         if (numWarningBeeps == 0) {
 	        toolkit.beep(); 
                 System.out.println("Time's up!");
-	        //timer.cancel(); //Not necessary because we call System.exit
 	        System.exit(0);   //Stops the AWT thread (and everything else)
         }
         if (numWarningBeeps <= 3) {

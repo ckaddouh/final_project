@@ -33,16 +33,7 @@ public class Reminder extends BorderPane {
         timer.schedule(new RemindTask(), 0, 1*1000);
         
         seconds = WordScreen.sec;
-        
-        
-        // label.textProperty().bind(secs.textProperty());
-        // DrawingScreen.timerLbl.textProperty().bind(secs.textProperty());
-        // show.setOnAction(e -> {
-        //     // DrawingScreen.setTimerLength(seconds);
-        //     DrawingScreen.setTimerLength(seconds);
-        //     // ResultsScreen.text.setText("Hmmm");
 
-        // });
 
         changeScreen = new Button();
         changeScreen.setOnAction(e -> {
@@ -57,8 +48,7 @@ public class Reminder extends BorderPane {
     class RemindTask extends TimerTask {
         public void run() {
             if (seconds > 0) {
-                // show.fire();
-                // label.setText(String.valueOf(seconds));
+
                 seconds--;
             }
             
@@ -78,12 +68,7 @@ public class Reminder extends BorderPane {
                 DrawingScreen.gc.setStroke(DrawingScreen.cp.getValue());
                 DrawingScreen.gc.setLineWidth(DrawingScreen.slider.getValue());
 
-                // DrawingScreen.timerLbl.setText("Time's up!");
-                // DrawingScreen.info.setText("Time's up!");
                 timer.cancel(); //Terminate the timer thread
-                // System.exit();                
-                // MainApp.stage2.close();
-
 
             }
         }
@@ -91,4 +76,3 @@ public class Reminder extends BorderPane {
 }
 
 
-// Using the timer: https://www.iitk.ac.in/esc101/05Aug/tutorial/essential/threads/timer.html 
