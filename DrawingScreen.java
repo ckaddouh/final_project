@@ -43,6 +43,8 @@ public class DrawingScreen extends StackPane {
     public static int sec;
     public static int rounds;
 
+    public static ColorPicker cp;
+    public static Slider slider;
 
     public static String word;
 
@@ -68,8 +70,8 @@ public class DrawingScreen extends StackPane {
         // Create GraphicsContext for the user to draw with
 
         // Implement a color picker and slider for pen color and width
-        ColorPicker cp = new ColorPicker();
-        Slider slider = new Slider();
+        cp = new ColorPicker();
+        slider = new Slider();
         Label sliderLbl = new Label("1.0");
 
         // Create a canvas and bind its properties to the scene's properties
@@ -83,6 +85,13 @@ public class DrawingScreen extends StackPane {
             gc = canvas.getGraphicsContext2D();
             gc.setStroke(Color.BLACK);
             gc.setLineWidth(1);
+
+            // Define the properties of the slider for the width of the pen
+            slider.setMin(1);
+            slider.setMax(5);
+            slider.setShowTickLabels(true);
+            slider.setShowTickMarks(true);
+            slider.setValue(1);
 
             getChildren().addAll(canvas, grid);
 
@@ -102,11 +111,7 @@ public class DrawingScreen extends StackPane {
             });
 
 
-            // Define the properties of the slider for the width of the pen
-            slider.setMin(1);
-            slider.setMax(5);
-            slider.setShowTickLabels(true);
-            slider.setShowTickMarks(true);
+
 
             // Create a listener for when the slider is moved to update the width of the pen
             slider.valueProperty().addListener(e -> {
@@ -269,6 +274,10 @@ public class DrawingScreen extends StackPane {
                     eraser = false;
                     gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
                     fill.setSelected(false);
+                    cp.setValue(Color.BLACK);
+                    slider.setValue(1);
+                    gc.setStroke(cp.getValue());
+                    gc.setLineWidth(slider.getValue());
                     Reminder.timer.cancel();
                     MainApp.stage2.close();
                     

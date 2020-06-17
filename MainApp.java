@@ -121,7 +121,7 @@ public class MainApp extends Application {
 
         // setStageSize(400, 400);
         scene.setRoot(resultsScreen);
-        Reminder.timer.cancel();
+        // Reminder.timer.cancel();
     }
 
     public void showFinalScreen(){

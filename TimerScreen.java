@@ -63,6 +63,7 @@ public class TimerScreen extends BorderPane {
                 label.setFont(new Font("Courier", 40));
                 setCenter(label);
                 setAlignment(label, Pos.CENTER);
+                
                 ImageView imageView = new ImageView();
                 imageView.setImage(new Image("image/timer2.gif"));
                 setBottom(imageView);

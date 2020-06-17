@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 
 import java.awt.Toolkit;
 
@@ -64,6 +65,7 @@ public class Reminder extends BorderPane {
             else {
 
                 toolkit.beep();
+                
                 changeScreen.fire();
                 DrawingScreen.clearScreen();
                 DrawingScreen.pen = true;
@@ -71,12 +73,16 @@ public class Reminder extends BorderPane {
                 DrawingScreen.oval = false;
                 DrawingScreen.eraser = false;
                 DrawingScreen.fill.setSelected(false);
-                
+                DrawingScreen.cp.setValue(Color.BLACK);
+                DrawingScreen.slider.setValue(1);
+                DrawingScreen.gc.setStroke(DrawingScreen.cp.getValue());
+                DrawingScreen.gc.setLineWidth(DrawingScreen.slider.getValue());
+
                 // DrawingScreen.timerLbl.setText("Time's up!");
                 // DrawingScreen.info.setText("Time's up!");
                 timer.cancel(); //Terminate the timer thread
                 // System.exit();                
-                MainApp.stage2.close();
+                // MainApp.stage2.close();
 
 
             }
