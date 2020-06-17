@@ -47,7 +47,6 @@ public class Reminder extends BorderPane {
         changeScreen = new Button();
         changeScreen.setOnAction(e -> {
             DrawingScreen.isCorrect = false;
-            // MainApp.stage2.close();
 
             mainApp.showResultsScreen();
         });
@@ -67,6 +66,7 @@ public class Reminder extends BorderPane {
                 toolkit.beep();
                 
                 changeScreen.fire();
+                
                 DrawingScreen.clearScreen();
                 DrawingScreen.pen = true;
                 DrawingScreen.rectangle = false;

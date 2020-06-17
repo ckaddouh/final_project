@@ -48,6 +48,7 @@ public class MainApp extends Application {
         reminder = new Reminder(this);
         // timeScreen = new TimeScreen(this);
 
+
         primaryStage.setResizable(false);
         stage2.setResizable(false);
 
@@ -67,6 +68,7 @@ public class MainApp extends Application {
         Scene scene = primaryStage.getScene();
         // setStageSize(800, 500);
         scene.setRoot(welcomeScreen);
+
     }
 
     public void showInstructionScreen(){
@@ -151,6 +153,7 @@ public class MainApp extends Application {
         // setStageSize(600, 400);
         scene.setRoot(wordScreen);
     }
+
 
     public static void setStageSize(double width, double height){
         primaryStage.setWidth(width);
