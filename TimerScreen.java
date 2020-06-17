@@ -41,9 +41,6 @@ public class TimerScreen extends BorderPane {
         setCenter(layout);
         doTime();
 
-        // setScene(new Scene(layout, 300, 70, Color.BLACK));
-        // setTitle("Countdown Timer");
-        // show();
 
     }
 
@@ -80,7 +77,4 @@ public class TimerScreen extends BorderPane {
 
     }
 
-    // public static void main(String[] args) {
-    //     launch(args);
-    // }
 }

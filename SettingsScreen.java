@@ -113,17 +113,9 @@ public class SettingsScreen extends BorderPane {
         center.setPadding(new Insets(10));
         setCenter(center);
 
-        // comboBox.setOnAction(e -> {
-        //     try {
-        //         WordScreen.setFileName(comboBox.getValue());
-        //     } catch (FileNotFoundException e1) {
-        //         e1.printStackTrace();
-        //     }
-        // });
     }
 
         private void handleButton() {
-            //Call the appropriate method from the MainApp
             WordScreen.setNumOfRounds(Integer.parseInt(SettingsScreen.numOfRounds.getText()));
             mainApp.showWordScreen();
         }

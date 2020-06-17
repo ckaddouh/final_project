@@ -10,7 +10,7 @@ public class MainApp extends Application {
 
     static Stage primaryStage;
     public static Stage stage2;
-    // static Stage secondaryStage;
+
 
     Pane welcomeScreen;
     Pane instructionScreen;
@@ -20,7 +20,7 @@ public class MainApp extends Application {
     Pane finalScreen;
     Pane wordScreen;
     Pane reminder;
-    // Pane timerScreen;
+
 
     public static Scene scene2;
 
@@ -44,18 +44,14 @@ public class MainApp extends Application {
         resultsScreen = new ResultsScreen(this);
         finalScreen = new FinalScreen(this);
         wordScreen = new WordScreen(this);
-        // timerScreen = new TimerScreen(this);
         reminder = new Reminder(this);
-        // timeScreen = new TimeScreen(this);
+ 
 
 
         primaryStage.setResizable(false);
         stage2.setResizable(false);
 
-        // scene2 = new Scene(new TimerScreen(this), 400, 400);
-        // scene2 = new Scene(reminder, 400, 400);
-        // stage2.setScene(scene2);
-        // stage2.setTitle("Pictionary!");
+
         
         Scene scene = new Scene(welcomeScreen, 900, 500);
         primaryStage.setTitle("Pictionary!");
@@ -92,18 +88,9 @@ public class MainApp extends Application {
         stage2.setScene(scene2);
         stage2.show();
 
-        // try {
-        //     DrawingScreen.setFileName(SettingsScreen.comboBox.getValue());
-        // } catch (FileNotFoundException e) {
-        //     e.printStackTrace();
-        // }
-        
-        // secondaryStage.show();
 
         new Reminder(this);
-        // System.out.println(WordScreen.sec);
-    
-        // setStageSize(900, 500);
+
         scene.setRoot(drawingScreen);
     }
 
@@ -119,24 +106,16 @@ public class MainApp extends Application {
         else
             ResultsScreen.text.setText("Out of time... \n The word was " + WordScreen.word);
 
-        // stage2.close();
 
-        // setStageSize(400, 400);
         scene.setRoot(resultsScreen);
-        // Reminder.timer.cancel();
     }
 
     public void showFinalScreen(){
         Scene scene = primaryStage.getScene();
-        // setStageSize(400, 400);
         scene.setRoot(finalScreen);
     }
 
-    // public void showTimeScreen(){
-    //     Scene scene = primaryStage.getScene();
-    //     setStageSize(400, 400);
-    //     scene.setRoot(timeScreen);
-    // }
+ 
 
     public void showWordScreen(){
         Scene scene = primaryStage.getScene();        
@@ -150,7 +129,7 @@ public class MainApp extends Application {
         }
         WordScreen.setTimerLength(Integer.parseInt(SettingsScreen.timerLength.getText()));
 
-        // setStageSize(600, 400);
+
         scene.setRoot(wordScreen);
     }
 

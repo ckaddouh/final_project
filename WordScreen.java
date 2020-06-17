@@ -42,10 +42,7 @@ public class WordScreen extends BorderPane {
         setAlignment(wordLbl, Pos.CENTER);
 
         GridPane pane = new GridPane();
-        
-        // roundsLbl = new Label();
-        // time = new Label();
-        
+
         
         Label filler = new Label();
         pane.addRow(1, filler, roundsLbl);
@@ -92,8 +89,7 @@ public class WordScreen extends BorderPane {
 
         private void handleButton() {
             mainApp.showDrawingScreen();
-            // new Reminder(sec);
-            // System.out.println("Task scheduled.");
+
         }
         
         public static void setFileName(String fileName) throws FileNotFoundException {
@@ -126,4 +122,3 @@ public class WordScreen extends BorderPane {
         }
 }
 
-// Interesting: https://www.youtube.com/watch?v=AUpytdHcwUg 
