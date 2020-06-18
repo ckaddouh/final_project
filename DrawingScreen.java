@@ -1,10 +1,5 @@
-import java.beans.EventHandler;
-import java.io.FileNotFoundException;
-import java.time.Duration;
+// The main drawing screen where users draw and can press a button to see the results screen
 
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.GridPane;
@@ -18,10 +13,11 @@ import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import java.util.Timer;
-import java.util.TimerTask;
 
+// Create a class that extends StackPane
 public class DrawingScreen extends StackPane {
 
+    // Define variables
     private MainApp mainApp;
     public static String file_name;
     public static Label lbl;
@@ -55,19 +51,16 @@ public class DrawingScreen extends StackPane {
 
     private static final Integer STARTTIME = WordScreen.sec;
     protected static final Object timerSeconds = null;
-    private Timeline timeline;
-    private Integer timeSeconds = STARTTIME;
+
 
     public DrawingScreen(MainApp app) {
         super();
         this.mainApp = app;
 
-        setStyle(" -fx-background-color: #FFFFFF");
 
         // Create a GridPane for the words and buttons
         GridPane grid = new GridPane();
-
-        // Create GraphicsContext for the user to draw with
+        setStyle(" -fx-background-color: #FFFFFF");
 
         // Implement a color picker and slider for pen color and width
         cp = new ColorPicker();
@@ -110,9 +103,6 @@ public class DrawingScreen extends StackPane {
                 gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
             });
 
-
-
-
             // Create a listener for when the slider is moved to update the width of the pen
             slider.valueProperty().addListener(e -> {
                 double value = slider.getValue();
@@ -131,14 +121,14 @@ public class DrawingScreen extends StackPane {
 
             // Define a set of events for when the mouse is pressed
             setOnMousePressed(e -> {
-                // If either the pen or eraser is selected, being a new path where the mouse is
-                // located
+                // If either the pen or eraser is selected, being a new path where the mouse is located
                 if (pen || eraser) {
                     gc.beginPath();
                     gc.moveTo(e.getX(), e.getY());
                     gc.stroke();
                 }
-
+                
+                // If rectangle or oval is selected, get the initial x and y coordinates of the mouse
                 if (rectangle) {
                     x = e.getX();
                     y = e.getY();
@@ -152,8 +142,7 @@ public class DrawingScreen extends StackPane {
 
             // Define a set of actions to carry out when the mouse is dragged
             setOnMouseDragged(e -> {
-                // If the pen or eraser is selected, draw a line to the new position of the
-                // mouse
+                // If the pen or eraser is selected, draw a line to the new position of the mouse
                 if (pen || eraser) {
                     gc.lineTo(e.getX(), e.getY());
                     gc.stroke();
@@ -175,7 +164,7 @@ public class DrawingScreen extends StackPane {
                         if (e.getX() < x && e.getY() < y)
                             gc.fillRect(e.getX(), e.getY(), x - e.getX(), y - e.getY());
                     }
-
+                    // If fill is not selected, outline the rectangle
                     else {
                         if (e.getX() > x && e.getY() > y)
                             gc.strokeRect(x, y, e.getX() - x, e.getY() - y);
@@ -188,8 +177,9 @@ public class DrawingScreen extends StackPane {
                     }
                     gc.closePath();
                 }
-
+                // If the oval button is selected
                 if (oval) {
+                    // If fill is selected, create a filled in oval
                     if (fill.isSelected()) {
                         if (e.getX() > x && e.getY() > y)
                             gc.fillOval(x, y, e.getX() - x, e.getY() - y);
@@ -199,7 +189,9 @@ public class DrawingScreen extends StackPane {
                             gc.fillOval(e.getX(), y, x - e.getX(), e.getY() - y);
                         if (e.getX() < x && e.getY() < y)
                             gc.fillOval(e.getX(), e.getY(), x - e.getX(), y - e.getY());
-                    } else {
+                    } 
+                    // If fill is not selected, outline the oval
+                    else {
                         if (e.getX() > x && e.getY() > y)
                             gc.strokeOval(x, y, e.getX() - x, e.getY() - y);
                         if (e.getX() > x && e.getY() < y)
@@ -225,8 +217,7 @@ public class DrawingScreen extends StackPane {
                 gc.setLineWidth(slider.getValue());
             });
 
-            // Create a rectangle button that adjusts the boolean variables and sets the
-            // stroke and line width
+            // Create a rectangle button that adjusts the boolean variables and sets the stroke and line width
             Button rectangleBT = new Button("Rectangle");
             rectangleBT.setOnAction(e -> {
                 rectangle = true;
@@ -238,8 +229,7 @@ public class DrawingScreen extends StackPane {
                 gc.setLineWidth(slider.getValue());
             });
 
-            // Create an oval button that adjusts the boolean variables and sets the stroke
-            // and line width
+            // Create an oval button that adjusts the boolean variables and sets the stroke and line width
             Button ovalBT = new Button("Oval");
             ovalBT.setOnAction(e -> {
                 oval = true;
@@ -263,9 +253,10 @@ public class DrawingScreen extends StackPane {
                 gc.setLineWidth(10);
             });
 
-
+            // Create a checkbutton for the user to press when the other players guesses correctly
             Button yesBT = new Button("GOT IT");
             yesBT.setOnAction(e -> {
+                // If the button is pressed before the timer is up, change the isCorrect boolean to true and reset the drawing settings
                 if (Reminder.seconds >= 0) {
                     isCorrect = true;
                     pen = true;
@@ -279,22 +270,21 @@ public class DrawingScreen extends StackPane {
                     gc.setStroke(cp.getValue());
                     gc.setLineWidth(slider.getValue());
 
-                    isCorrect = true;
-
+                    // Cancel the timer and close its screen
                     Reminder.timer.cancel();
                     MainApp.stage2.close();
 
                     
-                } else {
+                } 
+                // Otherwise, set the boolean to false (other files will handle this case)
+                else {
                     isCorrect = false;
                 }
+
+                // Use a button to control the screen change
                 handleButtonCorrect();
             });
-
-            lbl = new Label();
-            lbl.setText(file_name);
-            lbl2 = new Label();
-            grid.addRow(0, lbl, lbl2);
+            
             // Add the buttons, color picker, slider, and label to the grid
             grid.addRow(1, cp, slider, sliderLbl, penBT, fill, rectangleBT, ovalBT, eraseBT, clearBT, yesBT);
             // Set the grid's alignment
@@ -302,30 +292,20 @@ public class DrawingScreen extends StackPane {
             grid.setAlignment(Pos.TOP_CENTER);
             grid.setPadding(new Insets(20, 0, 0, 0));
 
-            Button seeWord = new Button("See Word");
-            seeWord.setOnAction(e -> handleSeeWord());
-
-
+            // Clear the screen
             clearBT.fire();  
           
-
-
+        // Catch statement
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        Button button = new Button();
-        button.fire();
     }
 
-
+    // Define methods for changing screens and clearing the canvas
     private void handleButton() {
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
         mainApp.showResultsScreen();
-    }
-
-    public void handleSeeWord() {
-        mainApp.showWordScreen();
     }
 
     public void handleButtonCorrect() {

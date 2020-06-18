@@ -1,20 +1,17 @@
+// A timer that controls program flow
+
 import java.util.Timer;
 import java.util.TimerTask;
-
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-
 import java.awt.Toolkit;
 
-/**
- * Simple demo that uses java.util.Timer to schedule a task 
- * to execute once 5 seconds have passed.
- */
-
+// Create a class that extends BorderPane
 public class Reminder extends BorderPane {
+
     private MainApp mainApp;
 
     Toolkit toolkit;    
@@ -27,35 +24,39 @@ public class Reminder extends BorderPane {
         super();
         this.mainApp = app;
 
+        // Set the toolkit and timer
         toolkit = Toolkit.getDefaultToolkit();
 
         timer = new Timer();
         timer.schedule(new RemindTask(), 0, 1*1000);
         
+        // Get the starting number of seconds from the wordScreen (really settingsScreen)
         seconds = WordScreen.sec;
 
-
+        // Create a button that is not displayed to handle the timer running out
         changeScreen = new Button();
         changeScreen.setOnAction(e -> {
             DrawingScreen.isCorrect = false;
-
             mainApp.showResultsScreen();
         });
 
 	}
 
+    // Create a class that extends TimerTask
     class RemindTask extends TimerTask {
         public void run() {
+            // While the timer has not run out, subtract 1 from it every second
             if (seconds > 0) {
-
                 seconds--;
             }
             
+            // If the timer has run out, notify the user and fire the button which will change the screen
             else {
                 toolkit.beep();
                 
                 changeScreen.fire();
                 
+                // Reset the settings of the drawing screen
                 DrawingScreen.clearScreen();
                 DrawingScreen.pen = true;
                 DrawingScreen.rectangle = false;
@@ -67,8 +68,8 @@ public class Reminder extends BorderPane {
                 DrawingScreen.gc.setStroke(DrawingScreen.cp.getValue());
                 DrawingScreen.gc.setLineWidth(DrawingScreen.slider.getValue());
 
-                timer.cancel(); //Terminate the timer thread
-
+                //Terminate the timer thread
+                timer.cancel(); 
             }
         }
     }
