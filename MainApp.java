@@ -102,6 +102,7 @@ public class MainApp extends Application {
 
         if (DrawingScreen.isCorrect){
             ResultsScreen.text.setText("CORRECT! \n The word was " + WordScreen.word);
+            // DrawingScreen.setNumOfCorrect(DrawingScreen.getNumOfCorrect() + 1);
             ResultsScreen.imageView.setImage(new Image("image/good.gif"));
         }
         else {

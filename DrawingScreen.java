@@ -280,7 +280,7 @@ public class DrawingScreen extends StackPane {
                     gc.setLineWidth(slider.getValue());
 
                     isCorrect = true;
-                    
+
                     Reminder.timer.cancel();
                     MainApp.stage2.close();
 
@@ -335,6 +335,5 @@ public class DrawingScreen extends StackPane {
     public static void clearScreen() {
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
     }
-
 
 }

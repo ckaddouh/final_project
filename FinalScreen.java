@@ -30,7 +30,7 @@ public class FinalScreen extends BorderPane {
         imageView.setImage(new Image("image/confetti.gif"));
         setCenter(imageView);
 
-        Label thanks = new Label("          Thanks for playing! \nWe hope you enjoyed the game! \n                       :)");
+        Label thanks = new Label("          Thanks for playing! \nWe hope you enjoyed the game! \n                      :)");
         thanks.setFont(new Font("verdana", 20));
         thanks.setTextFill(Color.DODGERBLUE);
         setBottom(thanks);
