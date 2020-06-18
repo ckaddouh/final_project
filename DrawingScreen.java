@@ -278,8 +278,12 @@ public class DrawingScreen extends StackPane {
                     slider.setValue(1);
                     gc.setStroke(cp.getValue());
                     gc.setLineWidth(slider.getValue());
+
+                    isCorrect = true;
+                    
                     Reminder.timer.cancel();
                     MainApp.stage2.close();
+
                     
                 } else {
                     isCorrect = false;

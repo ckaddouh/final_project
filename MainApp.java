@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import javafx.application.Application;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -10,7 +11,6 @@ public class MainApp extends Application {
 
     static Stage primaryStage;
     public static Stage stage2;
-
 
     Pane welcomeScreen;
     Pane instructionScreen;
@@ -20,7 +20,6 @@ public class MainApp extends Application {
     Pane finalScreen;
     Pane wordScreen;
     Pane reminder;
-
 
     public static Scene scene2;
 
@@ -101,11 +100,14 @@ public class MainApp extends Application {
         primaryStage.setX(350);
         primaryStage.setY(100);
 
-        if (DrawingScreen.isCorrect)
+        if (DrawingScreen.isCorrect){
             ResultsScreen.text.setText("CORRECT! \n The word was " + WordScreen.word);
-        else
+            ResultsScreen.imageView.setImage(new Image("image/good.gif"));
+        }
+        else {
             ResultsScreen.text.setText("Out of time... \n The word was " + WordScreen.word);
-
+            ResultsScreen.imageView.setImage(new Image("image/crying.gif"));
+        }
 
         scene.setRoot(resultsScreen);
     }

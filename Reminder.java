@@ -52,7 +52,6 @@ public class Reminder extends BorderPane {
             }
             
             else {
-
                 toolkit.beep();
                 
                 changeScreen.fire();

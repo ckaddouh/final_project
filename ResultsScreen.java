@@ -13,21 +13,26 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.scene.image.*;
+import javafx.scene.image.ImageView;
+
 
 public class ResultsScreen extends GridPane {
 
     private MainApp mainApp;
     public static Text text;
+    
+    public static ImageView imageView;
 
     public ResultsScreen(MainApp app) {
         super();
 
         this.mainApp = app;
 
-        setBackground( new Background( new BackgroundFill(Color.LIGHTCYAN, CornerRadii.EMPTY, Insets.EMPTY)));
+        setBackground(new Background(new BackgroundFill(Color.LIGHTCYAN, CornerRadii.EMPTY, Insets.EMPTY)));
+        imageView = new ImageView();
 
-
-
+        add(imageView, 5, 3);
 
         Button next = new Button("Next");
         Button changeScreenButton = new Button("Back");
@@ -68,7 +73,7 @@ public class ResultsScreen extends GridPane {
             }
         });
 
-        add(changeScreenButton, 3, 3, 1, 1);
+        add(changeScreenButton, 3, 3);
         
         setHgap(10);
         setVgap(10);
